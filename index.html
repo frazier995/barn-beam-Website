@@ -16,7 +16,7 @@
       --parchment: #faf7f1;
       --ivory: #fdfbf7;
       --ink: #2a2218;
-      --ink-soft: #4a3f32;
+      --ink-soft: #2a2218;
       --espresso: #3d2b1f;
       --brass: #a6895a;
       --brass-light: #c4a97a;
@@ -25,7 +25,7 @@
       --sage-mist: #d5ddd0;
       --sky: #9fc5d8;
       --sky-mist: #d4e6ef;
-      --muted: #7a6f62;
+      --muted: #3f362e;
       --line: rgba(42, 34, 24, 0.12);
       --line-strong: rgba(42, 34, 24, 0.22);
       --max: 1180px;
@@ -1119,7 +1119,7 @@
     .cta .eyebrow { color: var(--brass-light); }
     .cta .section-title { color: var(--linen); }
     .cta .section-lead {
-      color: rgba(244, 239, 230, 0.65);
+      color: rgba(253, 251, 247, 0.92);
       margin-bottom: 1.75rem;
     }
 
@@ -1134,8 +1134,8 @@
       grid-template-columns: auto 1fr;
       gap: 0.9rem;
       align-items: start;
-      font-weight: 300;
-      color: rgba(244, 239, 230, 0.82);
+      font-weight: 400;
+      color: rgba(253, 251, 247, 0.95);
       font-size: 0.98rem;
     }
 
@@ -1177,7 +1177,7 @@
     .form-card .form-sub {
       font-family: var(--font-serif);
       font-style: italic;
-      color: var(--muted);
+      color: var(--ink-soft);
       margin-bottom: 1.65rem;
       font-size: 1.05rem;
     }
@@ -1195,10 +1195,10 @@
     .field label {
       display: block;
       font-size: 0.68rem;
-      font-weight: 500;
+      font-weight: 600;
       letter-spacing: 0.16em;
       text-transform: uppercase;
-      color: var(--brass);
+      color: var(--ink);
       margin-bottom: 0.45rem;
     }
 
@@ -1210,8 +1210,10 @@
       border: none;
       border-bottom: 1px solid var(--line-strong);
       background: transparent;
-      font-family: var(--font-serif);
-      font-size: 1.1rem;
+      font-family: var(--font-sans);
+      font-size: 1rem;
+      font-weight: 400;
+      letter-spacing: 0.01em;
       color: var(--ink);
       border-radius: 0;
       transition: border-color 0.2s ease;
@@ -1219,8 +1221,14 @@
 
     .field input::placeholder,
     .field textarea::placeholder {
-      color: rgba(122, 111, 98, 0.55);
-      font-style: italic;
+      color: rgba(42, 34, 24, 0.5);
+      font-style: normal;
+      font-weight: 400;
+    }
+
+    .field input[type="tel"] {
+      font-variant-numeric: tabular-nums;
+      letter-spacing: 0.02em;
     }
 
     .field input:focus,
@@ -1253,17 +1261,17 @@
     .form-note {
       margin-top: 1rem;
       font-size: 0.78rem;
-      color: var(--muted);
+      color: var(--ink-soft);
       text-align: center;
-      font-weight: 300;
+      font-weight: 400;
       line-height: 1.5;
     }
 
     .form-note a {
-      color: var(--espresso);
+      color: var(--ink);
       text-decoration: underline;
       text-underline-offset: 0.15em;
-      font-weight: 500;
+      font-weight: 600;
     }
 
     .form-note a:hover { color: var(--brass); }
@@ -1527,7 +1535,7 @@
             <div class="logo-stage-inner">
               <img src="assets/logo.png" alt="Barn &amp; Beam Creations logo" width="520" height="520" />
             </div>
-            <span class="logo-caption">Est. 2025</span>
+            <span class="logo-caption">Est. 2026</span>
           </div>
         </div>
       </div>
@@ -1841,11 +1849,21 @@
         </div>
 
         <div class="form-card" id="formCard">
-          <form id="quoteForm" novalidate>
+          <form
+            id="quoteForm"
+            action="https://formsubmit.co/ltgallman@barn-beam.com"
+            method="POST"
+            novalidate
+          >
             <h3>Request a quote</h3>
             <p class="form-sub">Tell us what you need engraved or printed. We typically reply within 1–2 business days.</p>
             <input type="hidden" name="_subject" value="Barn &amp; Beam Creations — Quote Request" />
             <input type="hidden" name="_template" value="table" />
+            <input type="hidden" name="_captcha" value="false" />
+            <input type="hidden" name="_next" id="formNext" value="" />
+            <input type="hidden" name="_url" id="formUrl" value="" />
+            <input type="hidden" name="_replyto" id="formReplyTo" value="" />
+            <!-- Honeypot: leave empty. Bots that fill it are ignored by FormSubmit. -->
             <input type="text" name="_honey" class="sr-only" tabindex="-1" autocomplete="off" aria-hidden="true" />
             <div class="form-row two">
               <div class="field">
@@ -1860,18 +1878,28 @@
             <div class="form-row two">
               <div class="field">
                 <label for="phone">Phone <span style="opacity:.6;letter-spacing:0.08em">(optional)</span></label>
-                <input type="tel" id="phone" name="phone" autocomplete="tel" placeholder="(555) 000-0000" />
+                <input
+                  type="tel"
+                  id="phone"
+                  name="phone"
+                  autocomplete="tel"
+                  inputmode="tel"
+                  maxlength="14"
+                  placeholder="(816) 555-0123"
+                  pattern="^\(\d{3}\) \d{3}-\d{4}$"
+                  title="Enter a 10-digit US phone number, like (816) 555-0123"
+                />
               </div>
               <div class="field">
                 <label for="service">Interest</label>
                 <select id="service" name="service">
                   <option value="">Select a service…</option>
-                  <option>Laser engraving</option>
-                  <option>UV printing</option>
-                  <option>Custom signage</option>
-                  <option>Personalized gifts</option>
-                  <option>Business branding</option>
-                  <option>Not sure yet</option>
+                  <option value="Laser engraving">Laser engraving</option>
+                  <option value="UV printing">UV printing</option>
+                  <option value="Custom signage">Custom signage</option>
+                  <option value="Personalized gifts">Personalized gifts</option>
+                  <option value="Business branding">Business branding</option>
+                  <option value="Not sure yet">Not sure yet</option>
                 </select>
               </div>
             </div>
@@ -1882,7 +1910,7 @@
               </div>
             </div>
             <button type="submit" class="btn btn-primary" id="quoteSubmit">Send Inquiry</button>
-            <p class="form-note" id="formNote">Inquiries go to ltgallman@ban-beam.com — or call <a href="tel:+18164080675">(816) 408-0675</a>.</p>
+            <p class="form-note" id="formNote">Inquiries go to ltgallman@barn-beam.com — or call <a href="tel:+18164080675">(816) 408-0675</a>.</p>
           </form>
           <div class="form-success" id="formSuccess" role="status">
             <span class="script">Thank you</span>
@@ -1915,7 +1943,7 @@
           <h4>Studio</h4>
           <ul>
             <li><a href="tel:+18164080675">(816) 408-0675</a></li>
-            <li><a href="mailto:ltgallman@ban-beam.com">ltgallman@ban-beam.com</a></li>
+            <li><a href="mailto:ltgallman@barn-beam.com">ltgallman@barn-beam.com</a></li>
             <li>Custom orders by appointment</li>
             <li>Local &amp; ship-ready</li>
           </ul>
@@ -2012,58 +2040,146 @@
     const formSuccess = document.getElementById("formSuccess");
     const formNote = document.getElementById("formNote");
     const quoteSubmit = document.getElementById("quoteSubmit");
-    const QUOTE_EMAIL = "ltgallman@ban-beam.com";
+    const phoneInput = document.getElementById("phone");
+    const formNext = document.getElementById("formNext");
+    const formUrl = document.getElementById("formUrl");
+    const formReplyTo = document.getElementById("formReplyTo");
+    // FormSubmit delivers to this address. First use requires clicking
+    // FormSubmit’s activation email (often in Outlook Junk).
+    const QUOTE_EMAIL = "ltgallman@barn-beam.com";
+
+    function formatUsPhone(value) {
+      const digits = String(value || "").replace(/\D/g, "").slice(0, 10);
+      if (digits.length === 0) return "";
+      if (digits.length < 4) return "(" + digits;
+      if (digits.length < 7) return "(" + digits.slice(0, 3) + ") " + digits.slice(3);
+      return "(" + digits.slice(0, 3) + ") " + digits.slice(3, 6) + "-" + digits.slice(6);
+    }
+
+    function isValidUsPhone(value) {
+      const trimmed = String(value || "").trim();
+      if (!trimmed) return true; // optional
+      return /^\(\d{3}\) \d{3}-\d{4}$/.test(trimmed);
+    }
+
+    function showFormSuccess() {
+      formCard.classList.add("submitted");
+      formSuccess.classList.add("show");
+    }
+
+    // Where FormSubmit should return the visitor after a successful send
+    try {
+      const returnUrl = new URL(window.location.href);
+      returnUrl.searchParams.set("sent", "1");
+      returnUrl.hash = "quote";
+      if (formNext) formNext.value = returnUrl.toString();
+      if (formUrl) formUrl.value = window.location.href;
+    } catch (_) {
+      if (formNext) formNext.value = window.location.href;
+      if (formUrl) formUrl.value = window.location.href;
+    }
+
+    // After FormSubmit redirects back (?sent=1)
+    try {
+      const params = new URLSearchParams(window.location.search);
+      if (params.get("sent") === "1") {
+        showFormSuccess();
+        if (window.history && window.history.replaceState) {
+          const clean = new URL(window.location.href);
+          clean.searchParams.delete("sent");
+          window.history.replaceState({}, "", clean.pathname + clean.search + "#quote");
+        }
+      }
+    } catch (_) { /* ignore */ }
+
+    if (phoneInput) {
+      phoneInput.addEventListener("input", () => {
+        const formatted = formatUsPhone(phoneInput.value);
+        phoneInput.value = formatted;
+        phoneInput.setCustomValidity(
+          isValidUsPhone(formatted) || formatted.length === 0
+            ? ""
+            : "Enter a 10-digit US phone number, like (816) 555-0123"
+        );
+      });
+
+      phoneInput.addEventListener("blur", () => {
+        const formatted = formatUsPhone(phoneInput.value);
+        phoneInput.value = formatted;
+        if (formatted && !isValidUsPhone(formatted)) {
+          phoneInput.setCustomValidity("Enter a complete 10-digit US phone number");
+        } else {
+          phoneInput.setCustomValidity("");
+        }
+      });
+    }
 
     form.addEventListener("submit", async (e) => {
       e.preventDefault();
+
+      if (phoneInput) {
+        const formatted = formatUsPhone(phoneInput.value);
+        phoneInput.value = formatted;
+        if (formatted && !isValidUsPhone(formatted)) {
+          phoneInput.setCustomValidity("Enter a complete 10-digit US phone number");
+        } else {
+          phoneInput.setCustomValidity("");
+        }
+      }
+
       if (!form.checkValidity()) {
         form.reportValidity();
         return;
       }
 
-      const data = {
-        name: form.name.value.trim(),
-        email: form.email.value.trim(),
-        phone: form.phone.value.trim() || "Not provided",
-        service: form.service.value || "Not specified",
-        message: form.message.value.trim(),
-        _subject: "Barn & Beam Creations — Quote Request",
-        _template: "table",
-        _honey: form._honey.value,
-      };
+      if (formReplyTo) formReplyTo.value = form.email.value.trim();
 
       quoteSubmit.disabled = true;
       quoteSubmit.textContent = "Sending…";
       formNote.textContent = "Sending your inquiry…";
+      formNote.style.color = "";
 
+      // Prefer AJAX so the visitor stays on the page; fall back to a normal
+      // FormSubmit POST (never mailto) if the browser blocks the request.
       try {
+        const formData = new FormData(form);
+        if (!String(formData.get("phone") || "").trim()) {
+          formData.set("phone", "Not provided");
+        }
+        if (!String(formData.get("service") || "").trim()) {
+          formData.set("service", "Not specified");
+        }
+
         const res = await fetch("https://formsubmit.co/ajax/" + QUOTE_EMAIL, {
           method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-            Accept: "application/json",
-          },
-          body: JSON.stringify(data),
+          body: formData,
+          headers: { Accept: "application/json" },
         });
 
-        if (!res.ok) throw new Error("Send failed");
+        let payload = null;
+        try {
+          payload = await res.json();
+        } catch (_) {
+          payload = null;
+        }
 
-        formCard.classList.add("submitted");
-        formSuccess.classList.add("show");
+        const successFlag = payload && payload.success;
+        const isSuccess =
+          res.ok &&
+          successFlag !== false &&
+          successFlag !== "false";
+
+        if (!isSuccess) {
+          const message = (payload && (payload.message || payload.error)) || ("Send failed (" + res.status + ")");
+          throw new Error(message);
+        }
+
+        showFormSuccess();
       } catch (err) {
-        // Fallback: open the visitor's email client
-        const subject = encodeURIComponent("Barn & Beam Creations — Quote Request");
-        const body = encodeURIComponent(
-          "Name: " + data.name + "\n" +
-          "Email: " + data.email + "\n" +
-          "Phone: " + data.phone + "\n" +
-          "Service: " + data.service + "\n\n" +
-          data.message
-        );
-        window.location.href = "mailto:" + QUOTE_EMAIL + "?subject=" + subject + "&body=" + body;
-        formNote.textContent = "If your email app didn’t open, write us at " + QUOTE_EMAIL + ".";
-        quoteSubmit.disabled = false;
-        quoteSubmit.textContent = "Send Inquiry";
+        console.warn("AJAX form send failed; using FormSubmit POST instead.", err);
+        formNote.textContent = "Sending your inquiry…";
+        // Native POST to FormSubmit — emails the shop, then returns via _next
+        HTMLFormElement.prototype.submit.call(form);
       }
     });
   </script>
