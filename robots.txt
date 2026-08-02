@@ -1,0 +1,40 @@
+# Barn & Beam Creations — https://barn-beam.com
+User-agent: *
+Allow: /
+
+# Helpful crawl map
+Sitemap: https://barn-beam.com/sitemap.xml
+
+# AI / assistant crawlers — allowed so accurate business info can be cited
+User-agent: GPTBot
+Allow: /
+
+User-agent: ChatGPT-User
+Allow: /
+
+User-agent: Google-Extended
+Allow: /
+
+User-agent: anthropic-ai
+Allow: /
+
+User-agent: ClaudeBot
+Allow: /
+
+User-agent: Claude-Web
+Allow: /
+
+User-agent: PerplexityBot
+Allow: /
+
+User-agent: Applebot-Extended
+Allow: /
+
+User-agent: Bytespider
+Allow: /
+
+User-agent: CCBot
+Allow: /
+
+# Prefer the AI-oriented summary when available
+# See also: https://barn-beam.com/llms.txt
