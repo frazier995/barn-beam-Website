@@ -53,24 +53,62 @@
         "@type": ["LocalBusiness", "ProfessionalService"],
         "@id": "https://barn-beam.com/#business",
         "name": "Barn & Beam Creations",
-        "alternateName": ["Barn and Beam Creations", "Barn & Beam"],
+        "alternateName": ["Barn and Beam Creations", "Barn & Beam", "Barn and Beam"],
+        "legalName": "Barn & Beam Creations",
         "url": "https://barn-beam.com/",
         "logo": {
           "@type": "ImageObject",
-          "url": "https://barn-beam.com/assets/logo.png"
+          "url": "https://barn-beam.com/assets/logo.png",
+          "contentUrl": "https://barn-beam.com/assets/logo.png"
         },
-        "image": "https://barn-beam.com/assets/logo.png",
-        "description": "Custom laser engraving and full-color UV printing studio for signs, gifts, business branding, hat patches, drinkware, and one-of-a-kind pieces on wood, metal, acrylic, leather, glass, and more.",
+        "image": [
+          "https://barn-beam.com/assets/logo.png",
+          "https://barn-beam.com/assets/logo-mark.png"
+        ],
+        "description": "Kansas City–area custom laser engraving and full-color UV printing studio for signs, gifts, business branding, hat patches, drinkware, and one-of-a-kind pieces on wood, metal, acrylic, leather, glass, and more. Service-area business — by appointment; local pickup and shipping available.",
+        "slogan": "Precision craft for your design.",
         "telephone": "+1-816-408-0675",
         "email": "ltgallman@barn-beam.com",
         "foundingDate": "2026",
         "priceRange": "$$",
         "currenciesAccepted": "USD",
         "paymentAccepted": "Invoice, card, and arranged payment",
+        "address": {
+          "@type": "PostalAddress",
+          "addressLocality": "Kansas City",
+          "addressRegion": "MO",
+          "addressCountry": "US"
+        },
+        "geo": {
+          "@type": "GeoCoordinates",
+          "latitude": 39.0997,
+          "longitude": -94.5786
+        },
+        "hasMap": "https://www.google.com/maps/search/?api=1&query=Barn+%26+Beam+Creations+laser+engraving+Kansas+City",
+        "sameAs": [
+          "https://barn-beam.com/",
+          "https://www.google.com/maps/search/?api=1&query=Barn+%26+Beam+Creations+laser+engraving+Kansas+City"
+        ],
         "areaServed": [
           {
             "@type": "City",
-            "name": "Kansas City"
+            "name": "Kansas City",
+            "containedInPlace": {
+              "@type": "State",
+              "name": "Missouri"
+            }
+          },
+          {
+            "@type": "City",
+            "name": "Kansas City",
+            "containedInPlace": {
+              "@type": "State",
+              "name": "Kansas"
+            }
+          },
+          {
+            "@type": "AdministrativeArea",
+            "name": "Kansas City Metropolitan Area"
           },
           {
             "@type": "AdministrativeArea",
@@ -83,6 +121,30 @@
           {
             "@type": "Country",
             "name": "United States"
+          }
+        ],
+        "serviceArea": {
+          "@type": "GeoCircle",
+          "geoMidpoint": {
+            "@type": "GeoCoordinates",
+            "latitude": 39.0997,
+            "longitude": -94.5786
+          },
+          "geoRadius": "80000"
+        },
+        "openingHoursSpecification": [
+          {
+            "@type": "OpeningHoursSpecification",
+            "dayOfWeek": [
+              "Monday",
+              "Tuesday",
+              "Wednesday",
+              "Thursday",
+              "Friday"
+            ],
+            "opens": "09:00",
+            "closes": "17:00",
+            "description": "By appointment — custom orders scheduled with the shop"
           }
         ],
         "serviceType": [
@@ -100,16 +162,33 @@
           "custom merchandise",
           "product personalization",
           "branded gifts",
-          "wedding engraving"
+          "wedding engraving",
+          "Kansas City custom printing"
         ],
-        "contactPoint": {
-          "@type": "ContactPoint",
-          "telephone": "+1-816-408-0675",
-          "email": "ltgallman@barn-beam.com",
-          "contactType": "customer service",
-          "availableLanguage": "English",
-          "areaServed": "US"
+        "brand": {
+          "@type": "Brand",
+          "name": "Barn & Beam Creations",
+          "logo": "https://barn-beam.com/assets/logo.png"
         },
+        "contactPoint": [
+          {
+            "@type": "ContactPoint",
+            "telephone": "+1-816-408-0675",
+            "email": "ltgallman@barn-beam.com",
+            "contactType": "customer service",
+            "availableLanguage": ["English"],
+            "areaServed": ["US", "Kansas City"],
+            "productSupported": "Custom laser engraving and UV printing quotes"
+          },
+          {
+            "@type": "ContactPoint",
+            "telephone": "+1-816-408-0675",
+            "email": "ltgallman@barn-beam.com",
+            "contactType": "sales",
+            "availableLanguage": ["English"],
+            "areaServed": "US"
+          }
+        ],
         "hasOfferCatalog": {
           "@type": "OfferCatalog",
           "name": "Custom engraving and printing services",
@@ -1775,6 +1854,106 @@
       text-underline-offset: 0.15em;
       font-weight: 500;
     }
+
+    /* Google Business / local presence */
+    .local-band {
+      background:
+        radial-gradient(ellipse 50% 80% at 10% 50%, rgba(159, 197, 216, 0.18), transparent 55%),
+        radial-gradient(ellipse 40% 70% at 90% 40%, rgba(111, 127, 98, 0.1), transparent 50%),
+        var(--linen-deep);
+      border-block: 1px solid var(--line);
+    }
+
+    .local-grid {
+      display: grid;
+      gap: 2rem;
+      align-items: center;
+    }
+
+    @media (min-width: 860px) {
+      .local-grid {
+        grid-template-columns: 1.1fr 0.9fr;
+        gap: 3rem;
+      }
+    }
+
+    .local-card {
+      background: var(--parchment);
+      border: 1px solid var(--line-strong);
+      padding: clamp(1.5rem, 3vw, 2rem);
+      box-shadow: 0 16px 40px rgba(42, 34, 24, 0.06);
+    }
+
+    .local-card h3 {
+      font-family: var(--font-serif);
+      font-weight: 500;
+      font-size: 1.45rem;
+      color: var(--ink);
+      margin-bottom: 0.35rem;
+    }
+
+    .local-card .local-sub {
+      font-family: var(--font-serif);
+      font-style: italic;
+      color: var(--muted);
+      margin-bottom: 1.25rem;
+      font-size: 1.02rem;
+    }
+
+    .nap-list {
+      display: flex;
+      flex-direction: column;
+      gap: 0.85rem;
+      margin-bottom: 1.5rem;
+    }
+
+    .nap-list li {
+      display: grid;
+      grid-template-columns: 5.5rem 1fr;
+      gap: 0.75rem;
+      align-items: start;
+      font-size: 0.95rem;
+      color: var(--ink-soft);
+      line-height: 1.45;
+    }
+
+    .nap-list .nap-label {
+      font-size: 0.68rem;
+      font-weight: 600;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: var(--brass);
+      padding-top: 0.2rem;
+    }
+
+    .nap-list a {
+      color: var(--ink);
+      font-weight: 500;
+      text-decoration: underline;
+      text-underline-offset: 0.15em;
+    }
+
+    .nap-list a:hover { color: var(--brass); }
+
+    .local-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.75rem;
+    }
+
+    .local-actions .btn { padding: 0.85rem 1.25rem; }
+
+    .google-mark {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .google-mark svg {
+      width: 18px;
+      height: 18px;
+      flex-shrink: 0;
+    }
   </style>
 </head>
 <body>
@@ -1794,6 +1973,7 @@
         <a href="#gallery">Gallery</a>
         <a href="#process">Process</a>
         <a href="#faq">FAQ</a>
+        <a href="#visit">Local</a>
         <a href="#stories">Stories</a>
       </nav>
       <a href="#quote" class="btn btn-primary nav-cta">Request a Quote</a>
@@ -1807,6 +1987,7 @@
       <a href="#gallery">Gallery</a>
       <a href="#process">Process</a>
       <a href="#faq">FAQ</a>
+      <a href="#visit">Local</a>
       <a href="#stories">Stories</a>
       <a href="#quote" class="btn btn-primary">Request a Quote</a>
     </div>
@@ -2107,6 +2288,98 @@
       </div>
     </section>
 
+    <!-- Local presence / Google Business Profile alignment (NAP consistency) -->
+    <section class="section local-band" id="visit" aria-labelledby="visit-heading">
+      <div class="container local-grid">
+        <div>
+          <span class="eyebrow">Local &amp; on Google</span>
+          <h2 class="section-title" id="visit-heading">Find Barn &amp; Beam on Google</h2>
+          <div class="ornament" aria-hidden="true" style="justify-content: flex-start; margin: 0 0 1.25rem;">
+            <svg viewBox="0 0 16 16"><path d="M8 0l1.5 5.5L15 8l-5.5 1.5L8 15l-1.5-5.5L1 8l5.5-1.5L8 0z"/></svg>
+          </div>
+          <p class="section-lead">
+            We’re a Kansas City–area service business — custom laser engraving and UV printing
+            by appointment, with local pickup or shipping. Search for us on Google to call,
+            get directions context, and leave a review after your order.
+          </p>
+          <p style="margin-top: 1.1rem; max-width: 36rem; color: var(--ink-soft); font-size: 0.98rem;">
+            Use the same name, phone, and website everywhere online so Google can confidently
+            match our Business Profile to this site.
+          </p>
+        </div>
+        <div class="local-card" itemscope itemtype="https://schema.org/LocalBusiness">
+          <meta itemprop="image" content="https://barn-beam.com/assets/logo.png" />
+          <h3 itemprop="name">Barn &amp; Beam Creations</h3>
+          <p class="local-sub">Laser engraving · UV printing · Est. 2026</p>
+          <ul class="nap-list">
+            <li>
+              <span class="nap-label">Name</span>
+              <span>Barn &amp; Beam Creations</span>
+            </li>
+            <li>
+              <span class="nap-label">Phone</span>
+              <span>
+                <a itemprop="telephone" href="tel:+18164080675">(816) 408-0675</a>
+              </span>
+            </li>
+            <li>
+              <span class="nap-label">Email</span>
+              <span>
+                <a itemprop="email" href="mailto:ltgallman@barn-beam.com">ltgallman@barn-beam.com</a>
+              </span>
+            </li>
+            <li>
+              <span class="nap-label">Website</span>
+              <span>
+                <a itemprop="url" href="https://barn-beam.com/">barn-beam.com</a>
+              </span>
+            </li>
+            <li itemprop="address" itemscope itemtype="https://schema.org/PostalAddress">
+              <span class="nap-label">Area</span>
+              <span>
+                <span itemprop="addressLocality">Kansas City</span>
+                <meta itemprop="addressRegion" content="MO" />
+                <meta itemprop="addressCountry" content="US" />
+                metro (816) · by appointment · ship-ready
+              </span>
+            </li>
+            <li>
+              <span class="nap-label">Hours</span>
+              <span>By appointment (Mon–Fri)</span>
+            </li>
+          </ul>
+          <div class="local-actions">
+            <a
+              id="googleBusinessLink"
+              class="btn btn-primary google-mark"
+              href="https://www.google.com/maps/search/?api=1&amp;query=Barn+%26+Beam+Creations+laser+engraving+Kansas+City"
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="Find Barn and Beam Creations on Google Maps"
+            >
+              <svg viewBox="0 0 24 24" aria-hidden="true">
+                <path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"/>
+                <path fill="#34A853" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"/>
+                <path fill="#FBBC05" d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z"/>
+                <path fill="#EA4335" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z"/>
+              </svg>
+              Find us on Google
+            </a>
+            <a
+              id="googleReviewLink"
+              class="btn btn-ghost"
+              href="https://www.google.com/search?q=Barn+%26+Beam+Creations+laser+engraving+Kansas+City"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              Search &amp; review
+            </a>
+            <a href="#quote" class="btn btn-ghost">Request a Quote</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
     <!-- FAQ — visible Q&A for customers, search engines, and AI assistants -->
     <section class="section faq" id="faq" aria-labelledby="faq-heading">
       <div class="container">
@@ -2165,8 +2438,9 @@
             <summary>Where are you located?</summary>
             <div class="faq-answer">
               <p>
-                We serve the <strong>Kansas City</strong> area (816) with custom work by appointment,
-                and we ship finished pieces. Contact us for project details and scheduling.
+                We serve the <strong>Kansas City</strong> area (816) as a service-area studio —
+                custom work by appointment, with local pickup or shipping.
+                Find us on <a href="#visit">Google</a> or contact us for project details and scheduling.
               </p>
             </div>
           </details>
@@ -2310,6 +2584,7 @@
             <li><a href="#gallery">Gallery</a></li>
             <li><a href="#process">Process</a></li>
             <li><a href="#faq">FAQ</a></li>
+            <li><a href="#visit">On Google</a></li>
             <li><a href="#quote">Get a Quote</a></li>
           </ul>
         </div>
@@ -2321,6 +2596,14 @@
             <li>Kansas City area (816)</li>
             <li>Custom orders by appointment</li>
             <li>Local pickup &amp; shipping</li>
+            <li>
+              <a
+                id="footerGoogleLink"
+                href="https://www.google.com/maps/search/?api=1&amp;query=Barn+%26+Beam+Creations+laser+engraving+Kansas+City"
+                target="_blank"
+                rel="noopener noreferrer"
+              >Google Business Profile</a>
+            </li>
           </ul>
         </div>
       </div>
@@ -2343,6 +2626,39 @@
 
   <script>
     document.getElementById("year").textContent = new Date().getFullYear();
+
+    /**
+     * Google Business Profile links
+     * After you create/claim the profile, paste the public share URL and review URL here
+     * (maps.app.goo.gl / g.page / Share → Copy link from Google Business Profile).
+     * Leave blank to use Google Search/Maps lookup until the profile is live.
+     */
+    const GOOGLE_BUSINESS = {
+      profileUrl: "", // e.g. "https://maps.app.goo.gl/xxxxxxxx" or "https://g.page/barn-beam"
+      reviewUrl: "",  // e.g. "https://search.google.com/local/writereview?placeid=ChIJ..."
+    };
+
+    (function wireGoogleBusinessLinks() {
+      const fallbackMaps =
+        "https://www.google.com/maps/search/?api=1&query=" +
+        encodeURIComponent("Barn & Beam Creations laser engraving Kansas City");
+      const fallbackSearch =
+        "https://www.google.com/search?q=" +
+        encodeURIComponent("Barn & Beam Creations laser engraving Kansas City");
+
+      const profile = GOOGLE_BUSINESS.profileUrl || fallbackMaps;
+      const review = GOOGLE_BUSINESS.reviewUrl || fallbackSearch;
+
+      ["googleBusinessLink", "footerGoogleLink"].forEach((id) => {
+        const el = document.getElementById(id);
+        if (el) el.href = profile;
+      });
+      const reviewEl = document.getElementById("googleReviewLink");
+      if (reviewEl) {
+        reviewEl.href = review;
+        reviewEl.textContent = GOOGLE_BUSINESS.reviewUrl ? "Leave a Google review" : "Search & review";
+      }
+    })();
 
     // Continuous full-width marquee: fill ≥100vw, duplicate for seamless loop
     (function setupRibbonMarquee() {

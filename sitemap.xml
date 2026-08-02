@@ -37,6 +37,12 @@
     <priority>0.8</priority>
   </url>
   <url>
+    <loc>https://barn-beam.com/#visit</loc>
+    <lastmod>2026-08-02</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
     <loc>https://barn-beam.com/#quote</loc>
     <lastmod>2026-08-02</lastmod>
     <changefreq>monthly</changefreq>
