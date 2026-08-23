@@ -1,9 +1,13 @@
-# Barn & Beam Creations — https://barn-beam.com
+# Barn & Beam Creations — https://www.barn-beam.com
 User-agent: *
 Allow: /
 
+# Future / WIP shop — keep for later ideas; do not index
+Disallow: /shop.html
+Disallow: /shop
+
 # Helpful crawl map
-Sitemap: https://barn-beam.com/sitemap.xml
+Sitemap: https://www.barn-beam.com/sitemap.xml
 
 # AI / assistant crawlers — allowed so accurate business info can be cited
 User-agent: GPTBot
@@ -37,4 +41,4 @@ User-agent: CCBot
 Allow: /
 
 # Prefer the AI-oriented summary when available
-# See also: https://barn-beam.com/llms.txt
+# See also: https://www.barn-beam.com/llms.txt
