@@ -9,7 +9,7 @@
   <meta name="author" content="Barn &amp; Beam Creations" />
   <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1" />
   <meta name="googlebot" content="index, follow" />
-  <meta name="theme-color" content="#2a2218" />
+  <meta name="theme-color" content="#1A1A1A" />
   <meta name="color-scheme" content="light" />
   <meta name="format-detection" content="telephone=yes" />
   <meta name="geo.region" content="US-MO" />
@@ -44,7 +44,7 @@
 
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600&family=Great+Vibes&family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
 
   <!-- Structured data: business, website, services, FAQ (SEO + AI) -->
   <script type="application/ld+json">
@@ -333,1852 +333,196 @@
     ]
   }
   </script>
-  <style>
-    :root {
-      /* Warm linen, ink, brass, soft field accents */
-      --linen: #f4efe6;
-      --linen-deep: #e8e0d2;
-      --parchment: #faf7f1;
-      --ivory: #fdfbf7;
-      --ink: #2a2218;
-      --ink-soft: #2a2218;
-      --espresso: #3d2b1f;
-      --brass: #a6895a;
-      --brass-light: #c4a97a;
-      --brass-pale: #e8dcc4;
-      --sage: #6f7f62;
-      --sage-mist: #d5ddd0;
-      --sky: #9fc5d8;
-      --sky-mist: #d4e6ef;
-      --muted: #3f362e;
-      --line: rgba(42, 34, 24, 0.12);
-      --line-strong: rgba(42, 34, 24, 0.22);
-      --max: 1180px;
-      --font-serif: "Cormorant Garamond", "Times New Roman", Georgia, serif;
-      --font-script: "Great Vibes", "Segoe Script", cursive;
-      --font-sans: "Outfit", system-ui, sans-serif;
-    }
-
-    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-
-    html { scroll-behavior: smooth; }
-
-    body {
-      font-family: var(--font-sans);
-      font-weight: 400;
-      color: var(--ink-soft);
-      background: var(--linen);
-      line-height: 1.7;
-      font-size: 1.02rem;
-      letter-spacing: 0.01em;
-      overflow-x: hidden;
-    }
-
-    /* Linen paper grain over the whole page */
-    body::before {
-      content: "";
-      position: fixed;
-      inset: 0;
-      pointer-events: none;
-      z-index: 9999;
-      opacity: 0.035;
-      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
-    }
-
-    img { max-width: 100%; display: block; }
-    a { color: inherit; text-decoration: none; }
-    ul, ol { list-style: none; }
-
-    .container {
-      width: min(100% - 2.75rem, var(--max));
-      margin-inline: auto;
-    }
-
-    .container-narrow {
-      width: min(100% - 2.75rem, 720px);
-      margin-inline: auto;
-    }
-
-    /* —— Type —— */
-    .script {
-      font-family: var(--font-script);
-      font-weight: 400;
-      color: var(--brass);
-      letter-spacing: 0.02em;
-    }
-
-    .eyebrow {
-      display: block;
-      font-family: var(--font-sans);
-      font-size: 0.72rem;
-      font-weight: 500;
-      letter-spacing: 0.28em;
-      text-transform: uppercase;
-      color: var(--brass);
-      margin-bottom: 1rem;
-    }
-
-    .section-title {
-      font-family: var(--font-serif);
-      font-weight: 500;
-      font-size: clamp(2.15rem, 4.2vw, 3.15rem);
-      line-height: 1.12;
-      color: var(--ink);
-      letter-spacing: 0.01em;
-      margin-bottom: 1.1rem;
-    }
-
-    .section-lead {
-      font-family: var(--font-serif);
-      font-size: clamp(1.15rem, 2vw, 1.35rem);
-      font-weight: 400;
-      font-style: italic;
-      color: var(--muted);
-      line-height: 1.55;
-      max-width: 36rem;
-    }
-
-    .section {
-      padding: clamp(4.5rem, 9vw, 7.5rem) 0;
-      position: relative;
-    }
-
-    .section-head {
-      text-align: center;
-      margin-bottom: clamp(2.5rem, 5vw, 3.75rem);
-    }
-
-    .section-head .section-lead {
-      margin-inline: auto;
-    }
-
-    /* Ornamental divider */
-    .ornament {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 0.85rem;
-      margin: 1.35rem auto 0;
-      color: var(--brass);
-    }
-
-    .ornament::before,
-    .ornament::after {
-      content: "";
-      width: 48px;
-      height: 1px;
-      background: linear-gradient(90deg, transparent, var(--brass));
-    }
-
-    .ornament::after {
-      background: linear-gradient(90deg, var(--brass), transparent);
-    }
-
-    .ornament svg {
-      width: 14px;
-      height: 14px;
-      fill: currentColor;
-      opacity: 0.85;
-    }
-
-    /* —— Buttons —— */
-    .btn {
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      gap: 0.6rem;
-      padding: 1rem 1.9rem;
-      font-family: var(--font-sans);
-      font-weight: 500;
-      font-size: 0.78rem;
-      letter-spacing: 0.18em;
-      text-transform: uppercase;
-      border: 1px solid transparent;
-      cursor: pointer;
-      transition: background 0.25s ease, color 0.25s ease, border-color 0.25s ease, box-shadow 0.25s ease;
-    }
-
-    .btn-primary {
-      background: var(--ink);
-      color: var(--linen);
-      border-color: var(--ink);
-    }
-
-    .btn-primary:hover {
-      background: var(--espresso);
-      border-color: var(--espresso);
-      box-shadow: 0 10px 30px rgba(42, 34, 24, 0.18);
-    }
-
-    .btn-ghost {
-      background: transparent;
-      color: var(--ink);
-      border-color: var(--line-strong);
-    }
-
-    .btn-ghost:hover {
-      border-color: var(--ink);
-      background: rgba(42, 34, 24, 0.03);
-    }
-
-    .btn-brass {
-      background: transparent;
-      color: var(--brass-light);
-      border-color: rgba(196, 169, 122, 0.55);
-    }
-
-    .btn-brass:hover {
-      background: rgba(196, 169, 122, 0.12);
-      border-color: var(--brass-light);
-    }
-
-    .btn-light {
-      background: var(--linen);
-      color: var(--ink);
-      border-color: var(--linen);
-    }
-
-    .btn-light:hover {
-      background: var(--ivory);
-      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
-    }
-
-    /* —— Header —— */
-    .site-header {
-      position: sticky;
-      top: 0;
-      z-index: 100;
-      background: rgba(244, 239, 230, 0.88);
-      backdrop-filter: blur(14px) saturate(1.1);
-      border-bottom: 1px solid var(--line);
-    }
-
-    .nav {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      padding: 0.65rem 0;
-      gap: 1.5rem;
-    }
-
-    .nav-brand {
-      display: flex;
-      align-items: center;
-      gap: 0.9rem;
-    }
-
-    .nav-brand img {
-      width: 58px;
-      height: 58px;
-      object-fit: contain;
-    }
-
-    @media (min-width: 900px) {
-      .nav-brand img {
-        width: 64px;
-        height: 64px;
-      }
-    }
-
-    .nav-brand-text {
-      display: none;
-      flex-direction: column;
-      line-height: 1.15;
-    }
-
-    .nav-brand-text strong {
-      font-family: var(--font-serif);
-      font-weight: 600;
-      font-size: 1.05rem;
-      letter-spacing: 0.12em;
-      color: var(--ink);
-      text-transform: uppercase;
-    }
-
-    .nav-brand-text span {
-      font-family: var(--font-sans);
-      font-size: 0.62rem;
-      letter-spacing: 0.22em;
-      text-transform: uppercase;
-      color: var(--brass);
-      font-weight: 500;
-    }
-
-    @media (min-width: 420px) {
-      .nav-brand-text { display: flex; }
-    }
-
-    .nav-links {
-      display: none;
-      align-items: center;
-      gap: 2rem;
-      font-size: 0.78rem;
-      font-weight: 400;
-      letter-spacing: 0.14em;
-      text-transform: uppercase;
-      color: var(--ink-soft);
-    }
-
-    .nav-links a {
-      position: relative;
-      padding: 0.25rem 0;
-    }
-
-    .nav-links a::after {
-      content: "";
-      position: absolute;
-      left: 0;
-      bottom: 0;
-      width: 0;
-      height: 1px;
-      background: var(--brass);
-      transition: width 0.25s ease;
-    }
-
-    .nav-links a:hover::after { width: 100%; }
-
-    .nav-cta { display: none; }
-
-    .nav-toggle {
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      gap: 6px;
-      background: none;
-      border: none;
-      cursor: pointer;
-      padding: 0.5rem;
-      width: 40px;
-      height: 40px;
-    }
-
-    .nav-toggle span {
-      display: block;
-      height: 1px;
-      background: var(--ink);
-      transition: transform 0.25s, opacity 0.25s;
-    }
-
-    .nav-toggle[aria-expanded="true"] span:nth-child(1) {
-      transform: translateY(7px) rotate(45deg);
-    }
-    .nav-toggle[aria-expanded="true"] span:nth-child(2) { opacity: 0; }
-    .nav-toggle[aria-expanded="true"] span:nth-child(3) {
-      transform: translateY(-7px) rotate(-45deg);
-    }
-
-    .mobile-menu {
-      display: none;
-      flex-direction: column;
-      padding: 0.5rem 0 1.25rem;
-      border-top: 1px solid var(--line);
-    }
-
-    .mobile-menu.open { display: flex; }
-
-    .mobile-menu a {
-      padding: 0.9rem 0.15rem;
-      font-size: 0.85rem;
-      letter-spacing: 0.16em;
-      text-transform: uppercase;
-      border-bottom: 1px solid var(--line);
-      color: var(--ink-soft);
-    }
-
-    .mobile-menu .btn { margin-top: 1.1rem; width: 100%; }
-
-    @media (min-width: 960px) {
-      .nav-links, .nav-cta { display: flex; }
-      .nav-toggle, .mobile-menu { display: none !important; }
-    }
-
-    /* —— Hero —— */
-    .hero {
-      position: relative;
-      min-height: min(90vh, 900px);
-      display: flex;
-      align-items: center;
-      padding: clamp(2.5rem, 6vw, 4.5rem) 0 clamp(3.5rem, 7vw, 5.5rem);
-      overflow: hidden;
-      background:
-        radial-gradient(ellipse 65% 50% at 50% 0%, rgba(159, 197, 216, 0.22), transparent 58%),
-        radial-gradient(ellipse 40% 35% at 8% 90%, rgba(111, 127, 98, 0.08), transparent 50%),
-        linear-gradient(165deg, var(--parchment) 0%, var(--linen) 48%, var(--linen-deep) 100%);
-    }
-
-    /* Soft corner frame */
-    .hero-frame {
-      position: absolute;
-      inset: 1.25rem;
-      border: 1px solid var(--line);
-      pointer-events: none;
-      z-index: 1;
-    }
-
-    .hero-frame::before,
-    .hero-frame::after {
-      content: "";
-      position: absolute;
-      width: 28px;
-      height: 28px;
-      border: 1px solid var(--brass);
-      opacity: 0.55;
-    }
-
-    .hero-frame::before {
-      top: -1px;
-      left: -1px;
-      border-right: none;
-      border-bottom: none;
-    }
-
-    .hero-frame::after {
-      bottom: -1px;
-      right: -1px;
-      border-left: none;
-      border-top: none;
-    }
-
-    .hero .container {
-      position: relative;
-      z-index: 2;
-      display: grid;
-      gap: 2.75rem;
-      align-items: center;
-    }
-
-    @media (min-width: 900px) {
-      .hero .container {
-        grid-template-columns: 1.05fr 0.95fr;
-        gap: 2.5rem 4rem;
-      }
-    }
-
-    .hero-eyebrow {
-      display: block;
-      font-family: var(--font-sans);
-      font-size: 0.72rem;
-      font-weight: 500;
-      letter-spacing: 0.28em;
-      text-transform: uppercase;
-      color: var(--brass);
-      margin-bottom: 1.1rem;
-    }
-
-    .hero h1 {
-      font-family: var(--font-serif);
-      font-weight: 500;
-      font-size: clamp(2.5rem, 5.2vw, 3.85rem);
-      line-height: 1.08;
-      color: var(--ink);
-      margin-bottom: 1.25rem;
-      letter-spacing: -0.01em;
-    }
-
-    .hero h1 em {
-      font-style: italic;
-      font-weight: 400;
-      color: var(--ink-soft);
-    }
-
-    .hero-copy > p {
-      font-family: var(--font-serif);
-      font-size: clamp(1.15rem, 2vw, 1.32rem);
-      font-weight: 400;
-      color: var(--muted);
-      max-width: 32rem;
-      line-height: 1.6;
-      margin-bottom: 1.85rem;
-    }
-
-    .hero-actions {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 0.9rem;
-      margin-bottom: 2rem;
-    }
-
-    .hero-meta {
-      display: flex;
-      flex-wrap: wrap;
-      align-items: center;
-      gap: 1rem 1.75rem;
-      padding-top: 1.5rem;
-      border-top: 1px solid var(--line);
-      font-size: 0.72rem;
-      letter-spacing: 0.16em;
-      text-transform: uppercase;
-      color: var(--muted);
-      font-weight: 500;
-    }
-
-    .hero-meta span {
-      display: inline-flex;
-      align-items: center;
-      gap: 0.5rem;
-    }
-
-    .hero-meta i {
-      display: block;
-      width: 5px;
-      height: 5px;
-      border-radius: 50%;
-      background: var(--brass);
-      opacity: 0.7;
-    }
-
-    .hero-visual {
-      display: flex;
-      justify-content: center;
-      order: -1;
-    }
-
-    @media (min-width: 900px) {
-      .hero-visual {
-        order: 0;
-        justify-content: flex-end;
-      }
-    }
-
-    .logo-stage {
-      position: relative;
-      width: min(100%, 520px);
-      padding: 1.15rem;
-    }
-
-    @media (min-width: 900px) {
-      .logo-stage {
-        width: min(100%, 560px);
-        padding: 1.35rem;
-      }
-    }
-
-    .logo-stage::before {
-      content: "";
-      position: absolute;
-      inset: 0;
-      border: 1px solid var(--line-strong);
-    }
-
-    .logo-stage::after {
-      content: "";
-      position: absolute;
-      inset: 0.55rem;
-      border: 1px solid rgba(166, 137, 90, 0.4);
-      pointer-events: none;
-    }
-
-    .logo-stage-inner {
-      position: relative;
-      background:
-        radial-gradient(circle at 50% 38%, rgba(159, 197, 216, 0.4), transparent 62%),
-        linear-gradient(180deg, var(--ivory) 0%, var(--linen) 100%);
-      aspect-ratio: 1;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      padding: 6%;
-      box-shadow: inset 0 0 60px rgba(42, 34, 24, 0.03);
-    }
-
-    .logo-stage img {
-      width: 100%;
-      height: auto;
-      filter: drop-shadow(0 16px 36px rgba(42, 34, 24, 0.12));
-    }
-
-    .logo-caption {
-      position: absolute;
-      bottom: -0.15rem;
-      left: 50%;
-      transform: translate(-50%, 50%);
-      background: var(--linen);
-      padding: 0 1.15rem;
-      font-family: var(--font-sans);
-      font-size: 0.68rem;
-      font-weight: 500;
-      letter-spacing: 0.22em;
-      text-transform: uppercase;
-      color: var(--brass);
-      white-space: nowrap;
-      z-index: 2;
-    }
-
-    /* —— Ribbon band —— */
-    .ribbon {
-      background: var(--ink);
-      color: var(--linen);
-      padding: 1.1rem 0;
-      overflow: hidden;
-      width: 100%;
-      max-width: 100vw;
-    }
-
-    .ribbon-track {
-      display: flex;
-      width: max-content;
-      font-family: var(--font-serif);
-      font-size: 0.95rem;
-      font-style: italic;
-      letter-spacing: 0.04em;
-      opacity: 0.92;
-      will-change: transform;
-      /* Distance set in JS to exact group pixel width for seamless full-width loop */
-      animation: marquee-scroll var(--marquee-duration, 40s) linear infinite;
-    }
-
-    .ribbon-group {
-      display: flex;
-      flex-shrink: 0;
-      align-items: center;
-      gap: 2.75rem;
-      padding-inline-end: 2.75rem;
-      box-sizing: content-box;
-    }
-
-    .ribbon-group span {
-      display: inline-flex;
-      align-items: center;
-      gap: 2.75rem;
-      white-space: nowrap;
-      flex-shrink: 0;
-    }
-
-    .ribbon-group span::after {
-      content: "✦";
-      color: var(--brass);
-      font-style: normal;
-      font-size: 0.7rem;
-    }
-
-    /* Moves left continuously by one full group width (covers full screen when group ≥ 100vw) */
-    @keyframes marquee-scroll {
-      from { transform: translate3d(0, 0, 0); }
-      to { transform: translate3d(calc(-1 * var(--marquee-distance, 50%)), 0, 0); }
-    }
-
-    @media (prefers-reduced-motion: reduce) {
-      .ribbon-track { animation: none; }
-    }
-
-    /* —— About —— */
-    .about {
-      background: var(--parchment);
-    }
-
-    .about-layout {
-      display: grid;
-      gap: 3rem;
-      align-items: center;
-    }
-
-    @media (min-width: 860px) {
-      .about-layout {
-        grid-template-columns: 0.95fr 1.05fr;
-        gap: 4.5rem;
-      }
-    }
-
-    .about-portrait {
-      position: relative;
-    }
-
-    .about-portrait-frame {
-      position: relative;
-      padding: 0.65rem;
-      background: transparent;
-      border: 1px solid var(--line);
-      box-shadow: none;
-    }
-
-    .about-portrait-frame::before {
-      content: "";
-      position: absolute;
-      inset: 0.35rem;
-      border: 1px solid rgba(196, 169, 122, 0.45);
-      pointer-events: none;
-      z-index: 2;
-    }
-
-    .about-portrait-media {
-      position: relative;
-      aspect-ratio: 1;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      padding: 12%;
-      background: transparent;
-      overflow: hidden;
-    }
-
-    .about-portrait-media img {
-      width: 100%;
-      max-width: 360px;
-      height: auto;
-      display: block;
-      filter: drop-shadow(0 14px 32px rgba(42, 34, 24, 0.12));
-    }
-
-    .about-tag {
-      position: absolute;
-      bottom: 1.75rem;
-      right: -0.75rem;
-      background: var(--ink);
-      color: var(--linen);
-      padding: 1rem 1.25rem;
-      max-width: 11rem;
-      font-family: var(--font-serif);
-      font-style: italic;
-      font-size: 1.05rem;
-      line-height: 1.35;
-      box-shadow: 0 12px 30px rgba(42, 34, 24, 0.28);
-      z-index: 6;
-    }
-
-    @media (max-width: 500px) {
-      .about-tag {
-        right: 0.5rem;
-        bottom: 0.75rem;
-        max-width: 10rem;
-        font-size: 0.95rem;
-      }
-    }
-
-    .about-body .section-title { margin-bottom: 1.25rem; }
-
-    .about-body p {
-      color: var(--ink-soft);
-      margin-bottom: 1.15rem;
-      font-weight: 300;
-      font-size: 1.02rem;
-    }
-
-    .about-body p:last-of-type { margin-bottom: 0; }
-
-    .about-signature {
-      margin-top: 2rem;
-      padding-top: 1.75rem;
-      border-top: 1px solid var(--line);
-      display: flex;
-      align-items: center;
-      gap: 1.25rem;
-    }
-
-    .about-signature .script {
-      font-size: 1.85rem;
-      color: var(--ink);
-      line-height: 1;
-    }
-
-    .about-signature small {
-      display: block;
-      font-size: 0.7rem;
-      letter-spacing: 0.18em;
-      text-transform: uppercase;
-      color: var(--muted);
-      margin-top: 0.25rem;
-    }
-
-    /* —— Services —— */
-    .services {
-      background:
-        linear-gradient(180deg, var(--linen) 0%, var(--linen-deep) 100%);
-    }
-
-    .services-grid {
-      display: grid;
-      gap: 0;
-      border: 1px solid var(--line-strong);
-      background: var(--ivory);
-    }
-
-    @media (min-width: 720px) {
-      .services-grid { grid-template-columns: repeat(2, 1fr); }
-    }
-
-    @media (min-width: 1000px) {
-      .services-grid { grid-template-columns: repeat(3, 1fr); }
-    }
-
-    .service-card {
-      padding: 2.25rem 1.85rem;
-      border-bottom: 1px solid var(--line);
-      border-right: 1px solid var(--line);
-      transition: background 0.3s ease;
-      position: relative;
-    }
-
-    .service-card:hover {
-      background: var(--parchment);
-    }
-
-    .service-num {
-      font-family: var(--font-serif);
-      font-style: italic;
-      font-size: 0.95rem;
-      color: var(--brass);
-      margin-bottom: 1.1rem;
-      letter-spacing: 0.04em;
-    }
-
-    .service-card h3 {
-      font-family: var(--font-serif);
-      font-weight: 600;
-      font-size: 1.55rem;
-      color: var(--ink);
-      margin-bottom: 0.7rem;
-      letter-spacing: 0.01em;
-    }
-
-    .service-card p {
-      font-size: 0.95rem;
-      font-weight: 300;
-      color: var(--muted);
-      line-height: 1.65;
-    }
-
-    /* —— Gallery —— */
-    .gallery {
-      background: var(--parchment);
-    }
-
-    .gallery-intro {
-      display: grid;
-      gap: 1.5rem;
-      margin-bottom: clamp(2.5rem, 5vw, 3.5rem);
-      align-items: end;
-    }
-
-    @media (min-width: 760px) {
-      .gallery-intro {
-        grid-template-columns: 1fr auto;
-        text-align: left;
-      }
-      .gallery-intro .section-head {
-        text-align: left;
-        margin-bottom: 0;
-      }
-      .gallery-intro .section-lead {
-        margin-inline: 0;
-      }
-      .gallery-intro .ornament {
-        justify-content: flex-start;
-        margin-left: 0;
-      }
-    }
-
-    .gallery-wall {
-      display: grid;
-      gap: 1.25rem;
-      grid-template-columns: 1fr;
-    }
-
-    @media (min-width: 640px) {
-      .gallery-wall {
-        grid-template-columns: repeat(6, 1fr);
-        grid-auto-rows: minmax(140px, auto);
-      }
-    }
-
-    .gallery-piece {
-      position: relative;
-      background: var(--ivory);
-      padding: 0.7rem 0.7rem 1.65rem;
-      border: 1px solid var(--line);
-      box-shadow: 0 10px 32px rgba(42, 34, 24, 0.05);
-      transition: transform 0.35s ease, box-shadow 0.35s ease;
-    }
-
-    .gallery-piece:hover {
-      transform: translateY(-4px);
-      box-shadow: 0 18px 40px rgba(42, 34, 24, 0.1);
-    }
-
-    .gallery-piece .mat {
-      background: var(--linen-deep);
-      overflow: hidden;
-      border: 1px solid rgba(42, 34, 24, 0.06);
-      aspect-ratio: 1;
-    }
-
-    .gallery-piece img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      transition: transform 0.5s ease;
-    }
-
-    .gallery-piece:hover img { transform: scale(1.04); }
-
-    .gallery-piece figcaption {
-      margin-top: 0.85rem;
-      text-align: center;
-      font-family: var(--font-serif);
-      font-style: italic;
-      font-size: 1rem;
-      color: var(--ink-soft);
-    }
-
-    .gallery-piece .label {
-      display: block;
-      font-family: var(--font-sans);
-      font-style: normal;
-      font-size: 0.62rem;
-      letter-spacing: 0.18em;
-      text-transform: uppercase;
-      color: var(--brass);
-      margin-bottom: 0.15rem;
-    }
-
-    @media (min-width: 640px) {
-      .gallery-piece.span-2 { grid-column: span 2; }
-      .gallery-piece.span-3 { grid-column: span 3; }
-      .gallery-piece.span-4 { grid-column: span 4; }
-      .gallery-piece.tall .mat { aspect-ratio: 4 / 5; }
-      .gallery-piece.wide .mat { aspect-ratio: 16 / 10; }
-      .gallery-piece.hero-shot {
-        grid-column: span 4;
-        grid-row: span 2;
-      }
-      .gallery-piece.hero-shot .mat { aspect-ratio: auto; height: 100%; min-height: 320px; }
-    }
-
-    /* —— Process —— */
-    .process {
-      background: var(--ink);
-      color: var(--linen);
-    }
-
-    .process .eyebrow { color: var(--brass-light); }
-    .process .section-title { color: var(--linen); }
-    .process .section-lead { color: rgba(244, 239, 230, 0.65); }
-    .process .ornament { color: var(--brass-light); }
-    .process .ornament::before {
-      background: linear-gradient(90deg, transparent, var(--brass-light));
-    }
-    .process .ornament::after {
-      background: linear-gradient(90deg, var(--brass-light), transparent);
-    }
-
-    .steps {
-      display: grid;
-      gap: 0;
-      counter-reset: step;
-    }
-
-    @media (min-width: 800px) {
-      .steps {
-        grid-template-columns: repeat(4, 1fr);
-        border-top: 1px solid rgba(244, 239, 230, 0.12);
-      }
-    }
-
-    .step {
-      padding: 2rem 1.5rem;
-      border-bottom: 1px solid rgba(244, 239, 230, 0.12);
-      counter-increment: step;
-      position: relative;
-    }
-
-    @media (min-width: 800px) {
-      .step {
-        border-bottom: none;
-        border-right: 1px solid rgba(244, 239, 230, 0.12);
-        padding: 2.5rem 1.75rem 2rem;
-      }
-      .step:last-child { border-right: none; }
-    }
-
-    .step::before {
-      content: "0" counter(step);
-      display: block;
-      font-family: var(--font-serif);
-      font-style: italic;
-      font-size: 2rem;
-      color: var(--brass-light);
-      margin-bottom: 1.25rem;
-      line-height: 1;
-      opacity: 0.9;
-    }
-
-    .step h3 {
-      font-family: var(--font-serif);
-      font-weight: 500;
-      font-size: 1.4rem;
-      color: var(--linen);
-      margin-bottom: 0.65rem;
-    }
-
-    .step p {
-      font-size: 0.92rem;
-      font-weight: 300;
-      color: rgba(244, 239, 230, 0.62);
-      line-height: 1.65;
-    }
-
-    /* —— Testimonials —— */
-    .testimonials {
-      background: var(--linen);
-    }
-
-    .quote-grid {
-      display: grid;
-      gap: 1.5rem;
-    }
-
-    @media (min-width: 820px) {
-      .quote-grid { grid-template-columns: repeat(3, 1fr); }
-    }
-
-    .quote-card {
-      background: var(--ivory);
-      border: 1px solid var(--line);
-      padding: 2.25rem 1.85rem;
-      display: flex;
-      flex-direction: column;
-      position: relative;
-    }
-
-    .quote-card::before {
-      content: "“";
-      font-family: var(--font-serif);
-      font-size: 4.5rem;
-      line-height: 0.7;
-      color: var(--brass-pale);
-      position: absolute;
-      top: 1.5rem;
-      left: 1.4rem;
-    }
-
-    .quote-card blockquote {
-      position: relative;
-      z-index: 1;
-      font-family: var(--font-serif);
-      font-size: 1.25rem;
-      font-style: italic;
-      font-weight: 400;
-      color: var(--ink-soft);
-      line-height: 1.5;
-      margin: 1.5rem 0 1.75rem;
-      flex: 1;
-    }
-
-    .quote-card footer {
-      border-top: 1px solid var(--line);
-      padding-top: 1.15rem;
-      display: flex;
-      flex-direction: column;
-      gap: 0.15rem;
-    }
-
-    .quote-card cite {
-      font-style: normal;
-      font-family: var(--font-sans);
-      font-size: 0.78rem;
-      font-weight: 500;
-      letter-spacing: 0.14em;
-      text-transform: uppercase;
-      color: var(--ink);
-    }
-
-    .quote-card .role {
-      font-family: var(--font-serif);
-      font-style: italic;
-      font-size: 0.95rem;
-      color: var(--muted);
-    }
-
-    /* —— CTA —— */
-    .cta {
-      position: relative;
-      background:
-        radial-gradient(ellipse 50% 60% at 15% 80%, rgba(111, 127, 98, 0.18), transparent 55%),
-        radial-gradient(ellipse 40% 50% at 90% 20%, rgba(159, 197, 216, 0.2), transparent 50%),
-        linear-gradient(165deg, #34281e 0%, var(--ink) 55%, #1f1913 100%);
-      color: var(--linen);
-      overflow: hidden;
-    }
-
-    /* barn door X motif — subtle */
-    .cta-motif {
-      position: absolute;
-      width: 320px;
-      height: 320px;
-      border: 1px solid rgba(196, 169, 122, 0.12);
-      pointer-events: none;
-    }
-
-    .cta-motif.tr {
-      top: -80px;
-      right: -40px;
-      transform: rotate(8deg);
-      background:
-        linear-gradient(45deg, transparent 49%, rgba(196, 169, 122, 0.08) 49%, rgba(196, 169, 122, 0.08) 51%, transparent 51%),
-        linear-gradient(-45deg, transparent 49%, rgba(196, 169, 122, 0.08) 49%, rgba(196, 169, 122, 0.08) 51%, transparent 51%);
-    }
-
-    .cta-motif.bl {
-      bottom: -100px;
-      left: -60px;
-      transform: rotate(-6deg);
-      background:
-        linear-gradient(45deg, transparent 49%, rgba(111, 127, 98, 0.1) 49%, rgba(111, 127, 98, 0.1) 51%, transparent 51%),
-        linear-gradient(-45deg, transparent 49%, rgba(111, 127, 98, 0.1) 49%, rgba(111, 127, 98, 0.1) 51%, transparent 51%);
-    }
-
-    .cta .container {
-      position: relative;
-      z-index: 1;
-      display: grid;
-      gap: 3rem;
-    }
-
-    @media (min-width: 900px) {
-      .cta .container {
-        grid-template-columns: 0.95fr 1.05fr;
-        gap: 4rem;
-        align-items: center;
-      }
-    }
-
-    .cta .eyebrow { color: var(--brass-light); }
-    .cta .section-title { color: var(--linen); }
-    .cta .section-lead {
-      color: rgba(253, 251, 247, 0.92);
-      margin-bottom: 1.75rem;
-    }
-
-    .cta-list {
-      display: flex;
-      flex-direction: column;
-      gap: 1rem;
-    }
-
-    .cta-list li {
-      display: grid;
-      grid-template-columns: auto 1fr;
-      gap: 0.9rem;
-      align-items: start;
-      font-weight: 400;
-      color: rgba(253, 251, 247, 0.95);
-      font-size: 0.98rem;
-    }
-
-    .cta-list .mark {
-      font-family: var(--font-serif);
-      font-style: italic;
-      color: var(--brass-light);
-      font-size: 1.1rem;
-      line-height: 1.4;
-    }
-
-    .form-card {
-      background: var(--parchment);
-      color: var(--ink-soft);
-      padding: clamp(1.75rem, 4vw, 2.5rem);
-      border: 1px solid rgba(196, 169, 122, 0.25);
-      box-shadow: 0 30px 70px rgba(0, 0, 0, 0.28);
-      position: relative;
-    }
-
-    .form-card::before {
-      content: "";
-      position: absolute;
-      inset: 0.55rem;
-      border: 1px solid var(--brass-pale);
-      pointer-events: none;
-    }
-
-    .form-card > * { position: relative; z-index: 1; }
-
-    .form-card h3 {
-      font-family: var(--font-serif);
-      font-weight: 500;
-      font-size: 1.85rem;
-      color: var(--ink);
-      margin-bottom: 0.35rem;
-    }
-
-    .form-card .form-sub {
-      font-family: var(--font-serif);
-      font-style: italic;
-      color: var(--ink-soft);
-      margin-bottom: 1.65rem;
-      font-size: 1.05rem;
-    }
-
-    .form-row {
-      display: grid;
-      gap: 1.1rem;
-      margin-bottom: 1.1rem;
-    }
-
-    @media (min-width: 520px) {
-      .form-row.two { grid-template-columns: 1fr 1fr; }
-    }
-
-    .field label {
-      display: block;
-      font-size: 0.68rem;
-      font-weight: 600;
-      letter-spacing: 0.16em;
-      text-transform: uppercase;
-      color: var(--ink);
-      margin-bottom: 0.45rem;
-    }
-
-    .field input,
-    .field select,
-    .field textarea {
-      width: 100%;
-      padding: 0.85rem 0;
-      border: none;
-      border-bottom: 1px solid var(--line-strong);
-      background: transparent;
-      font-family: var(--font-sans);
-      font-size: 1rem;
-      font-weight: 400;
-      letter-spacing: 0.01em;
-      color: var(--ink);
-      border-radius: 0;
-      transition: border-color 0.2s ease;
-    }
-
-    .field input::placeholder,
-    .field textarea::placeholder {
-      color: rgba(42, 34, 24, 0.5);
-      font-style: normal;
-      font-weight: 400;
-    }
-
-    .field input[type="tel"] {
-      font-variant-numeric: tabular-nums;
-      letter-spacing: 0.02em;
-    }
-
-    .field input:focus,
-    .field select:focus,
-    .field textarea:focus {
-      outline: none;
-      border-bottom-color: var(--brass);
-    }
-
-    .field select {
-      cursor: pointer;
-      appearance: none;
-      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%23a6895a' fill='none' stroke-width='1.5'/%3E%3C/svg%3E");
-      background-repeat: no-repeat;
-      background-position: right 0.25rem center;
-      padding-right: 1.5rem;
-    }
-
-    .field textarea {
-      min-height: 100px;
-      resize: vertical;
-      line-height: 1.5;
-    }
-
-    .form-card .btn {
-      width: 100%;
-      margin-top: 0.75rem;
-    }
-
-    .form-note {
-      margin-top: 1rem;
-      font-size: 0.78rem;
-      color: var(--ink-soft);
-      text-align: center;
-      font-weight: 400;
-      line-height: 1.5;
-    }
-
-    .form-note a {
-      color: var(--ink);
-      text-decoration: underline;
-      text-underline-offset: 0.15em;
-      font-weight: 600;
-    }
-
-    .form-note a:hover { color: var(--brass); }
-
-    .form-file-hint {
-      margin: 0.45rem 0 0;
-      font-size: 0.75rem;
-      color: var(--ink-soft);
-      line-height: 1.45;
-    }
-
-    .form-file-status {
-      margin: 0.4rem 0 0;
-      font-size: 0.78rem;
-      font-weight: 600;
-      color: var(--ink);
-      line-height: 1.4;
-    }
-
-    .field input[type="file"] {
-      width: 100%;
-      font-size: 0.88rem;
-      padding: 0.55rem 0;
-      color: var(--ink);
-    }
-
-    .cta-list a:hover { color: var(--brass-light); }
-
-    .form-success {
-      display: none;
-      text-align: center;
-      padding: 2.5rem 1rem;
-    }
-
-    .form-success.show { display: block; }
-    .form-card.submitted form { display: none; }
-
-    .form-success .script {
-      font-size: 2.4rem;
-      color: var(--brass);
-      display: block;
-      margin-bottom: 0.75rem;
-    }
-
-    .form-success h3 {
-      font-family: var(--font-serif);
-      font-weight: 500;
-      font-size: 1.75rem;
-      color: var(--ink);
-      margin-bottom: 0.5rem;
-    }
-
-    .form-success p {
-      color: var(--muted);
-      font-weight: 300;
-      max-width: 22rem;
-      margin-inline: auto;
-    }
-
-    /* —— Footer —— */
-    .site-footer {
-      background: #1a1510;
-      color: rgba(244, 239, 230, 0.65);
-      padding: 4rem 0 1.75rem;
-    }
-
-    .footer-top {
-      display: grid;
-      gap: 2.5rem;
-      margin-bottom: 3rem;
-      padding-bottom: 3rem;
-      border-bottom: 1px solid rgba(244, 239, 230, 0.1);
-    }
-
-    @media (min-width: 760px) {
-      .footer-top {
-        grid-template-columns: 1.4fr 1fr 1fr;
-        gap: 3rem;
-      }
-    }
-
-    .footer-brand img {
-      width: 72px;
-      height: auto;
-      margin-bottom: 1.15rem;
-      opacity: 0.95;
-    }
-
-    .footer-brand p {
-      font-family: var(--font-serif);
-      font-style: italic;
-      font-size: 1.1rem;
-      line-height: 1.55;
-      max-width: 22rem;
-      color: rgba(244, 239, 230, 0.7);
-    }
-
-    .footer-col h4 {
-      font-family: var(--font-sans);
-      font-size: 0.68rem;
-      font-weight: 500;
-      letter-spacing: 0.22em;
-      text-transform: uppercase;
-      color: var(--brass-light);
-      margin-bottom: 1.15rem;
-    }
-
-    .footer-col ul {
-      display: flex;
-      flex-direction: column;
-      gap: 0.55rem;
-    }
-
-    .footer-col a {
-      font-size: 0.95rem;
-      font-weight: 300;
-      transition: color 0.2s;
-    }
-
-    .footer-col a:hover { color: var(--linen); }
-
-    .footer-bottom {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 1rem 1.5rem;
-      justify-content: space-between;
-      align-items: center;
-      font-size: 0.8rem;
-      font-weight: 300;
-    }
-
-    .socials {
-      display: flex;
-      gap: 0.55rem;
-      align-items: center;
-    }
-
-    .socials a {
-      width: 42px;
-      height: 42px;
-      border: 1px solid rgba(244, 239, 230, 0.15);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      transition: border-color 0.2s, color 0.2s, background 0.2s, transform 0.2s;
-      color: rgba(244, 239, 230, 0.85);
-    }
-
-    .socials a:hover {
-      border-color: var(--brass-light);
-      color: var(--brass-light);
-      background: rgba(196, 169, 122, 0.08);
-      transform: translateY(-2px);
-    }
-
-    .socials svg {
-      width: 18px;
-      height: 18px;
-      fill: currentColor;
-    }
-
-    .socials-inline {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 0.75rem 1.25rem;
-      margin-top: 1.75rem;
-      padding-top: 1.5rem;
-      border-top: 1px solid rgba(244, 239, 230, 0.12);
-    }
-
-    .socials-inline .socials-label {
-      width: 100%;
-      font-family: var(--font-sans);
-      font-size: 0.68rem;
-      font-weight: 500;
-      letter-spacing: 0.2em;
-      text-transform: uppercase;
-      color: var(--brass-light);
-      margin-bottom: 0.15rem;
-    }
-
-    .socials-inline a {
-      display: inline-flex;
-      align-items: center;
-      gap: 0.45rem;
-      font-size: 0.92rem;
-      font-weight: 300;
-      color: rgba(244, 239, 230, 0.85);
-      transition: color 0.2s;
-    }
-
-    .socials-inline a:hover { color: var(--brass-light); }
-
-    .socials-inline svg {
-      width: 16px;
-      height: 16px;
-      fill: currentColor;
-      flex-shrink: 0;
-    }
-
-    .footer-follow {
-      display: flex;
-      flex-direction: column;
-      gap: 0.85rem;
-    }
-
-    .footer-follow p {
-      font-size: 0.9rem;
-      font-weight: 300;
-      color: rgba(244, 239, 230, 0.65);
-      max-width: 16rem;
-    }
-
-    .sr-only {
-      position: absolute;
-      width: 1px;
-      height: 1px;
-      padding: 0;
-      margin: -1px;
-      overflow: hidden;
-      clip: rect(0, 0, 0, 0);
-      border: 0;
-    }
-
-    /* Skip link (accessibility + SEO bots with a11y checks) */
-    .skip-link {
-      position: absolute;
-      left: 1rem;
-      top: -100px;
-      z-index: 10000;
-      padding: 0.75rem 1.1rem;
-      background: var(--ink);
-      color: var(--linen);
-      font-size: 0.78rem;
-      font-weight: 500;
-      letter-spacing: 0.12em;
-      text-transform: uppercase;
-      transition: top 0.2s ease;
-    }
-
-    .skip-link:focus {
-      top: 1rem;
-      outline: 2px solid var(--brass-light);
-      outline-offset: 2px;
-    }
-
-    /* FAQ */
-    .faq-list {
-      max-width: 760px;
-      margin: 0 auto;
-      display: flex;
-      flex-direction: column;
-      gap: 0.75rem;
-    }
-
-    .faq-item {
-      border: 1px solid var(--line-strong);
-      background: var(--parchment);
-    }
-
-    .faq-item summary {
-      cursor: pointer;
-      list-style: none;
-      padding: 1.15rem 1.35rem;
-      font-family: var(--font-serif);
-      font-size: 1.15rem;
-      font-weight: 500;
-      color: var(--ink);
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 1rem;
-    }
-
-    .faq-item summary::-webkit-details-marker { display: none; }
-
-    .faq-item summary::after {
-      content: "+";
-      font-family: var(--font-sans);
-      font-size: 1.25rem;
-      font-weight: 400;
-      color: var(--brass);
-      line-height: 1;
-      flex-shrink: 0;
-    }
-
-    .faq-item[open] summary::after { content: "–"; }
-
-    .faq-item .faq-answer {
-      padding: 0 1.35rem 1.25rem;
-      color: var(--ink-soft);
-      font-size: 0.98rem;
-      line-height: 1.65;
-      border-top: 1px solid var(--line);
-    }
-
-    .faq-item .faq-answer p { margin-top: 0.9rem; }
-
-    .faq-item .faq-answer a {
-      color: var(--espresso);
-      text-decoration: underline;
-      text-underline-offset: 0.15em;
-      font-weight: 500;
-    }
-
-    /* Google Business / local presence */
-    .local-band {
-      background:
-        radial-gradient(ellipse 50% 80% at 10% 50%, rgba(159, 197, 216, 0.18), transparent 55%),
-        radial-gradient(ellipse 40% 70% at 90% 40%, rgba(111, 127, 98, 0.1), transparent 50%),
-        var(--linen-deep);
-      border-block: 1px solid var(--line);
-    }
-
-    .local-grid {
-      display: grid;
-      gap: 2rem;
-      align-items: center;
-    }
-
-    @media (min-width: 860px) {
-      .local-grid {
-        grid-template-columns: 1.1fr 0.9fr;
-        gap: 3rem;
-      }
-    }
-
-    .local-card {
-      background: var(--parchment);
-      border: 1px solid var(--line-strong);
-      padding: clamp(1.5rem, 3vw, 2rem);
-      box-shadow: 0 16px 40px rgba(42, 34, 24, 0.06);
-    }
-
-    .local-card h3 {
-      font-family: var(--font-serif);
-      font-weight: 500;
-      font-size: 1.45rem;
-      color: var(--ink);
-      margin-bottom: 0.35rem;
-    }
-
-    .local-card .local-sub {
-      font-family: var(--font-serif);
-      font-style: italic;
-      color: var(--muted);
-      margin-bottom: 1.25rem;
-      font-size: 1.02rem;
-    }
-
-    .nap-list {
-      display: flex;
-      flex-direction: column;
-      gap: 0.85rem;
-      margin-bottom: 1.5rem;
-    }
-
-    .nap-list li {
-      display: grid;
-      grid-template-columns: 5.5rem 1fr;
-      gap: 0.75rem;
-      align-items: start;
-      font-size: 0.95rem;
-      color: var(--ink-soft);
-      line-height: 1.45;
-    }
-
-    .nap-list .nap-label {
-      font-size: 0.68rem;
-      font-weight: 600;
-      letter-spacing: 0.16em;
-      text-transform: uppercase;
-      color: var(--brass);
-      padding-top: 0.2rem;
-    }
-
-    .nap-list a {
-      color: var(--ink);
-      font-weight: 500;
-      text-decoration: underline;
-      text-underline-offset: 0.15em;
-    }
-
-    .nap-list a:hover { color: var(--brass); }
-
-    .local-actions {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 0.75rem;
-    }
-
-    .local-actions .btn { padding: 0.85rem 1.25rem; }
-
-    .google-mark {
-      display: inline-flex;
-      align-items: center;
-      gap: 0.5rem;
-    }
-
-    .google-mark svg {
-      width: 18px;
-      height: 18px;
-      flex-shrink: 0;
-    }
-
-    /* —— Shop —— */
-  </style>
+  <link rel="stylesheet" href="css/home.css" />
 </head>
+
 <body>
   <a class="skip-link" href="#main-content">Skip to content</a>
   <header class="site-header">
     <div class="container nav">
       <a href="#top" class="nav-brand">
-        <img src="assets/logo.png" alt="Barn &amp; Beam Creations" width="64" height="64" />
+        <img src="assets/logo.png" alt="Barn &amp; Beam Creations" width="48" height="48" />
         <div class="nav-brand-text">
           <strong>Barn &amp; Beam</strong>
           <span>Creations</span>
         </div>
       </a>
       <nav class="nav-links" aria-label="Primary">
-        <a href="#about">About</a>
-        <a href="#services">Services</a>
-        <a href="#gallery">Gallery</a>
+        <a href="#gallery">Work</a>
         <a href="#process">Process</a>
+        <a href="#about">About</a>
         <a href="#faq">FAQ</a>
-        <a href="#visit">Local</a>
-        <a href="#stories">Stories</a>
       </nav>
-      <a href="#quote" class="btn btn-primary nav-cta">Request a Quote</a>
+      <a class="nav-phone" href="tel:+18164080675">(816) 408-0675</a>
+      <a href="#quote" class="btn btn-primary nav-cta">Request a quote</a>
       <button class="nav-toggle" type="button" aria-label="Open menu" aria-expanded="false" id="navToggle">
         <span></span><span></span><span></span>
       </button>
     </div>
     <div class="container mobile-menu" id="mobileMenu">
-      <a href="#about">About</a>
-      <a href="#services">Services</a>
-      <a href="#gallery">Gallery</a>
+      <a href="#gallery">Work</a>
       <a href="#process">Process</a>
+      <a href="#about">About</a>
       <a href="#faq">FAQ</a>
-      <a href="#visit">Local</a>
-      <a href="#stories">Stories</a>
-      <a href="#quote" class="btn btn-primary">Request a Quote</a>
+      <a href="tel:+18164080675">(816) 408-0675</a>
+      <a href="#quote" class="btn btn-primary">Request a quote</a>
     </div>
   </header>
 
   <main id="main-content">
-    <!-- Hero -->
     <section class="hero" id="top" aria-label="Introduction">
-      <div class="hero-frame" aria-hidden="true"></div>
       <div class="container">
         <div class="hero-copy">
-          <span class="hero-eyebrow">Custom Laser Engraving &amp; UV Printing</span>
-          <h1>Precision craft<br />for <em>your</em> design.</h1>
+          <span class="eyebrow">Custom laser engraving &amp; UV printing</span>
+          <h1>Precision craft for your design.</h1>
           <p>
-            Barn &amp; Beam Creations is a Buckner, Missouri studio (Kansas City metro) specializing in
-            <strong>custom laser engraving</strong> and <strong>full-color UV printing</strong> —
-            turning your artwork into polished products on wood, metal, acrylic, leather, hats,
-            drinkware, and more. Local pickup or shipping available.
+            Barn &amp; Beam Creations is a Buckner, Missouri studio (Kansas City metro)
+            for <strong>custom laser engraving</strong> and <strong>full-color UV printing</strong>
+            on wood, metal, leather, acrylic, hats, and drinkware. Local pickup or shipping.
           </p>
           <div class="hero-actions">
-            <a href="#quote" class="btn btn-primary">Get a Custom Quote</a>
-            <a href="#gallery" class="btn btn-ghost">See recent work</a>
+            <a href="#gallery" class="btn btn-primary">View work</a>
+            <a href="#quote" class="btn btn-secondary">Request a quote</a>
           </div>
-          <div class="hero-meta">
-            <span><i></i> Laser engraving</span>
-            <span><i></i> UV printing</span>
-            <span><i></i> Fully custom orders</span>
+          <div class="hero-chips">
+            <span class="chip">Laser engraving</span>
+            <span class="chip">UV printing</span>
+            <span class="chip">Fully custom</span>
           </div>
         </div>
         <div class="hero-visual">
-          <div class="logo-stage">
-            <div class="logo-stage-inner">
-              <img src="assets/logo.png" alt="Barn &amp; Beam Creations logo" width="520" height="520" />
-            </div>
-            <span class="logo-caption">Est. 2025</span>
-          </div>
+          <figure class="hero-frame">
+            <img
+              src="assets/gallery/hat-cowboy.jpg"
+              alt="UV-printed America rodeo leatherette patch on a navy trucker hat"
+              width="720"
+              height="720"
+            />
+            <figcaption>
+              <span>America Rodeo hat patch</span>
+              <span class="chip">UV print</span>
+            </figcaption>
+          </figure>
         </div>
       </div>
     </section>
 
-    <!-- Marquee ribbon — continuous seamless loop across full viewport -->
-    <div class="ribbon" aria-hidden="true">
-      <div class="ribbon-track" id="ribbonTrack">
-        <div class="ribbon-group" id="ribbonGroup">
-          <span>Laser Engraving</span>
-          <span>UV Printing</span>
-          <span>Custom Signage</span>
-          <span>Hat Patches</span>
-          <span>Brand Marking</span>
-          <span>Personalized Gifts</span>
+    <section class="section" id="gallery" aria-labelledby="work-heading">
+      <span id="work"></span>
+      <div class="container">
+        <div class="work-intro">
+          <div class="section-head">
+            <span class="eyebrow">Work</span>
+            <h2 class="section-title" id="work-heading">Recent custom work</h2>
+            <hr class="rule" />
+            <p class="section-lead">
+              UV-printed patches, drinkware, and laser-engraved pieces from the shop.
+            </p>
+          </div>
+          <a href="#quote" class="btn btn-secondary">Request a quote</a>
         </div>
-      </div>
-    </div>
-
-    <!-- About -->
-    <section class="section about" id="about" aria-labelledby="about-heading">
-      <div class="container about-layout">
-        <div class="about-portrait">
-          <div class="about-portrait-frame">
-            <div class="about-portrait-media">
-              <img
-                src="assets/logo.png"
-                alt="Barn &amp; Beam Creations logo"
-                width="360"
-                height="360"
-              />
+        <div class="work-grid">
+          <figure class="work-card">
+            <div class="mat">
+              <img src="assets/gallery/hat-cowboy.jpg" alt="UV-printed America rodeo patch on a navy trucker hat" loading="lazy" width="640" height="800" />
             </div>
-          </div>
-          <p class="about-tag">“Sharp detail. Clean color. Built to last.”</p>
-        </div>
-        <div class="about-body">
-          <span class="eyebrow">The Shop</span>
-          <h2 class="section-title" id="about-heading">Precision custom work on professional-quality equipment.</h2>
-          <div class="ornament" aria-hidden="true" style="justify-content: flex-start; margin: 0 0 1.5rem;">
-            <svg viewBox="0 0 16 16"><path d="M8 0l1.5 5.5L15 8l-5.5 1.5L8 15l-1.5-5.5L1 8l5.5-1.5L8 0z"/></svg>
-          </div>
-          <p>
-            Barn &amp; Beam Creations is a custom laser engraving and UV printing
-            studio built for clients who want more than a mass-produced imprint.
-            Bring us your <strong>custom logo or design</strong> and we’ll bring it
-            to life on whatever you can imagine — with professional accuracy and a
-            premium finish.
-          </p>
-          <p>
-            We work across all kinds of materials — <strong>glass, wood, leather,
-            fabric</strong>, acrylic, metal, and more — so your project isn’t limited
-            by a short menu. Whether it’s for the <strong>office</strong>, a
-            <strong>wedding</strong>, or <strong>marketing giveaways</strong>, we
-            match the right process and surface to what you need.
-          </p>
-          <div class="about-signature">
-            <div>
-              <span class="script">Barn &amp; Beam</span>
-              <small>Laser engraving &amp; UV printing</small>
+            <figcaption>
+              <span class="chip">UV print</span>
+              <span class="name">America Rodeo hat patch</span>
+            </figcaption>
+          </figure>
+          <figure class="work-card">
+            <div class="mat">
+              <img src="assets/gallery/hat-eagle.jpg" alt="UV-printed leatherette eagle patch on a khaki canvas cap" loading="lazy" width="640" height="800" />
             </div>
-          </div>
+            <figcaption>
+              <span class="chip">UV print</span>
+              <span class="name">Merica eagle badge</span>
+            </figcaption>
+          </figure>
+          <figure class="work-card">
+            <div class="mat">
+              <img src="assets/gallery/hat-highland.jpg" alt="UV-printed highland cow patch on a two-tone cap" loading="lazy" width="640" height="800" />
+            </div>
+            <figcaption>
+              <span class="chip">UV print</span>
+              <span class="name">Highland RWB</span>
+            </figcaption>
+          </figure>
+          <figure class="work-card">
+            <div class="mat">
+              <img src="assets/gallery/hat-feral.jpg" alt="UV-printed Red White and Feral patch on a navy baseball cap" loading="lazy" width="640" height="800" />
+            </div>
+            <figcaption>
+              <span class="chip">UV print</span>
+              <span class="name">Red, White &amp; Feral</span>
+            </figcaption>
+          </figure>
+          <figure class="work-card">
+            <div class="mat">
+              <img src="assets/gallery/product-merica-cup.jpg" alt="Merica UV print on a white 30oz tumbler" loading="lazy" width="640" height="800" />
+            </div>
+            <figcaption>
+              <span class="chip">UV print</span>
+              <span class="name">Merica 30oz tumbler</span>
+            </figcaption>
+          </figure>
+          <figure class="work-card">
+            <div class="mat">
+              <img src="assets/gallery/wedding-toasting-glasses.jpg" alt="Laser-engraved toasting flutes with names and wedding date" loading="lazy" width="640" height="800" />
+            </div>
+            <figcaption>
+              <span class="chip">Laser</span>
+              <span class="name">Custom toasting glasses</span>
+            </figcaption>
+          </figure>
         </div>
       </div>
     </section>
 
-
-    <!-- Services -->
     <section class="section services" id="services" aria-labelledby="services-heading">
       <div class="container">
         <div class="section-head">
           <span class="eyebrow">Capabilities</span>
           <h2 class="section-title" id="services-heading">What we create for you</h2>
-          <div class="ornament" aria-hidden="true">
-            <svg viewBox="0 0 16 16"><path d="M8 0l1.5 5.5L15 8l-5.5 1.5L8 15l-1.5-5.5L1 8l5.5-1.5L8 0z"/></svg>
-          </div>
-          <p class="section-lead" style="margin-top: 1.25rem;">
-            Two core technologies — laser engraving and UV printing — applied across
-            materials, products, and fully custom projects.
+          <hr class="rule" />
+          <p class="section-lead">
+            Two processes — laser engraving and UV printing — on materials, products, and fully custom jobs.
           </p>
         </div>
         <div class="services-grid">
           <article class="service-card">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 20V8l8-4 8 4v12"/><path d="M4 8l8 4 8-4"/><path d="M12 12v8"/></svg>
             <p class="service-num">01</p>
             <h3>Laser Engraving</h3>
             <p>Permanent, high-precision detail on wood, leather, acrylic, metal, and more — logos, names, and fine line art.</p>
           </article>
           <article class="service-card">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="1"/><path d="M3 9h18"/><path d="M8 13h4"/></svg>
             <p class="service-num">02</p>
             <h3>UV Printing</h3>
             <p>Vibrant, durable full-color prints on hard goods: drinkware, patches, plaques, and promotional products.</p>
           </article>
           <article class="service-card">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 20h16"/><path d="M6 20V8h12v12"/><path d="M10 12h4"/></svg>
             <p class="service-num">03</p>
             <h3>Custom Signage</h3>
             <p>House signs, ranch boards, shop plaques, and display pieces finished for everyday visibility and longevity.</p>
           </article>
           <article class="service-card">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3l2.2 6.6H21l-5.4 4 2.1 6.4L12 16.8 6.3 20l2.1-6.4L3 9.6h6.8z"/></svg>
             <p class="service-num">04</p>
             <h3>Personalized Gifts</h3>
             <p>Cutting boards, coasters, hat patches, keychains, and keepsakes customized for events and milestones.</p>
           </article>
           <article class="service-card">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="8" cy="8" r="3"/><path d="M3 20c1.2-3 3.2-4.5 5-4.5S16.8 17 18 20"/><path d="M16 8h5M18.5 5.5v5"/></svg>
             <p class="service-num">05</p>
             <h3>Business Branding</h3>
             <p>Logo engraving, branded merch, and client gifts that present your company with a polished, custom look.</p>
           </article>
           <article class="service-card">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 7h16v10H4z"/><path d="M8 7V5h8v2"/><path d="M9 12h6"/></svg>
             <p class="service-num">06</p>
             <h3>Custom Projects</h3>
             <p>Have a unique idea? We help select materials, sizing, and process so your design comes out production-ready.</p>
@@ -2187,90 +531,13 @@
       </div>
     </section>
 
-    <!-- Gallery -->
-    <section class="section gallery" id="gallery">
-      <div class="container">
-        <div class="gallery-intro">
-          <div class="section-head">
-            <span class="eyebrow">Portfolio</span>
-            <h2 class="section-title">Recent custom work</h2>
-            <div class="ornament" aria-hidden="true">
-              <svg viewBox="0 0 16 16"><path d="M8 0l1.5 5.5L15 8l-5.5 1.5L8 15l-1.5-5.5L1 8l5.5-1.5L8 0z"/></svg>
-            </div>
-            <p class="section-lead" style="margin-top: 1.25rem;">
-              UV-printed patches, drinkware, and laser-engraved wedding pieces — finished work from the shop.
-            </p>
-          </div>
-          <a href="#quote" class="btn btn-ghost">Start a Custom Order</a>
-        </div>
-
-        <div class="gallery-wall">
-          <figure class="gallery-piece hero-shot">
-            <div class="mat">
-              <img src="assets/gallery/hat-cowboy.jpg" alt="UV-printed America rodeo patch on a navy trucker hat" loading="lazy" />
-            </div>
-          </figure>
-          <figure class="gallery-piece span-2 tall">
-            <div class="mat">
-              <img src="assets/gallery/hat-eagle.jpg" alt="Merica eagle UV-printed patch on a khaki canvas cap" loading="lazy" />
-            </div>
-            <figcaption>
-              <span class="label">UV Print</span>
-              Merica · Eagle badge
-            </figcaption>
-          </figure>
-          <figure class="gallery-piece span-2 tall">
-            <div class="mat">
-              <img src="assets/gallery/hat-highland.jpg" alt="Highland cow UV-printed patch on a two-tone cap" loading="lazy" />
-            </div>
-            <figcaption>
-              <span class="label">UV Print</span>
-              Highland RWB
-            </figcaption>
-          </figure>
-          <figure class="gallery-piece span-3">
-            <div class="mat">
-              <img src="assets/gallery/hat-feral.jpg" alt="Red White and Feral UV-printed patch on a navy baseball cap" loading="lazy" />
-            </div>
-            <figcaption>
-              <span class="label">UV Print</span>
-              Red, White &amp; Feral
-            </figcaption>
-          </figure>
-          <figure class="gallery-piece span-3">
-            <div class="mat">
-              <img src="assets/gallery/product-merica-cup.jpg" alt="Merica UV print on a white 30oz YETI Rambler tumbler" loading="lazy" />
-            </div>
-            <figcaption>
-              <span class="label">UV Print</span>
-              Merica · 30oz YETI Rambler
-            </figcaption>
-          </figure>
-          <figure class="gallery-piece span-3">
-            <div class="mat">
-              <img src="assets/gallery/wedding-toasting-glasses.jpg" alt="Custom laser-engraved toasting flutes for Malia and Carter, wedding date 9-19-26" loading="lazy" />
-            </div>
-            <figcaption>
-              <span class="label">Laser Engraving</span>
-              Malia &amp; Carter · 9.19.26
-            </figcaption>
-          </figure>
-        </div>
-      </div>
-    </section>
-
-    <!-- Process -->
-    <section class="section process" id="process">
+    <section class="section" id="process" aria-labelledby="process-heading">
       <div class="container">
         <div class="section-head">
           <span class="eyebrow">Process</span>
-          <h2 class="section-title">From design to finished product</h2>
-          <div class="ornament" aria-hidden="true">
-            <svg viewBox="0 0 16 16"><path d="M8 0l1.5 5.5L15 8l-5.5 1.5L8 15l-1.5-5.5L1 8l5.5-1.5L8 0z"/></svg>
-          </div>
-          <p class="section-lead" style="margin-top: 1.25rem;">
-            A clear path from your idea to a laser-engraved or UV-printed piece.
-          </p>
+          <h2 class="section-title" id="process-heading">From design to finished product</h2>
+          <hr class="rule" />
+          <p class="section-lead">A clear path from your idea to a laser-engraved or UV-printed piece.</p>
         </div>
         <ol class="steps">
           <li class="step">
@@ -2293,18 +560,55 @@
       </div>
     </section>
 
-    <!-- Testimonials -->
-    <section class="section testimonials" id="stories">
+    <section class="section about" id="about" aria-labelledby="about-heading">
+      <div class="container about-layout">
+        <div class="about-photos">
+          <img
+            src="assets/shop/shop-professional.jpg"
+            alt="Barn and Beam Creations shop: laser and finishing stations on a wood workbench"
+            width="960"
+            height="600"
+            loading="lazy"
+          />
+          <div class="pair">
+            <img
+              src="assets/shop/epilog-crop.jpg"
+              alt="Epilog Fusion Ascent laser engraver on the shop workbench"
+              width="480"
+              height="360"
+              loading="lazy"
+            />
+            <img
+              src="assets/shop/mimaki-clean.jpg"
+              alt="Mimaki UJF-6042 MkII e UV flatbed printer in the shop"
+              width="480"
+              height="360"
+              loading="lazy"
+            />
+          </div>
+        </div>
+        <div class="about-body">
+          <span class="eyebrow">The shop</span>
+          <h2 class="section-title" id="about-heading">Custom work on production equipment.</h2>
+          <hr class="rule" />
+          <p>
+            Barn &amp; Beam Creations produces custom laser-engraved and UV-printed pieces from your artwork.
+            Wood, metal, acrylic, leather, glass, hats, drinkware, and other hard goods.
+          </p>
+          <p>
+            Based in Buckner, Missouri (Kansas City metro). Visits by appointment. Local pickup or shipping.
+          </p>
+          <p class="about-meta">Est. 2025 · By appointment Mon–Fri</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="stories" aria-labelledby="stories-heading">
       <div class="container">
         <div class="section-head">
           <span class="eyebrow">Reviews</span>
-          <h2 class="section-title">What customers say</h2>
-          <div class="ornament" aria-hidden="true">
-            <svg viewBox="0 0 16 16"><path d="M8 0l1.5 5.5L15 8l-5.5 1.5L8 15l-1.5-5.5L1 8l5.5-1.5L8 0z"/></svg>
-          </div>
-          <p class="section-lead" style="margin-top: 1.25rem;">
-            Feedback from clients who ordered custom laser and UV work.
-          </p>
+          <h2 class="section-title" id="stories-heading">What customers say</h2>
+          <hr class="rule" />
         </div>
         <div class="quote-grid">
           <article class="quote-card">
@@ -2338,22 +642,15 @@
       </div>
     </section>
 
-    <!-- Local presence / Google Business Profile alignment (NAP consistency) -->
     <section class="section local-band" id="visit" aria-labelledby="visit-heading">
       <div class="container local-grid">
         <div>
-          <span class="eyebrow">Local &amp; on Google</span>
+          <span class="eyebrow">Local</span>
           <h2 class="section-title" id="visit-heading">Find Barn &amp; Beam on Google</h2>
-          <div class="ornament" aria-hidden="true" style="justify-content: flex-start; margin: 0 0 1.25rem;">
-            <svg viewBox="0 0 16 16"><path d="M8 0l1.5 5.5L15 8l-5.5 1.5L8 15l-1.5-5.5L1 8l5.5-1.5L8 0z"/></svg>
-          </div>
+          <hr class="rule" />
           <p class="section-lead">
-            Visit us by appointment in Buckner, Missouri — custom laser engraving and UV printing
-            with local pickup or shipping. Find us on Google for directions, hours, and reviews.
-          </p>
-          <p style="margin-top: 1.1rem; max-width: 36rem; color: var(--ink-soft); font-size: 0.98rem;">
-            Keep the same name, address, phone, and website on Google and this site so your
-            Business Profile matches what customers see online.
+            Visit by appointment in Buckner, Missouri — custom laser engraving and UV printing
+            with local pickup or shipping.
           </p>
         </div>
         <div class="local-card" itemscope itemtype="https://schema.org/LocalBusiness">
@@ -2367,21 +664,15 @@
             </li>
             <li>
               <span class="nap-label">Phone</span>
-              <span>
-                <a itemprop="telephone" href="tel:+18164080675">(816) 408-0675</a>
-              </span>
+              <span><a itemprop="telephone" href="tel:+18164080675">(816) 408-0675</a></span>
             </li>
             <li>
               <span class="nap-label">Email</span>
-              <span>
-                <a itemprop="email" href="mailto:ltgallman@barn-beam.com">ltgallman@barn-beam.com</a>
-              </span>
+              <span><a itemprop="email" href="mailto:ltgallman@barn-beam.com">ltgallman@barn-beam.com</a></span>
             </li>
             <li>
               <span class="nap-label">Website</span>
-              <span>
-                <a itemprop="url" href="https://www.barn-beam.com/">barn-beam.com</a>
-              </span>
+              <span><a itemprop="url" href="https://www.barn-beam.com/">barn-beam.com</a></span>
             </li>
             <li itemprop="address" itemscope itemtype="https://schema.org/PostalAddress">
               <span class="nap-label">Address</span>
@@ -2417,31 +708,26 @@
             </a>
             <a
               id="googleReviewLink"
-              class="btn btn-ghost"
+              class="btn btn-secondary"
               href="https://www.google.com/search?q=Barn+%26+Beam+Creations+Buckner+MO"
               target="_blank"
               rel="noopener noreferrer"
             >
               Search &amp; review
             </a>
-            <a href="#quote" class="btn btn-ghost">Request a Quote</a>
+            <a href="#quote" class="btn btn-secondary">Request a quote</a>
           </div>
         </div>
       </div>
     </section>
 
-    <!-- FAQ — visible Q&A for customers, search engines, and AI assistants -->
     <section class="section faq" id="faq" aria-labelledby="faq-heading">
       <div class="container">
         <div class="section-head">
           <span class="eyebrow">FAQ</span>
           <h2 class="section-title" id="faq-heading">Common questions</h2>
-          <div class="ornament" aria-hidden="true">
-            <svg viewBox="0 0 16 16"><path d="M8 0l1.5 5.5L15 8l-5.5 1.5L8 15l-1.5-5.5L1 8l5.5-1.5L8 0z"/></svg>
-          </div>
-          <p class="section-lead" style="margin-top: 1.25rem;">
-            Quick answers about custom laser engraving, UV printing, quotes, and shipping.
-          </p>
+          <hr class="rule" />
+          <p class="section-lead">Quick answers about custom laser engraving, UV printing, quotes, and shipping.</p>
         </div>
         <div class="faq-list">
           <details class="faq-item">
@@ -2498,50 +784,24 @@
       </div>
     </section>
 
-    <!-- Quote CTA -->
     <section class="section cta" id="quote" aria-labelledby="quote-heading">
-      <div class="cta-motif tr" aria-hidden="true"></div>
-      <div class="cta-motif bl" aria-hidden="true"></div>
       <div class="container">
         <div>
-          <span class="eyebrow">Custom Quote</span>
+          <span class="eyebrow">Custom quote</span>
           <h2 class="section-title" id="quote-heading">Ready for laser or UV?</h2>
+          <hr class="rule" />
           <p class="section-lead">
             Tell us about your project — design, material, quantity, and timeline.
-            We’ll reply with options and pricing for custom laser engraving or UV printing.
+            We’ll reply with options and pricing.
           </p>
           <ul class="cta-list">
-            <li>
-              <span class="mark">01</span>
-              Free consult for custom engraving &amp; print jobs
-            </li>
-            <li>
-              <span class="mark">02</span>
-              File prep help for laser and UV production
-            </li>
-            <li>
-              <span class="mark">03</span>
-              Single pieces and small production runs welcome
-            </li>
-            <li>
-              <span class="mark">Call</span>
-              <a href="tel:+18164080675" style="color: inherit; text-decoration: underline; text-underline-offset: 0.2em;">(816) 408-0675</a>
-            </li>
+            <li><span class="mark">01</span> Free consult for custom engraving and print jobs</li>
+            <li><span class="mark">02</span> File prep help for laser and UV production</li>
+            <li><span class="mark">03</span> Single pieces and small production runs welcome</li>
           </ul>
-          <div class="socials-inline">
-            <span class="socials-label">Follow along</span>
-            <a href="https://www.facebook.com/" target="_blank" rel="noopener noreferrer" aria-label="Facebook">
-              <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M14 9h3V6h-3c-1.7 0-3 1.3-3 3v2H9v3h2v7h3v-7h2.5l.5-3H14V9z"/></svg>
-              Facebook
-            </a>
-            <a href="https://www.instagram.com/" target="_blank" rel="noopener noreferrer" aria-label="Instagram">
-              <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 7a5 5 0 100 10 5 5 0 000-10zm0 8.2A3.2 3.2 0 1112 8.8a3.2 3.2 0 010 6.4z"/><circle cx="17.5" cy="6.5" r="1.2"/><path d="M16.5 3h-9A4.5 4.5 0 003 7.5v9A4.5 4.5 0 007.5 21h9a4.5 4.5 0 004.5-4.5v-9A4.5 4.5 0 0016.5 3zm2.5 13.5a2.5 2.5 0 01-2.5 2.5h-9a2.5 2.5 0 01-2.5-2.5v-9A2.5 2.5 0 017.5 5h9a2.5 2.5 0 012.5 2.5v9z"/></svg>
-              Instagram
-            </a>
-            <a href="https://www.tiktok.com/" target="_blank" rel="noopener noreferrer" aria-label="TikTok">
-              <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M19.59 6.69a4.83 4.83 0 01-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 01-5.2 1.74 2.89 2.89 0 012.31-4.5c.28 0 .54.04.79.1v3.52a.9.9 0 00-.79-.04 1.37 1.37 0 00-.9 1.3 1.38 1.38 0 002.68.44V6.77a8.15 8.15 0 004.88 1.62V5.04a4.85 4.85 0 01-1.55-.35z"/></svg>
-              TikTok
-            </a>
+          <div class="contact-row">
+            <a class="btn btn-primary" href="tel:+18164080675">Call (816) 408-0675</a>
+            <a class="btn btn-secondary" href="sms:+18164080675">Text us</a>
           </div>
         </div>
 
@@ -2553,14 +813,13 @@
             novalidate
           >
             <h3>Request a quote</h3>
-            <p class="form-sub">Tell us what you need engraved or printed. We typically reply within 1–2 business days.</p>
+            <p class="form-sub">We typically reply in 1–2 business days.</p>
             <input type="hidden" name="_subject" value="Barn &amp; Beam Creations — Quote Request" />
             <input type="hidden" name="_template" value="table" />
             <input type="hidden" name="_captcha" value="false" />
             <input type="hidden" name="_next" id="formNext" value="" />
             <input type="hidden" name="_url" id="formUrl" value="" />
             <input type="hidden" name="_replyto" id="formReplyTo" value="" />
-            <!-- Honeypot: leave empty. Bots that fill it are ignored by FormSubmit. -->
             <input type="text" name="_honey" class="sr-only" tabindex="-1" autocomplete="off" aria-hidden="true" />
             <div class="form-row two">
               <div class="field">
@@ -2574,7 +833,7 @@
             </div>
             <div class="form-row two">
               <div class="field">
-                <label for="phone">Phone <span style="opacity:.6;letter-spacing:0.08em">(optional)</span></label>
+                <label for="phone">Phone <span style="font-weight:400;letter-spacing:0;text-transform:none;opacity:.7">(optional)</span></label>
                 <input
                   type="tel"
                   id="phone"
@@ -2588,7 +847,7 @@
                 />
               </div>
               <div class="field">
-                <label for="service">Interest</label>
+                <label for="service">Project type</label>
                 <select id="service" name="service">
                   <option value="">Select a service…</option>
                   <option value="Laser engraving">Laser engraving</option>
@@ -2600,17 +859,27 @@
                 </select>
               </div>
             </div>
+            <div class="form-row two">
+              <div class="field">
+                <label for="quantity">Quantity</label>
+                <input type="text" id="quantity" name="quantity" placeholder="e.g. 12" />
+              </div>
+              <div class="field">
+                <label for="timeline">Timeline</label>
+                <input type="text" id="timeline" name="timeline" placeholder="e.g. before May 12" />
+              </div>
+            </div>
             <div class="form-row">
               <div class="field">
                 <label for="message">Project notes</label>
-                <textarea id="message" name="message" required placeholder="What shall we make? Quantity, size, materials, timing…"></textarea>
+                <textarea id="message" name="message" required placeholder="What should we make? Size, materials, finish…"></textarea>
               </div>
             </div>
             <div class="form-row">
               <div class="field">
                 <label for="artwork">
                   Artwork file
-                  <span style="opacity:.6;letter-spacing:0.08em">(optional)</span>
+                  <span style="font-weight:400;letter-spacing:0;text-transform:none;opacity:.7">(optional)</span>
                 </label>
                 <input
                   type="file"
@@ -2624,13 +893,16 @@
                 <p class="form-file-status" id="artworkStatus" hidden></p>
               </div>
             </div>
-            <button type="submit" class="btn btn-primary" id="quoteSubmit">Send Inquiry</button>
-            <p class="form-note" id="formNote">Inquiries go to ltgallman@barn-beam.com — or call <a href="tel:+18164080675">(816) 408-0675</a>.</p>
+            <button type="submit" class="btn btn-primary" id="quoteSubmit">Send inquiry</button>
+            <p class="form-note" id="formNote">
+              Or email <a href="mailto:ltgallman@barn-beam.com">ltgallman@barn-beam.com</a>
+              · call <a href="tel:+18164080675">(816) 408-0675</a>
+            </p>
           </form>
           <div class="form-success" id="formSuccess" role="status">
-            <span class="script">Thank you</span>
+            <p class="ok">Sent</p>
             <h3>Your inquiry is on its way.</h3>
-            <p>We’ve emailed your quote request to the shop. We’ll be in touch soon.</p>
+            <p>We’ll be in touch soon.</p>
           </div>
         </div>
       </div>
@@ -2641,19 +913,19 @@
     <div class="container">
       <div class="footer-top">
         <div class="footer-brand">
-          <img src="assets/logo.png" alt="Barn &amp; Beam Creations" width="72" height="72" />
-          <p>Custom laser engraving and UV printing — precise, durable, made to your design.</p>
+          <img src="assets/logo.png" alt="Barn &amp; Beam Creations" width="56" height="56" />
+          <p>Custom laser engraving and UV printing. Precise, durable, made to your design.</p>
         </div>
         <div class="footer-col">
           <h4>Explore</h4>
           <ul>
-            <li><a href="#about">About</a></li>
-            <li><a href="#services">Services</a></li>
-            <li><a href="#gallery">Gallery</a></li>
+            <li><a href="#gallery">Work</a></li>
+            <li><a href="#services">Capabilities</a></li>
             <li><a href="#process">Process</a></li>
+            <li><a href="#about">About</a></li>
             <li><a href="#faq">FAQ</a></li>
-            <li><a href="#visit">On Google</a></li>
-            <li><a href="#quote">Get a Quote</a></li>
+            <li><a href="#visit">Location</a></li>
+            <li><a href="#quote">Request a quote</a></li>
           </ul>
         </div>
         <div class="footer-col">
@@ -2668,7 +940,7 @@
                 rel="noopener noreferrer"
               >1500 N Lake City Valley Rd<br />Buckner, MO 64016</a>
             </li>
-            <li>By appointment · local pickup &amp; shipping</li>
+            <li>By appointment (Mon–Fri)</li>
             <li>
               <a
                 id="footerGoogleLink"
@@ -2681,7 +953,7 @@
         </div>
       </div>
       <div class="footer-bottom">
-        <p>&copy; <span id="year"></span> Barn &amp; Beam Creations. Custom laser engraving &amp; UV printing. All rights reserved.</p>
+        <p>&copy; <span id="year"></span> Barn &amp; Beam Creations. Custom laser engraving &amp; UV printing.</p>
         <div class="socials" aria-label="Social media">
           <a href="https://www.facebook.com/" target="_blank" rel="noopener noreferrer" aria-label="Facebook" title="Facebook">
             <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M14 9h3V6h-3c-1.7 0-3 1.3-3 3v2H9v3h2v7h3v-7h2.5l.5-3H14V9z"/></svg>
@@ -2697,21 +969,17 @@
     </div>
   </footer>
 
+  <nav class="mobile-dock" aria-label="Quick actions">
+    <a class="btn btn-secondary" href="tel:+18164080675">Call</a>
+    <a class="btn btn-secondary" href="sms:+18164080675">Text</a>
+    <a class="btn btn-primary" href="#quote">Quote</a>
+  </nav>
 
   <script>
     document.getElementById("year").textContent = new Date().getFullYear();
 
-
-    /**
-     * Google Business Profile links
-     * After you create/claim the profile, paste the public share URL and review URL here
-     * (maps.app.goo.gl / g.page / Share → Copy link from Google Business Profile).
-     * Leave blank to use Google Search/Maps lookup until the profile is live.
-     */
     const GOOGLE_BUSINESS = {
-      // Google Business Profile share link (Maps / place page)
       profileUrl: "https://share.google/qY6HyYiSuduC3ne6e",
-      // Get more reviews → short review form URL
       reviewUrl: "https://g.page/r/CZEgivIRPaIsEBM/review",
       addressQuery: "1500 N Lake City Valley Rd, Buckner, MO 64016",
       searchQuery: "Barn & Beam Creations Buckner MO",
@@ -2739,58 +1007,6 @@
       }
     })();
 
-    // Continuous full-width marquee: fill ≥100vw, duplicate for seamless loop
-    (function setupRibbonMarquee() {
-      const track = document.getElementById("ribbonTrack");
-      const group = document.getElementById("ribbonGroup");
-      if (!track || !group) return;
-
-      const baseHTML = group.innerHTML.trim();
-      let resizeTimer;
-
-      function build() {
-        // Stop animation while rebuilding
-        track.style.animation = "none";
-        group.innerHTML = baseHTML;
-        while (track.children.length > 1) {
-          track.removeChild(track.lastElementChild);
-        }
-
-        // Fill until one group is at least as wide as the viewport
-        // (plus one extra cycle) so scroll covers the full screen
-        const viewport = Math.max(window.innerWidth, document.documentElement.clientWidth);
-        let guard = 0;
-        while (group.scrollWidth < viewport && guard < 50) {
-          group.insertAdjacentHTML("beforeend", baseHTML);
-          guard++;
-        }
-        group.insertAdjacentHTML("beforeend", baseHTML);
-
-        const distance = Math.ceil(group.getBoundingClientRect().width);
-        const clone = group.cloneNode(true);
-        clone.removeAttribute("id");
-        clone.setAttribute("aria-hidden", "true");
-        track.appendChild(clone);
-
-        // ~70px per second — full-width travel feels continuous
-        const duration = Math.max(18, Math.round(distance / 70));
-        track.style.setProperty("--marquee-distance", distance + "px");
-        track.style.setProperty("--marquee-duration", duration + "s");
-        void track.offsetWidth;
-        track.style.animation = "marquee-scroll " + duration + "s linear infinite";
-      }
-
-      if (document.fonts && document.fonts.ready) {
-        document.fonts.ready.then(build).catch(build);
-      } else {
-        build();
-      }
-      window.addEventListener("resize", () => {
-        clearTimeout(resizeTimer);
-        resizeTimer = setTimeout(build, 150);
-      });
-    })();
-
     const toggle = document.getElementById("navToggle");
     const mobileMenu = document.getElementById("mobileMenu");
     toggle.addEventListener("click", () => {
@@ -2814,8 +1030,6 @@
     const formNext = document.getElementById("formNext");
     const formUrl = document.getElementById("formUrl");
     const formReplyTo = document.getElementById("formReplyTo");
-    // FormSubmit delivers to this address. First use requires clicking
-    // FormSubmit’s activation email (often in Outlook Junk).
     const QUOTE_EMAIL = "ltgallman@barn-beam.com";
 
     function formatUsPhone(value) {
@@ -2828,7 +1042,7 @@
 
     function isValidUsPhone(value) {
       const trimmed = String(value || "").trim();
-      if (!trimmed) return true; // optional
+      if (!trimmed) return true;
       return /^\(\d{3}\) \d{3}-\d{4}$/.test(trimmed);
     }
 
@@ -2837,7 +1051,6 @@
       formSuccess.classList.add("show");
     }
 
-    // Where FormSubmit should return the visitor after a successful send
     try {
       const returnUrl = new URL(window.location.href);
       returnUrl.searchParams.set("sent", "1");
@@ -2849,7 +1062,6 @@
       if (formUrl) formUrl.value = window.location.href;
     }
 
-    // After FormSubmit redirects back (?sent=1)
     try {
       const params = new URLSearchParams(window.location.search);
       if (params.get("sent") === "1") {
@@ -2908,18 +1120,17 @@
       const artworkStatus = document.getElementById("artworkStatus");
       const file = artworkInput && artworkInput.files && artworkInput.files[0];
 
-      // Client-side pre-check before scan/upload
       if (file) {
         const maxBytes = 4 * 1024 * 1024;
         const allowed = /\.(pdf|png|jpe?g|webp|gif)$/i;
         if (!allowed.test(file.name || "")) {
           formNote.textContent = "Artwork must be PDF, JPG, PNG, WEBP, or GIF.";
-          formNote.style.color = "#b91c1c";
+          formNote.style.color = "#b42318";
           return;
         }
         if (file.size > maxBytes) {
           formNote.textContent = "Artwork file must be 4 MB or smaller.";
-          formNote.style.color = "#b91c1c";
+          formNote.style.color = "#b42318";
           return;
         }
       }
@@ -2933,12 +1144,8 @@
         artworkStatus.textContent = "";
       }
 
-      // 1) Optional secure upload (validate + malware scan + private store)
-      // 2) Save into shop Workflow (Vercel API → Hub)
-      // 3) Email the shop via FormSubmit
       try {
         const formData = new FormData(form);
-        // Do not send binary file through FormSubmit (size/security); we handle it ourselves
         formData.delete("artwork");
         if (!String(formData.get("phone") || "").trim()) {
           formData.set("phone", "Not provided");
@@ -2983,18 +1190,27 @@
           formNote.textContent = "Sending your inquiry…";
         }
 
+        const extras = [];
+        const qty = String(formData.get("quantity") || "").trim();
+        const timeline = String(formData.get("timeline") || "").trim();
+        if (qty) extras.push("Quantity: " + qty);
+        if (timeline) extras.push("Timeline: " + timeline);
+        let message = String(formData.get("message") || "").trim();
+        if (extras.length) {
+          message = extras.join("\n") + (message ? "\n\n" + message : "");
+        }
+
         const leadPayload = {
           name: String(formData.get("name") || "").trim(),
           email: String(formData.get("email") || "").trim(),
           phone: String(formData.get("phone") || "").trim(),
           service: String(formData.get("service") || "").trim(),
-          message: String(formData.get("message") || "").trim(),
+          message: message,
           page: window.location.href,
           _honey: String(formData.get("_honey") || ""),
           attachment: attachment,
         };
 
-        // Best-effort: store for Workflow app (does not block email if this fails)
         let leadOk = false;
         try {
           const leadRes = await fetch("/api/quote-request", {
@@ -3008,7 +1224,6 @@
           console.warn("Workflow lead store error", leadErr);
         }
 
-        // Mention attachment in email body fields for the shop
         if (attachment && attachment.filename) {
           formData.set(
             "artwork_note",
@@ -3039,26 +1254,23 @@
           successFlag !== false &&
           successFlag !== "false";
 
-        // Success if either email OR workflow intake worked (prefer both)
-        // If user attached a file, require the secure store to succeed
         if (file && !leadOk) {
           throw new Error(
             "Your message was prepared, but the secure artwork upload did not finish. Please try again."
           );
         }
         if (!isSuccess && !leadOk) {
-          const message = (payload && (payload.message || payload.error)) || ("Send failed (" + res.status + ")");
-          throw new Error(message);
+          const errMessage = (payload && (payload.message || payload.error)) || ("Send failed (" + res.status + ")");
+          throw new Error(errMessage);
         }
 
         showFormSuccess();
       } catch (err) {
         console.warn("Quote submit failed", err);
         formNote.textContent = (err && err.message) || "Send failed. Please try again.";
-        formNote.style.color = "#b91c1c";
+        formNote.style.color = "#b42318";
         quoteSubmit.disabled = false;
-        quoteSubmit.textContent = "Send Inquiry";
-        // If no file was involved, allow classic FormSubmit fallback
+        quoteSubmit.textContent = "Send inquiry";
         if (!file) {
           try {
             HTMLFormElement.prototype.submit.call(form);
@@ -3070,7 +1282,6 @@
     });
   </script>
 
-  <!-- Vercel Web Analytics (enable in Vercel project → Analytics) -->
   <script>
     window.va = window.va || function () { (window.vaq = window.vaq || []).push(arguments); };
   </script>
