@@ -1,11 +1,11 @@
 /* Barn & Beam Creations — homepage (design kit) */
 :root {
-  --cream: #f3e6c8;
-  --cream-dark: #e5d4b0;
+  --cream: #f8f2e3;
+  --cream-dark: #efe6d2;
   --ink: #1a1a1a;
   --ink-soft: #3a3a3a;
   --steel: #5c5c5c;
-  --steel-light: #d9d4c8;
+  --steel-light: #e2dccf;
   --white: #ffffff;
   --wood: #6b5344;
   --error: #b42318;
@@ -14,6 +14,7 @@
   --radius: 6px;
   --font: "Inter", system-ui, sans-serif;
   --font-display: "Inter Tight", "Inter", system-ui, sans-serif;
+  --grain: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='220' height='220'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.055'/%3E%3C/svg%3E");
 }
 
 *,
@@ -34,7 +35,8 @@ body {
   font-size: 17px;
   line-height: 1.55;
   color: var(--ink);
-  background: var(--cream);
+  background-color: var(--cream);
+  background-image: var(--grain);
   letter-spacing: 0;
 }
 
@@ -206,7 +208,8 @@ ol {
   position: sticky;
   top: 0;
   z-index: 100;
-  background: var(--cream);
+  background-color: var(--cream);
+  background-image: var(--grain);
   border-bottom: 1px solid var(--steel-light);
 }
 
@@ -443,15 +446,6 @@ ol {
   object-fit: cover;
 }
 
-.hero-frame figcaption {
-  padding: 0.75rem 1rem 0.9rem;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 0.75rem;
-  font-size: 0.9rem;
-}
-
 /* Work grid */
 .work-intro {
   display: flex;
@@ -523,7 +517,8 @@ ol {
 
 /* Capabilities */
 .services {
-  background: var(--cream-dark);
+  background-color: var(--cream-dark);
+  background-image: var(--grain);
 }
 
 .services-grid {
@@ -726,7 +721,8 @@ ol {
 
 /* Local / NAP */
 .local-band {
-  background: var(--cream-dark);
+  background-color: var(--cream-dark);
+  background-image: var(--grain);
 }
 
 .local-grid {
@@ -878,7 +874,8 @@ ol {
 
 /* Quote */
 .cta {
-  background: var(--cream-dark);
+  background-color: var(--cream-dark);
+  background-image: var(--grain);
 }
 
 .cta .container {
@@ -1171,7 +1168,8 @@ ol {
   grid-template-columns: 1fr 1fr 1.2fr;
   gap: 0.45rem;
   padding: 0.55rem 0.75rem calc(0.55rem + env(safe-area-inset-bottom));
-  background: var(--cream);
+  background-color: var(--cream);
+  background-image: var(--grain);
   border-top: 1px solid var(--steel-light);
 }
 
