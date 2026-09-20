@@ -352,6 +352,7 @@
         <a href="#process">Process</a>
         <a href="#about">About</a>
         <a href="#faq">FAQ</a>
+        <a href="https://hub.barn-beam.com/login" title="Studio staff sign-in">Studio Portal</a>
       </nav>
       <a class="nav-phone" href="tel:+18164080675">(816) 408-0675</a>
       <a href="#quote" class="btn btn-primary nav-cta">Request a quote</a>
@@ -364,6 +365,7 @@
       <a href="#process">Process</a>
       <a href="#about">About</a>
       <a href="#faq">FAQ</a>
+      <a href="https://hub.barn-beam.com/login" title="Studio staff sign-in">Studio Portal</a>
       <a href="tel:+18164080675">(816) 408-0675</a>
       <a href="#quote" class="btn btn-primary">Request a quote</a>
     </div>
@@ -807,9 +809,13 @@
             action="https://formsubmit.co/ltgallman@barn-beam.com"
             method="POST"
             novalidate
+            data-quote-wizard="1"
           >
             <h3>Request a quote</h3>
-            <p class="form-sub">We typically reply in 1–2 business days.</p>
+            <p class="form-sub" id="quoteStepSub">Step 1 of 4 — About you</p>
+            <div class="quote-progress" aria-hidden="true">
+              <span class="quote-progress-bar" id="quoteProgressBar" style="width:25%"></span>
+            </div>
             <input type="hidden" name="_subject" value="Barn &amp; Beam Creations — Quote Request" />
             <input type="hidden" name="_template" value="table" />
             <input type="hidden" name="_captcha" value="false" />
@@ -817,84 +823,199 @@
             <input type="hidden" name="_url" id="formUrl" value="" />
             <input type="hidden" name="_replyto" id="formReplyTo" value="" />
             <input type="text" name="_honey" class="sr-only" tabindex="-1" autocomplete="off" aria-hidden="true" />
-            <div class="form-row two">
-              <div class="field">
-                <label for="name">Name</label>
-                <input type="text" id="name" name="name" autocomplete="name" required placeholder="Your full name" />
+
+            <div class="quote-step" data-step="1">
+              <div class="form-row two">
+                <div class="field">
+                  <label for="name">Name</label>
+                  <input type="text" id="name" name="name" autocomplete="name" required placeholder="Your full name" />
+                </div>
+                <div class="field">
+                  <label for="email">Email</label>
+                  <input type="email" id="email" name="email" autocomplete="email" required placeholder="you@example.com" />
+                </div>
               </div>
-              <div class="field">
-                <label for="email">Email</label>
-                <input type="email" id="email" name="email" autocomplete="email" required placeholder="you@example.com" />
-              </div>
-            </div>
-            <div class="form-row two">
-              <div class="field">
-                <label for="phone">Phone <span style="font-weight:400;letter-spacing:0;text-transform:none;opacity:.7">(optional)</span></label>
-                <input
-                  type="tel"
-                  id="phone"
-                  name="phone"
-                  autocomplete="tel"
-                  inputmode="tel"
-                  maxlength="14"
-                  placeholder="(816) 555-0123"
-                  pattern="^\(\d{3}\) \d{3}-\d{4}$"
-                  title="Enter a 10-digit US phone number, like (816) 555-0123"
-                />
-              </div>
-              <div class="field">
-                <label for="service">Project type</label>
-                <select id="service" name="service">
-                  <option value="">Select a service…</option>
-                  <option value="Laser engraving">Laser engraving</option>
-                  <option value="UV printing">UV printing</option>
-                  <option value="Custom signage">Custom signage</option>
-                  <option value="Personalized gifts">Personalized gifts</option>
-                  <option value="Business branding">Business branding</option>
-                  <option value="Not sure yet">Not sure yet</option>
-                </select>
+              <div class="form-row two">
+                <div class="field">
+                  <label for="phone">Phone <span style="font-weight:400;letter-spacing:0;text-transform:none;opacity:.7">(optional)</span></label>
+                  <input type="tel" id="phone" name="phone" autocomplete="tel" inputmode="tel" maxlength="14"
+                    placeholder="(816) 555-0123" pattern="^\(\d{3}\) \d{3}-\d{4}$"
+                    title="Enter a 10-digit US phone number, like (816) 555-0123" />
+                </div>
+                <div class="field">
+                  <label for="company">Company <span style="font-weight:400;letter-spacing:0;text-transform:none;opacity:.7">(optional)</span></label>
+                  <input type="text" id="company" name="company" autocomplete="organization" placeholder="Business or organization" />
+                </div>
               </div>
             </div>
-            <div class="form-row two">
-              <div class="field">
-                <label for="quantity">Quantity</label>
-                <input type="text" id="quantity" name="quantity" placeholder="e.g. 12" />
-              </div>
-              <div class="field">
-                <label for="timeline">Timeline</label>
-                <input type="text" id="timeline" name="timeline" placeholder="e.g. before May 12" />
-              </div>
-            </div>
-            <div class="form-row">
-              <div class="field">
-                <label for="message">Project notes</label>
-                <textarea id="message" name="message" required placeholder="What should we make? Size, materials, finish…"></textarea>
+
+            <div class="quote-step" data-step="2" hidden>
+              <input type="hidden" id="job_family" name="job_family" value="" required />
+              <div class="quote-chat" id="quoteChat">
+                <div class="quote-chat-log" id="quoteChatLog" aria-live="polite"></div>
+                <div class="quote-chat-compose">
+                  <label class="sr-only" for="quoteChatInput">Describe your project</label>
+                  <textarea id="quoteChatInput" rows="2" placeholder="e.g. UV printing on mint tins, or hat patches printed and pressed…"></textarea>
+                  <button type="button" class="btn btn-primary" id="quoteChatSend">Send</button>
+                </div>
+                <p class="form-file-hint" id="quoteChatHint">Describe the job in your own words — we’ll figure out the type and move to the right questions.</p>
               </div>
             </div>
-            <div class="form-row">
-              <div class="field">
-                <label for="artwork">
-                  Artwork file
-                  <span style="font-weight:400;letter-spacing:0;text-transform:none;opacity:.7">(optional)</span>
-                </label>
-                <input
-                  type="file"
-                  id="artwork"
-                  name="artwork"
-                  accept=".pdf,.png,.jpg,.jpeg,.webp,.gif,application/pdf,image/png,image/jpeg,image/webp,image/gif"
-                />
-                <p class="form-file-hint" id="artworkHint">
-                  PDF, JPG, PNG, WEBP, or GIF · max 4&nbsp;MB · scanned for malware before upload
+
+            <div class="quote-step" data-step="3" hidden>
+              <div class="quote-details" id="details-hat_patch" hidden>
+                <div class="form-row two">
+                  <div class="field">
+                    <label for="hat_method">Patch style</label>
+                    <select id="hat_method" name="hat_method">
+                      <option value="uv_cut_press">Full color, pressed on a hat</option>
+                      <option value="laser_cut_press">Laser engraved, pressed on a hat</option>
+                      <option value="uv_cut_only">Full color patches only (no hat)</option>
+                      <option value="press_only">I already have patches — just press on hats</option>
+                    </select>
+                  </div>
+                  <div class="field">
+                    <label for="hat_surface">Look of the patch</label>
+                    <select id="hat_surface" name="hat_surface">
+                      <option value="flat">Flat / smooth</option>
+                      <option value="textured">Raised / textured</option>
+                    </select>
+                  </div>
+                </div>
+                <div class="form-row two">
+                  <div class="field">
+                    <label for="hat_qty">How many?</label>
+                    <input type="text" id="hat_qty" name="hat_qty" placeholder="e.g. 1 or 24" />
+                  </div>
+                  <div class="field">
+                    <label for="hat_patch_size">About what size?</label>
+                    <select id="hat_patch_size" name="hat_patch_size">
+                      <option value="2.5in">About 2.5&quot;</option>
+                      <option value="2in">About 2&quot;</option>
+                      <option value="3in">About 3&quot;</option>
+                      <option value="other">Other / not sure</option>
+                    </select>
+                  </div>
+                </div>
+                <div class="form-row two">
+                  <div class="field">
+                    <label for="hat_include_blank">Who provides the hats?</label>
+                    <select id="hat_include_blank" name="hat_include_blank">
+                      <option value="yes">Barn &amp; Beam provides the hats</option>
+                      <option value="customer">I’ll provide the hats</option>
+                      <option value="patch_only">Patches only — no hats</option>
+                    </select>
+                  </div>
+                  <div class="field">
+                    <label for="hat_art_ready">Do you have artwork ready?</label>
+                    <select id="hat_art_ready" name="hat_art_ready">
+                      <option value="yes">Yes</option>
+                      <option value="needs_help">I need help with artwork</option>
+                    </select>
+                  </div>
+                </div>
+                <div class="form-row">
+                  <div class="field">
+                    <label for="hat_timeline">Timeline</label>
+                    <input type="text" id="hat_timeline" name="hat_timeline" placeholder="e.g. needed by May 12" />
+                  </div>
+                </div>
+              </div>
+
+              <div class="quote-details" id="details-mint_tin" hidden>
+                <div class="form-row two">
+                  <div class="field">
+                    <label for="mint_qty">Quantity</label>
+                    <input type="text" id="mint_qty" name="mint_qty" placeholder="e.g. 313" />
+                  </div>
+                  <div class="field">
+                    <label for="mint_blank">Who supplies the blanks?</label>
+                    <select id="mint_blank" name="mint_blank">
+                      <option value="customer">Customer supplies</option>
+                      <option value="studio">Studio supplies</option>
+                    </select>
+                  </div>
+                </div>
+                <div class="form-row two">
+                  <div class="field">
+                    <label for="mint_art_ready">Is artwork print-ready?</label>
+                    <select id="mint_art_ready" name="mint_art_ready">
+                      <option value="yes">Yes</option>
+                      <option value="needs_help">Needs cleanup / help</option>
+                    </select>
+                  </div>
+                  <div class="field">
+                    <label for="mint_logo_size">Logo size (approx)</label>
+                    <input type="text" id="mint_logo_size" name="mint_logo_size" placeholder="e.g. 1 inch circle flat" />
+                  </div>
+                </div>
+                <div class="form-row">
+                  <div class="field">
+                    <label for="mint_timeline">Timeline</label>
+                    <input type="text" id="mint_timeline" name="mint_timeline" placeholder="e.g. needed by May 12" />
+                  </div>
+                </div>
+              </div>
+
+              <div class="quote-details" id="details-generic" hidden>
+                <!-- Process is shop-side: set from Betsy / job family, never shown to the customer -->
+                <input type="hidden" id="service" name="service" value="" />
+                <div class="form-row two">
+                  <div class="field">
+                    <label for="quantity">Quantity</label>
+                    <input type="text" id="quantity" name="quantity" placeholder="e.g. 12 (or leave blank if unsure)" />
+                  </div>
+                  <div class="field">
+                    <label for="design_size">Engraving / design size</label>
+                    <input type="text" id="design_size" name="design_size" placeholder="e.g. about 2 inches wide" />
+                  </div>
+                </div>
+                <div class="form-row">
+                  <div class="field">
+                    <label for="timeline">Timeline</label>
+                    <input type="text" id="timeline" name="timeline" placeholder="e.g. before May 12" />
+                  </div>
+                </div>
+                <p class="form-file-hint" id="genericProcessHint">
+                  These should match what you told Betsy. Change anything that looks wrong, then Continue.
+                  We’ll pick the production method from the chat — you don’t choose a process here.
                 </p>
-                <p class="form-file-status" id="artworkStatus" hidden></p>
               </div>
             </div>
-            <button type="submit" class="btn btn-primary" id="quoteSubmit">Send inquiry</button>
-            <p class="form-note" id="formNote">
-              Or email <a href="mailto:ltgallman@barn-beam.com">ltgallman@barn-beam.com</a>
-              · call <a href="tel:+18164080675">(816) 408-0675</a>
-            </p>
-          </form>
+
+            <div class="quote-step" data-step="4" hidden>
+              <div class="form-row">
+                <div class="field">
+                  <label for="message">Anything else we should know?</label>
+                  <textarea id="message" name="message" placeholder="Colors, finish, special instructions… (optional)"></textarea>
+                </div>
+              </div>
+              <div class="form-row">
+                <div class="field">
+                  <label for="artwork">
+                    Artwork file
+                    <span style="font-weight:400;letter-spacing:0;text-transform:none;opacity:.7">(optional)</span>
+                  </label>
+                  <input
+                    type="file"
+                    id="artwork"
+                    name="artwork"
+                    accept=".pdf,.png,.jpg,.jpeg,.webp,.gif,application/pdf,image/png,image/jpeg,image/webp,image/gif"
+                  />
+                  <p class="form-file-hint" id="artworkHint">
+                    PDF, JPG, PNG, WEBP, or GIF · max 4&nbsp;MB · scanned for malware before upload
+                  </p>
+                  <p class="form-file-status" id="artworkStatus" hidden></p>
+                </div>
+              </div>
+            </div>
+
+            <div class="quote-nav">
+              <button type="button" class="btn btn-secondary" id="quoteBack" hidden>Back</button>
+              <button type="button" class="btn btn-primary" id="quoteNext">Continue</button>
+            </div>
+            <p class="form-note" id="formNote" hidden></p>
+          </form>          </form>
           <div class="form-success" id="formSuccess" role="status">
             <p class="ok">Sent</p>
             <h3>Your inquiry is on its way.</h3>
@@ -927,6 +1048,7 @@
         <div class="footer-col">
           <h4>Studio</h4>
           <ul>
+            <li><a href="https://hub.barn-beam.com/login">Studio Portal</a></li>
             <li><a href="tel:+18164080675">(816) 408-0675</a></li>
             <li><a href="mailto:ltgallman@barn-beam.com">ltgallman@barn-beam.com</a></li>
             <li>
@@ -1021,12 +1143,13 @@
     const formCard = document.getElementById("formCard");
     const formSuccess = document.getElementById("formSuccess");
     const formNote = document.getElementById("formNote");
-    const quoteSubmit = document.getElementById("quoteSubmit");
     const phoneInput = document.getElementById("phone");
     const formNext = document.getElementById("formNext");
     const formUrl = document.getElementById("formUrl");
     const formReplyTo = document.getElementById("formReplyTo");
     const QUOTE_EMAIL = "ltgallman@barn-beam.com";
+    // Hidden submit button created below with the wizard (no visible "Send inquiry")
+    let quoteSubmit = null;
 
     function formatUsPhone(value) {
       const digits = String(value || "").replace(/\D/g, "").slice(0, 10);
@@ -1092,8 +1215,1297 @@
       });
     }
 
+    const jobFamily = document.getElementById("job_family");
+    const quoteNext = document.getElementById("quoteNext");
+    const quoteBack = document.getElementById("quoteBack");
+    const quoteStepSub = document.getElementById("quoteStepSub");
+    const quoteProgressBar = document.getElementById("quoteProgressBar");
+    const quoteChatLog = document.getElementById("quoteChatLog");
+    const quoteChatInput = document.getElementById("quoteChatInput");
+    const quoteChatSend = document.getElementById("quoteChatSend");
+    const quoteChatHint = document.getElementById("quoteChatHint");
+    // Hidden submit control for the existing submit handler (no visible Send inquiry button)
+    quoteSubmit = document.getElementById("quoteSubmit");
+    if (!quoteSubmit) {
+      quoteSubmit = document.createElement("button");
+      quoteSubmit.type = "submit";
+      quoteSubmit.id = "quoteSubmit";
+      quoteSubmit.hidden = true;
+      quoteSubmit.setAttribute("aria-hidden", "true");
+      quoteSubmit.tabIndex = -1;
+      form.appendChild(quoteSubmit);
+    }
+    let quoteStep = 1;
+    const quoteStepCount = 4;
+    const quoteStepLabels = {
+      1: "Step 1 of 4 — About you",
+      2: "Step 2 of 4 — Tell us what you’re making",
+      3: "Step 3 of 4 — Project details",
+      4: "Step 4 of 4 — Notes & artwork",
+    };
+    let chatBootstrapped = false;
+
+    function serviceFromBetsy() {
+      // Map persisted classify slots → Portal "service" (customer never picks this)
+      const family = (
+        (jobFamily && jobFamily.value) ||
+        quoteSlots.family ||
+        quoteSlots.job_family ||
+        ""
+      ).trim();
+      const proc = String(quoteSlots.process || quoteSlots.action || "").toLowerCase();
+      if (
+        proc === "uv_print" ||
+        family === "hard_goods_uv" ||
+        family === "drinkware_coated" ||
+        family === "mint_tin" ||
+        family === "small_hard_good"
+      ) {
+        if (proc.indexOf("engrave") === 0 || proc.indexOf("engrave_") === 0) {
+          return "Laser engraving";
+        }
+        return "UV printing";
+      }
+      if (
+        proc.indexOf("engrave") === 0 ||
+        family === "engrave" ||
+        family === "flat_sign" ||
+        family === "metal_mark" ||
+        family === "glass" ||
+        family === "signage_laser"
+      ) {
+        return "Laser engraving";
+      }
+      if (family === "hat_patch") return "Personalized gifts";
+      if (family === "other" || family === "contact_only") return "Not sure yet";
+      return "";
+    }
+
+    function autofillHiddenProcess() {
+      const serviceEl = document.getElementById("service");
+      if (!serviceEl) return;
+      const next = serviceFromBetsy();
+      if (next) serviceEl.value = next;
+      const qty = quoteSlots.quantity;
+      const qtyEl = document.getElementById("quantity");
+      if (qtyEl && !String(qtyEl.value || "").trim() && qty) qtyEl.value = String(qty);
+      const mintQty = document.getElementById("mint_qty");
+      if (mintQty && !String(mintQty.value || "").trim() && qty) mintQty.value = String(qty);
+      const hatQty = document.getElementById("hat_qty");
+      if (hatQty && !String(hatQty.value || "").trim() && qty) hatQty.value = String(qty);
+      const mintBlank = document.getElementById("mint_blank");
+      if (mintBlank && quoteSlots.blank_source) {
+        mintBlank.value = quoteSlots.blank_source === "shop" ? "studio" : "customer";
+      }
+      const timeline = quoteSlots.timeline || quoteSlots.deadline_stated;
+      ["timeline", "mint_timeline", "hat_timeline"].forEach((id) => {
+        const el = document.getElementById(id);
+        if (el && !String(el.value || "").trim() && timeline) el.value = String(timeline);
+      });
+      const designSize = quoteSlots.design_size || quoteSlots.size;
+      if (designSize) {
+        ["design_size", "mint_logo_size"].forEach((id) => {
+          const el = document.getElementById(id);
+          if (el && !String(el.value || "").trim()) el.value = String(designSize);
+        });
+      }
+    }
+
+    function syncQuoteDetails() {
+      const v = (jobFamily && jobFamily.value) || "";
+      ["details-hat_patch", "details-mint_tin", "details-generic"].forEach((id) => {
+        const el = document.getElementById(id);
+        if (el) el.hidden = true;
+      });
+      if (v === "hat_patch") {
+        const el = document.getElementById("details-hat_patch");
+        if (el) el.hidden = false;
+      } else if (v === "mint_tin" || v === "hard_goods_uv") {
+        const el = document.getElementById("details-mint_tin");
+        if (el) el.hidden = false;
+      } else if (
+        v === "signage_laser" ||
+        v === "engrave" ||
+        v === "drinkware_coated" ||
+        v === "flat_sign" ||
+        v === "metal_mark" ||
+        v === "glass" ||
+        v === "small_hard_good" ||
+        v === "leatherette_cut" ||
+        v === "other" ||
+        v
+      ) {
+        // Default unknown families to generic details (qty/timeline) — still no process picker
+        const el = document.getElementById("details-generic");
+        if (el) el.hidden = false;
+      }
+      autofillHiddenProcess();
+    }
+
+    function showQuoteStep(step) {
+      quoteStep = step;
+      form.querySelectorAll(".quote-step").forEach((el) => {
+        const n = Number(el.getAttribute("data-step"));
+        el.hidden = n !== step;
+      });
+      if (quoteStepSub) quoteStepSub.textContent = quoteStepLabels[step] || "";
+      if (quoteProgressBar) quoteProgressBar.style.width = (step / quoteStepCount) * 100 + "%";
+      if (quoteBack) quoteBack.hidden = step <= 1;
+      if (quoteNext) {
+        // On chat step, Continue is optional once classified; still allow if already set
+        quoteNext.hidden = false;
+        if (step === 2) {
+          quoteNext.textContent = jobFamily && jobFamily.value ? "Continue" : "Continue";
+          quoteNext.disabled = !(jobFamily && jobFamily.value);
+        } else {
+          quoteNext.disabled = false;
+          quoteNext.textContent = step >= quoteStepCount ? "Finish" : "Continue";
+        }
+      }
+      if (step === 2) bootstrapQuoteChat();
+      if (step === 3) syncQuoteDetails();
+    }
+
+    function validateQuoteStep(step) {
+      if (step === 2) {
+        if (!jobFamily || !jobFamily.value) {
+          if (quoteChatHint) {
+            quoteChatHint.textContent = "Tell us what you’re making in the chat first (or be a bit more specific).";
+          }
+          if (quoteChatInput) quoteChatInput.focus();
+          return false;
+        }
+        return true;
+      }
+      const panel = form.querySelector('.quote-step[data-step="' + step + '"]');
+      if (!panel) return true;
+      const fields = panel.querySelectorAll("input, select, textarea");
+      for (const el of fields) {
+        if (el.disabled || el.name === "_honey" || el.id === "quoteChatInput") continue;
+        if (el.id === "job_family") continue;
+        if (typeof el.checkValidity === "function" && !el.checkValidity()) {
+          el.reportValidity();
+          return false;
+        }
+      }
+      return true;
+    }
+
+    function appendChat(role, text) {
+      if (!quoteChatLog) return;
+      const bubble = document.createElement("div");
+      bubble.className = "quote-chat-bubble " + (role === "user" ? "user" : "bot");
+      bubble.textContent = text;
+      quoteChatLog.appendChild(bubble);
+      quoteChatLog.scrollTop = quoteChatLog.scrollHeight;
+    }
+
+    function classifyJobFamily(text) {
+      const t = String(text || "").toLowerCase();
+      // Mint tin / hard goods UV
+      if (
+        /(mint\s*tin|altoid|hard\s*good|uv\s+print.*(tin|tumbler|bottle|flask)|print(ing)?\s+on\s+(a\s+)?tin)/.test(t)
+      ) {
+        return {
+          family: "mint_tin",
+          label: "Mint tin / hard goods UV",
+          confidence: "high",
+          reply: "Got it — mint tin / hard-goods UV print. I’ll ask quantity, who supplies the blanks, and artwork next.",
+        };
+      }
+      // Hat patch
+      if (
+        /(hat\s*patch|patches?\s+on\s+hats?|press(ed|ing)?\s+on\s+(a\s+)?hat|uv\s*(print|printed).*patch|laser.*patch|embroidered\s+patch)/.test(
+          t
+        ) ||
+        (/\bhat\b/.test(t) && /\bpatch\b/.test(t))
+      ) {
+        return {
+          family: "hat_patch",
+          label: "Hat with a patch",
+          confidence: "high",
+          reply: "Sounds like a hat with a patch. Next I’ll ask how the patch is made, size, quantity, and whether we supply the hat.",
+        };
+      }
+      // Signage / laser
+      if (
+        /(signage|\bsign\b|laser\s*engrav|engrav(e|ing)|acrylic|wood\s+sign|nameplate|plaque)/.test(t)
+      ) {
+        return {
+          family: "signage_laser",
+          label: "Signage / laser engraving",
+          confidence: "high",
+          reply: "Understood — signage / laser work. I’ll ask process, quantity, and timeline next.",
+        };
+      }
+      // Soft matches
+      if (/\b(tin|tumbler|bottle)\b/.test(t) && /\b(uv|print)\b/.test(t)) {
+        return {
+          family: "mint_tin",
+          label: "Mint tin / hard goods UV",
+          confidence: "medium",
+          reply: "I’m leaning mint tin / UV hard goods. Confirming that — continuing to those questions.",
+        };
+      }
+      if (/\b(hat|patch)\b/.test(t)) {
+        return {
+          family: "hat_patch",
+          label: "Hat with a patch",
+          confidence: "medium",
+          reply: "I’m leaning hat + patch. Continuing to those questions — you can refine on the next step.",
+        };
+      }
+      if (t.trim().length < 4) {
+        return {
+          family: "",
+          label: "",
+          confidence: "low",
+          reply: "Give me a bit more — for example: “UV hat patches pressed on hats” or “313 mint tins, customer supplies blanks”.",
+        };
+      }
+      return {
+        family: "other",
+        label: "Other / not sure yet",
+        confidence: "low",
+        reply: "I’ll mark this as Other for now so we can capture process and quantity. You can add detail in notes.",
+      };
+    }
+
+    function applyJobFamily(family) {
+      if (!jobFamily) return;
+      jobFamily.value = family || "";
+      // HTML5 required on hidden input: empty string fails; set custom validity
+      jobFamily.setCustomValidity(family ? "" : "Tell us what you’re making in the chat.");
+      if (quoteNext) quoteNext.disabled = !family;
+      syncQuoteDetails();
+    }
+
+    function bootstrapQuoteChat() {
+      if (chatBootstrapped || !quoteChatLog) return;
+      chatBootstrapped = true;
+      betsyHistory = [];
+      betsyLastReply = "";
+      quoteSlots = {};
+      quoteChatLog.innerHTML = "";
+      const hello =
+        "Hi — I’m Betsy. Tell me what you’d like made or decorated, and I’ll get the details for a quote.";
+      appendChat("bot", hello);
+      betsyHistory.push({ role: "assistant", content: hello });
+      betsyLastReply = hello;
+      if (quoteChatHint) {
+        quoteChatHint.textContent =
+          "Chat with Betsy — one question at a time. (" + BETSY_UI_VERSION + ")";
+      }
+      applyJobFamily(jobFamily ? jobFamily.value : "");
+    }
+
+    const BETSY_NAME = "Betsy";
+    const BETSY_UI_VERSION = "slots-api-1";
+    // Same classify path as run_betsy_eval.py (Portal slot merger)
+    function betsyClassifyUrl() {
+      return "http://127.0.0.1:8746/api/quote-chat/classify";
+    }
+    // Conversation + persisted slots (app/API owns next question — never raw model order)
+    let betsyHistory = [];
+    let betsyLastReply = "";
+    let quoteSlots = {}; // persisted across turns; merged from classify every reply
+
+
+    const ITEM_PATTERNS = [
+      [/champagne\s+flutes?|\bflutes?\b/i, "champagne flutes"],
+      [/wine\s+glasses?/i, "wine glasses"],
+      [/cigar\s+box(?:es)?/i, "cigar box"],
+      [/cutting\s+boards?/i, "cutting board"],
+      [/key\s*chains?/i, "keychains"],
+      [/tumblers?/i, "tumblers"],
+      [/\bmugs?\b/i, "mugs"],
+      [/\bcups?\b/i, "cups"],
+      [/mint\s*tins?|altoids?/i, "mint tins"],
+      [/flasks?/i, "flasks"],
+      [/coasters?/i, "coasters"],
+      [/rocks?\s+glasses?|\bglasses\b|\bglass\b/i, "glasses"],
+      [/hats?\s+with\s+patches?|hat\s*patches?/i, "hats with patches"],
+      [/\bhats?\b/i, "hats"],
+      [/\bsigns?\b/i, "sign"],
+      [/plaques?/i, "plaque"],
+      [/\bt-?shirts?\b|\btees?\b/i, "t-shirts"],
+      [/\bhoodies?\b/i, "hoodies"],
+      [/\bsweatshirts?\b/i, "sweatshirts"],
+    ];
+    const ITEM_MATERIAL = {
+      "cigar box": "wood",
+      "cutting board": "wood",
+      "champagne flutes": "glass",
+      "wine glasses": "glass",
+      glasses: "glass",
+      "t-shirts": "fabric",
+      hoodies: "fabric",
+      sweatshirts: "fabric",
+    };
+
+    function formatItemList(items) {
+      const clean = (items || []).filter(Boolean);
+      if (!clean.length) return "";
+      if (clean.length === 1) return clean[0];
+      if (clean.length === 2) return clean[0] + " and " + clean[1];
+      return clean.slice(0, -1).join(", ") + ", and " + clean[clean.length - 1];
+    }
+
+    function extractItems(text) {
+      const found = [];
+      const seen = {};
+      const blob = String(text || "");
+      ITEM_PATTERNS.forEach(([re, label]) => {
+        if (re.test(blob) && !seen[label]) {
+          found.push(label);
+          seen[label] = true;
+        }
+      });
+      return found;
+    }
+
+    function userTextBlob(extraText) {
+      const parts = [];
+      (betsyHistory || []).forEach(function (turn) {
+        if (turn && turn.role === "user" && turn.content) parts.push(String(turn.content));
+      });
+      if (extraText) parts.push(String(extraText));
+      return parts.join(" \n ").toLowerCase();
+    }
+
+    function detectProcess(text) {
+      // Simple substring checks — customers say "engrave", we lock it. No "select a process."
+      const t = String(text || "").toLowerCase();
+      const hasEngrave = /engrav|etch|laser|engav/.test(t);
+      const hasColor =
+        /full\s*-?\s*colou?r|colou?r\s*print|uv\s*print/.test(t) ||
+        (/\bprinted\b/.test(t) && !hasEngrave);
+      if (hasEngrave && !hasColor) return "engrave";
+      if (hasColor && !hasEngrave) return "uv_print";
+      if (hasEngrave && hasColor) {
+        const engIdx = Math.max(t.lastIndexOf("engrav"), t.lastIndexOf("etch"), t.lastIndexOf("laser"), t.lastIndexOf("engav"));
+        const colIdx = Math.max(t.lastIndexOf("color"), t.lastIndexOf("colour"), t.lastIndexOf("printed"), t.lastIndexOf("uv print"));
+        return engIdx >= colIdx ? "engrave" : "uv_print";
+      }
+      return "";
+    }
+
+    function lockProcessFromAnything(text) {
+      const blob = userTextBlob(text);
+      const proc = detectProcess(blob) || detectProcess(text);
+      if (proc) {
+        interview.process = proc;
+        if (proc === "engrave") interview.family = "engrave";
+        if (proc === "uv_print") {
+          interview.family = /hat/i.test(interview.item || "") ? "hat_patch" : "hard_goods_uv";
+        }
+      }
+      return proc;
+    }
+
+    function isProcessQuestion(reply) {
+      const r = String(reply || "").toLowerCase();
+      return /full-?color.*engrav|engrav.*full-?color|color print, or an engraved|engraved\/etched look/.test(r);
+    }
+
+    function isMaterialQuestion(reply) {
+      const r = String(reply || "").toLowerCase();
+      return /made of|glass,\s*ceramic|what (is|are) the .{0,60}made/.test(r);
+    }
+
+    function detectMaterial(text) {
+      const t = String(text || "").toLowerCase();
+      if (/\b(wood|wooden|bamboo)\b/.test(t)) return "wood";
+      if (/\bacrylic\b/.test(t)) return "acrylic";
+      if (/\b(metal|steel|aluminum|aluminium|brass|copper|tin)\b/.test(t)) return "metal";
+      if (/\b(glass|crystal)\b/.test(t)) return "glass";
+      if (/\b(ceramic|porcelain|stoneware)\b/.test(t)) return "ceramic";
+      if (/\b(leather|leatherette)\b/.test(t)) return "leather";
+      return "";
+    }
+
+    function detectSupply(text) {
+      const t = String(text || "").toLowerCase();
+      // Shop / Barn & Beam sources the items — check FIRST
+      // e.g. "No you will need to order them"
+      if (
+        /\bneed\s+you\b/.test(t) ||
+        /\byou\s+will\s+need\s+to\b/.test(t) ||
+        /\byou\s+(will\s+|can\s+|need\s+to\s+)?(get|supply|provide|find|order|source)\b/.test(t) ||
+        /\byou\s+to\s+(get|supply|provide|find|order|source)\b/.test(t) ||
+        /\b(y'?all|barn)\s+(will\s+|can\s+|need\s+to\s+)?(supply|provide|get|find|order|source)\b/.test(t) ||
+        /\bcan\s+you\s+(get|supply|provide|find|order)\b/.test(t) ||
+        /\bneed\s+(you|y'?all|barn)\b/.test(t) ||
+        /\b(order|source|get)\s+them\b/.test(t) ||
+        /\bplease\s+(get|find|order|supply)\b/.test(t) ||
+        /\bi\s+need\s+you\s+to\b/.test(t) ||
+        /\byou\s+guys\b/.test(t)
+      ) {
+        return "shop";
+      }
+      // Customer already has / will bring the items
+      if (
+        /\b(i|we)\s+(will\s+|can\s+|shall\s+)?(supply|provide|bring|have|send)\b/.test(t) ||
+        /\b(i'?ll|we'?ll)\s+(supply|provide|bring|send|get)\b/.test(t) ||
+        /\bcustomer\s+suppl/.test(t) ||
+        /\bi\s+have\s+(them|the|my)\b/.test(t) ||
+        /\b(i|we)\s+already\s+have\b/.test(t) ||
+        /\byes\b.*\b(supply|have|bring|already)\b/.test(t) ||
+        /\bi'?ll\s+get\s+them\b/.test(t) ||
+        /\bi\s+will\s+(bring|supply|provide|get)\b/.test(t)
+      ) {
+        return "customer";
+      }
+      return "";
+    }
+
+    function isSupplyQuestion(reply) {
+      const r = String(reply || "").toLowerCase();
+      return (
+        /do you (already )?have|supply the|need us to|we (find|get|source)|who (is )?provid|bring them|have the/.test(r)
+      );
+    }
+
+    function wordToNum(w) {
+      const map = {
+        a: 1,
+        an: 1,
+        one: 1,
+        two: 2,
+        couple: 2,
+        three: 3,
+        four: 4,
+        five: 5,
+        six: 6,
+        seven: 7,
+        eight: 8,
+        nine: 9,
+        ten: 10,
+        eleven: 11,
+        twelve: 12,
+        dozen: 12,
+      };
+      return map[String(w || "").toLowerCase()] || 0;
+    }
+
+    function detectQty(text) {
+      const t = String(text || "").toLowerCase();
+      // "2 cups and one box" / "1 box and two glasses" → total or paired counts
+      const parts = [];
+      const re = /\b(\d{1,5}|a|an|one|two|couple|three|four|five|six|seven|eight|nine|ten|eleven|twelve|dozen)\s+(?:of\s+)?([a-z][a-z\s-]{0,20}?)(?=\s+and\b|\s*,|$|\.|!|\?)/gi;
+      let m;
+      while ((m = re.exec(t)) !== null) {
+        const n = /^\d+$/.test(m[1]) ? parseInt(m[1], 10) : wordToNum(m[1]);
+        if (n > 0) parts.push({ n: n, label: m[2].trim() });
+      }
+      if (parts.length) {
+        // Prefer a readable breakdown when multiple lines of product
+        if (parts.length > 1) {
+          return parts.map((p) => p.n + " " + p.label).join(", ");
+        }
+        return String(parts[0].n);
+      }
+      if (/\ba\s+dozen\b|\bdozen\b/.test(t)) return "12";
+      const lone = t.match(/\b(\d{1,5})\b/);
+      if (lone) return lone[1];
+      for (const w of ["twelve", "eleven", "ten", "nine", "eight", "seven", "six", "five", "four", "three", "two", "one"]) {
+        if (new RegExp("\\b" + w + "\\b").test(t)) return String(wordToNum(w));
+      }
+      return "";
+    }
+
+    function isQtyQuestion(reply) {
+      const r = String(reply || "").toLowerCase();
+      return /how many|about how many|quantity|qty/.test(r);
+    }
+
+    function isTimelineQuestion(reply) {
+      const r = String(reply || "").toLowerCase();
+      return /when do you need|needed by|timeline|how soon|due date|deadline/.test(r);
+    }
+
+    function isSizeQuestion(reply) {
+      const r = String(reply || "").toLowerCase();
+      return /how big|what size|design size|logo size|engraving (be |size)|about how large/.test(r);
+    }
+
+    function isAddAnotherQuestion(reply) {
+      const r = String(reply || "").toLowerCase();
+      return /do you need anything else made|another item|or is that everything|need anything else made/.test(r);
+    }
+
+    function detectAddAnother(text) {
+      const raw = String(text || "").trim();
+      if (!raw) return "";
+      const t = raw.toLowerCase();
+      // Done — no more products
+      if (
+        /^(no|nope|nah|none|nothing|n\/a|na)$/i.test(t) ||
+        /\b(nothing else|nope,? that'?s (it|all)|that'?s (it|all|everything)|all good|i'?m good|no thanks|just that|only that)\b/.test(t)
+      ) {
+        return "no";
+      }
+      // Yes, or they named another product (t-shirts, etc.)
+      if (
+        /^(yes|yep|yeah|sure|please)\b/.test(t) ||
+        /\balso\b|\banother\b|\bas well\b|\bplus\b|\band\b/.test(t) ||
+        extractItems(raw).length > 0
+      ) {
+        return "yes";
+      }
+      if (isAddAnotherQuestion(betsyLastReply) && raw.length >= 2) {
+        // Ambiguous short reply while she asked — if it isn't clearly no, treat as yes/more
+        return "yes";
+      }
+      return "";
+    }
+
+    function snapshotCurrentJob() {
+      if (!interview.item) return;
+      const last = interview.jobs[interview.jobs.length - 1];
+      if (
+        last &&
+        last.item === interview.item &&
+        last.quantity === interview.quantity &&
+        last.timeline === interview.timeline
+      ) {
+        return;
+      }
+      interview.jobs.push({
+        item: interview.item,
+        process: interview.process,
+        material: materialSummary() || interview.material,
+        materials: Object.assign({}, interview.materials),
+        blank_source: interview.blank_source,
+        quantity: interview.quantity,
+        design_size: interview.design_size,
+        timeline: interview.timeline,
+        family: interview.family,
+        suggested_machine: interview.suggested_machine,
+      });
+    }
+
+    function startNextJobFromText(text) {
+      snapshotCurrentJob();
+      const newItems = extractItems(text);
+      interview.item = newItems.length ? formatItemList(newItems) : "";
+      interview.process = detectProcess(text) || "";
+      interview.material = "";
+      interview.materials = {};
+      interview.blank_source = "";
+      interview.quantity = detectQty(text) || "";
+      interview.design_size = "";
+      interview.timeline = "";
+      interview.add_another = "";
+      interview.family = "";
+      interview.suggested_machine = "";
+      if (interview.item) {
+        (interview.item.split(/\s+and\s+|,\s*/i) || []).forEach((it) => {
+          const name = String(it || "").trim();
+          if (name && ITEM_MATERIAL[name]) interview.materials[name] = ITEM_MATERIAL[name];
+        });
+      }
+      if (interview.process === "uv_print") {
+        interview.family = /hat/i.test(interview.item) ? "hat_patch" : "hard_goods_uv";
+      }
+      if (interview.process === "engrave") interview.family = "engrave";
+      // Apparel without an explicit look yet — still ask color vs engraved/print
+      if (interview.item && !interview.process && /t-shirt|hoodie|sweatshirt|fabric/i.test(interview.item)) {
+        interview.family = "hard_goods_uv";
+      }
+    }
+
+    function detectDesignSize(text) {
+      const raw = String(text || "").trim();
+      if (!raw) return "";
+      const t = raw.toLowerCase();
+      if (
+        /\b\d+(\.\d+)?\s*(-|x|by|×)?\s*\d*(\.\d+)?\s*(in|inch|inches|mm|cm|")\b/.test(t) ||
+        /\b(inch|inches|mm|cm)\b/.test(t) ||
+        /\b(about|approx|around|roughly)\s+\d/.test(t) ||
+        /\b(small|medium|large|full\s*wrap|logo\s*size)\b/.test(t) ||
+        /\b\d+(\.\d+)?\s*("|in)\b/.test(t)
+      ) {
+        return raw;
+      }
+      // If she just asked size, accept a short plain answer
+      if (isSizeQuestion(betsyLastReply) && raw.length >= 1 && raw.length <= 80) {
+        return raw;
+      }
+      return "";
+    }
+
+    function detectTimeline(text) {
+      const raw = String(text || "").trim();
+      if (!raw) return "";
+      const t = raw.toLowerCase();
+      if (
+        /\b(asap|soon|no rush|whenever|flexible)\b/.test(t) ||
+        /\b(by|before|needed|due)\b/.test(t) ||
+        /\b(monday|tuesday|wednesday|thursday|friday|saturday|sunday)\b/.test(t) ||
+        /\b(jan(?:uary)?|feb(?:ruary)?|mar(?:ch)?|apr(?:il)?|may|jun(?:e)?|jul(?:y)?|aug(?:ust)?|sep(?:t(?:ember)?)?|oct(?:ober)?|nov(?:ember)?|dec(?:ember)?)\b/.test(t) ||
+        /\b\d{1,2}[\/\-]\d{1,2}([\/\-]\d{2,4})?\b/.test(t) ||
+        /\bin\s+\d+\s+(day|days|week|weeks|month|months)\b/.test(t) ||
+        /\bnext\s+(week|month|friday|monday)\b/.test(t)
+      ) {
+        return raw;
+      }
+      // If she just asked timeline, treat almost any non-empty answer as the timeline
+      if (isTimelineQuestion(betsyLastReply) && raw.length >= 2 && raw.length <= 120) {
+        return raw;
+      }
+      return "";
+    }
+
+    function updateInterviewFromText(text) {
+      // Handle "need anything else?" FIRST so a new product doesn't merge into the old job
+      if (isAddAnotherQuestion(betsyLastReply)) {
+        const more = detectAddAnother(text);
+        if (more === "no") {
+          interview.add_another = "no";
+          snapshotCurrentJob();
+          return;
+        }
+        if (more === "yes") {
+          startNextJobFromText(text);
+          // Continue below to fill any other slots present in this same message
+        }
+      }
+
+      const items = extractItems(text);
+      if (items.length && !isAddAnotherQuestion(betsyLastReply)) {
+        const merged = [];
+        const seen = {};
+        (interview.item ? interview.item.split(/\s+and\s+|,\s*/i) : [])
+          .concat(items)
+          .forEach((it) => {
+            const name = String(it || "").trim();
+            if (name && !seen[name]) {
+              merged.push(name);
+              seen[name] = true;
+            }
+          });
+        interview.item = formatItemList(merged);
+        merged.forEach((it) => {
+          if (ITEM_MATERIAL[it] && !interview.materials[it]) {
+            interview.materials[it] = ITEM_MATERIAL[it];
+          }
+        });
+      } else if (items.length && isAddAnotherQuestion(betsyLastReply) && !interview.item) {
+        // startNextJobFromText already set item; if empty, set from extract
+        interview.item = formatItemList(items);
+        items.forEach((it) => {
+          if (ITEM_MATERIAL[it]) interview.materials[it] = ITEM_MATERIAL[it];
+        });
+      }
+
+      // HARD LOCK — "I want to engrave …" must never lead to a process picker
+      lockProcessFromAnything(text);
+      if (!interview.process && isProcessQuestion(betsyLastReply)) {
+        const t = String(text || "").toLowerCase();
+        if (/engrav|etch|laser|engav/.test(t)) {
+          interview.process = "engrave";
+          interview.family = "engrave";
+        } else if (/full\s*-?\s*colou?r|colou?r|print/.test(t)) {
+          interview.process = "uv_print";
+          interview.family = /hat/i.test(interview.item || "") ? "hat_patch" : "hard_goods_uv";
+        }
+      }
+      const mat = detectMaterial(text);
+      if (mat) {
+        const parts = (interview.item || "").split(/\s+and\s+|,\s*/i).map((s) => s.trim()).filter(Boolean);
+        const unknown = parts.filter((it) => !interview.materials[it] && !ITEM_MATERIAL[it]);
+        if (unknown.length) {
+          unknown.forEach((it) => {
+            interview.materials[it] = mat;
+          });
+        } else if (parts.length) {
+          parts.forEach((it) => {
+            if (!interview.materials[it]) interview.materials[it] = mat;
+          });
+        }
+        interview.material = mat;
+      }
+      Object.keys(ITEM_MATERIAL).forEach((it) => {
+        if ((interview.item || "").includes(it) && !interview.materials[it]) {
+          interview.materials[it] = ITEM_MATERIAL[it];
+        }
+      });
+      let supply = detectSupply(text);
+      if (!supply && isSupplyQuestion(betsyLastReply)) {
+        supply = detectSupply(text);
+        if (!supply) {
+          const t = String(text || "").toLowerCase();
+          // Answering the have-them question: "no" alone usually means we need to get them
+          if (
+            /^(no|nope|nah)\b/.test(t) ||
+            /\border\b/.test(t) ||
+            /\byou\b/.test(t)
+          ) {
+            supply = "shop";
+          } else if (
+            /^(yes|yep|yeah)\b/.test(t) ||
+            /\bi\s+have\b|\balready\s+have\b|\bi'?ll\s+bring\b/.test(t)
+          ) {
+            supply = "customer";
+          }
+        }
+      }
+      if (supply) interview.blank_source = supply;
+      let qty = detectQty(text);
+      if (!qty && isQtyQuestion(betsyLastReply)) {
+        qty = detectQty(text);
+        if (!qty) {
+          const t = String(text || "").toLowerCase();
+          const lone = t.match(/\b(\d{1,5})\b/);
+          if (lone) qty = lone[1];
+          else if (/\ba\s+couple\b|\bcouple\b/.test(t)) qty = "2";
+        }
+      }
+      if (!qty && /\ba\s+couple\b|\bcouple\b/.test(String(text || "").toLowerCase())) qty = "2";
+      if (qty) interview.quantity = qty;
+
+      const designSize = detectDesignSize(text);
+      if (designSize && !isAddAnotherQuestion(betsyLastReply)) interview.design_size = designSize;
+
+      const timeline = detectTimeline(text);
+      if (timeline && !isAddAnotherQuestion(betsyLastReply)) interview.timeline = timeline;
+
+      if (interview.process === "uv_print") interview.family = /hat/i.test(interview.item) ? "hat_patch" : "hard_goods_uv";
+      if (interview.process === "engrave") interview.family = "engrave";
+    }
+
+    function materialComplete() {
+      if (interview.process !== "engrave") return true;
+      const parts = (interview.item || "").split(/\s+and\s+|,\s*/i).map((s) => s.trim()).filter(Boolean);
+      if (!parts.length) return !!interview.material;
+      return parts.every((it) => !!(interview.materials[it] || ITEM_MATERIAL[it] || interview.material));
+    }
+
+    function unknownMaterials() {
+      const parts = (interview.item || "").split(/\s+and\s+|,\s*/i).map((s) => s.trim()).filter(Boolean);
+      return parts.filter((it) => !(interview.materials[it] || ITEM_MATERIAL[it]));
+    }
+
+    function materialSummary() {
+      const parts = (interview.item || "").split(/\s+and\s+|,\s*/i).map((s) => s.trim()).filter(Boolean);
+      if (!parts.length) return interview.material || "";
+      return parts
+        .map((it) => it + " (" + (interview.materials[it] || ITEM_MATERIAL[it] || interview.material || "?") + ")")
+        .join(", ");
+    }
+
+    function localNextReply() {
+      // Re-lock from full thread every time before choosing a question
+      lockProcessFromAnything("");
+
+      if (!interview.item) {
+        return "What are we putting a design on? (hats, cups, cutting boards, glass, keychains…)";
+      }
+      // Only ask look if they have NOT already said engrave / color / laser
+      if (!interview.process) {
+        return (
+          "Got it — " +
+          interview.item +
+          ". Should the design be full color on the surface, or engraved/etched into it?"
+        );
+      }
+      if (interview.process === "engrave" && !materialComplete()) {
+        const unknown = unknownMaterials();
+        const known = (interview.item || "")
+          .split(/\s+and\s+|,\s*/i)
+          .map((s) => s.trim())
+          .filter((it) => it && (interview.materials[it] || ITEM_MATERIAL[it]));
+        if (known.length && unknown.length) {
+          const knownBits = known
+            .map((it) => it + " as " + (interview.materials[it] || ITEM_MATERIAL[it]))
+            .join(", ");
+          const ask = formatItemList(unknown);
+          const verb = unknown.length > 1 || /s$/i.test(ask) ? "are" : "is";
+          return (
+            "Engraved " +
+            interview.item +
+            " — got it. We'll treat " +
+            knownBits +
+            ". What " +
+            verb +
+            " the " +
+            ask +
+            " made of (glass, ceramic, metal, wood…)?"
+          );
+        }
+        return (
+          "Engraved " +
+          interview.item +
+          " — thanks. What is it made of (for example wood, glass, acrylic, or metal)?"
+        );
+      }
+      // One question at a time — guide the quote, don't dump two asks
+      if (!interview.blank_source) {
+        const ack =
+          interview.process === "engrave"
+            ? "Got it — " + (materialSummary() || interview.item) + "."
+            : "Full-color print on " + interview.item + " — got it.";
+        return (
+          ack +
+          " Do you already have the " +
+          (interview.item || "items") +
+          ", or do you need us to get them for you?"
+        );
+      }
+      if (!interview.quantity) {
+        return (
+          (interview.blank_source === "shop"
+            ? "We can help get those. "
+            : "Perfect — you’ll bring them in. ") +
+          "About how many do you need? (A rough number is fine — we’ll firm it up on the quote.)"
+        );
+      }
+      // Qty known — ask how big the engraving/design should be on each item
+      if (!interview.design_size) {
+        const look =
+          interview.process === "uv_print" ? "print / design" : "engraving";
+        return (
+          "Got it — " +
+          (interview.quantity || "that quantity") +
+          ". About how big should the " +
+          look +
+          " be on each " +
+          (interview.item || "item") +
+          "? (Rough size is fine — e.g. 2 inches wide.)"
+        );
+      }
+      if (!interview.timeline) {
+        return (
+          "Got it — about " +
+          interview.design_size +
+          ". When do you need this done by?"
+        );
+      }
+      // Current line-item is complete — ask if they need another product (loops chat)
+      const lineComplete = !!(
+        interview.item &&
+        interview.process &&
+        materialComplete() &&
+        interview.blank_source &&
+        interview.quantity &&
+        interview.design_size &&
+        interview.timeline
+      );
+      if (lineComplete && interview.add_another !== "no") {
+        const prior =
+          interview.jobs.length > 0
+            ? " We already have " + interview.jobs.map((j) => j.item).join(", ") + " on this quote."
+            : "";
+        return (
+          "Got it — needed " +
+          interview.timeline +
+          "." +
+          prior +
+          " Do you need anything else made (another item), or is that everything?"
+        );
+      }
+      const summaryItems =
+        (interview.jobs || []).map((j) => j.item).filter(Boolean).join(", ") ||
+        interview.item ||
+        "that";
+      return (
+        "Perfect — " +
+        summaryItems +
+        ". I’ll show a quick summary next so you can verify, then artwork on the last step."
+      );
+    }
+
+    function forceAdvanceFromRepeat(text, reply) {
+      // Absolute loop breaker: never ask the same question twice in a row
+      if (!reply || !betsyLastReply) return reply;
+      const same =
+        reply === betsyLastReply ||
+        (isProcessQuestion(reply) && isProcessQuestion(betsyLastReply)) ||
+        (isMaterialQuestion(reply) && isMaterialQuestion(betsyLastReply)) ||
+        (isSupplyQuestion(reply) && isSupplyQuestion(betsyLastReply)) ||
+        (isQtyQuestion(reply) && isQtyQuestion(betsyLastReply)) ||
+        (isSizeQuestion(reply) && isSizeQuestion(betsyLastReply)) ||
+        (isTimelineQuestion(reply) && isTimelineQuestion(betsyLastReply)) ||
+        (isAddAnotherQuestion(reply) && isAddAnotherQuestion(betsyLastReply));
+      if (!same) return reply;
+
+      if (isProcessQuestion(betsyLastReply) && !interview.process) {
+        const t = String(text || "").toLowerCase();
+        interview.process = /\b(colou?r|print)\b/.test(t) && !/\b(engrav\w*|engav\w*|etch|laser)\b/.test(t)
+          ? "uv_print"
+          : "engrave";
+        if (interview.process === "engrave") interview.family = "engrave";
+        if (interview.process === "uv_print") {
+          interview.family = /hat/i.test(interview.item) ? "hat_patch" : "hard_goods_uv";
+        }
+      }
+      if (isMaterialQuestion(betsyLastReply) && interview.process === "engrave" && !materialComplete()) {
+        const mat = detectMaterial(text) || "wood";
+        unknownMaterials().forEach((it) => {
+          interview.materials[it] = mat;
+        });
+        interview.material = mat;
+      }
+      if (isSupplyQuestion(betsyLastReply) && !interview.blank_source) {
+        const guessed = detectSupply(text);
+        const t = String(text || "").toLowerCase();
+        interview.blank_source =
+          guessed ||
+          (/^(no|nope|nah)\b|\border\b|\byou\b|\bneed\s+you\b|\bget\s+them\b|\bfor\s+me\b|\by'?all\b/.test(t)
+            ? "shop"
+            : /^(yes|yep|yeah)\b|\bi\s+have\b|\bbring\b/.test(t)
+              ? "customer"
+              : "shop");
+      }
+      if (isQtyQuestion(betsyLastReply) && !interview.quantity) {
+        interview.quantity = detectQty(text) || "TBD";
+      }
+      if (isSizeQuestion(betsyLastReply) && !interview.design_size) {
+        interview.design_size = detectDesignSize(text) || String(text || "").trim() || "TBD";
+      }
+      if (isTimelineQuestion(betsyLastReply) && !interview.timeline) {
+        interview.timeline = detectTimeline(text) || String(text || "").trim() || "TBD";
+      }
+      if (isAddAnotherQuestion(betsyLastReply) && !interview.add_another) {
+        const more = detectAddAnother(text);
+        if (more === "no") {
+          interview.add_another = "no";
+          snapshotCurrentJob();
+        } else if (more === "yes") {
+          startNextJobFromText(text);
+        }
+      }
+      return localNextReply();
+    }
+
+    function interviewSlots() {
+      const jobs = interview.jobs || [];
+      return {
+        item: jobs.length
+          ? jobs.map((j) => j.item).filter(Boolean).join("; ")
+          : interview.item,
+        process:
+          interview.process === "uv_print"
+            ? "uv_print"
+            : interview.process === "engrave"
+              ? interview.material === "metal" || Object.values(interview.materials).includes("metal")
+                ? "engrave_fiber"
+                : interview.material === "glass" || Object.values(interview.materials).includes("glass")
+                  ? "engrave_uv"
+                  : "engrave_co2"
+              : "",
+        material: materialSummary() || interview.material,
+        blank_source: interview.blank_source,
+        quantity: interview.quantity,
+        design_size: interview.design_size,
+        timeline: interview.timeline,
+        jobs: jobs,
+        suggested_machine: interview.suggested_machine,
+      };
+    }
+
+    function replyReasksFilledSlot(reply) {
+      const r = String(reply || "").toLowerCase();
+      if (!r) return false;
+      if (interview.process && /full-?color.*engrav|engrav.*full-?color|color print, or/.test(r)) return true;
+      if (materialComplete() && interview.process === "engrave" && /made of|glass,\s*ceramic|what (is|are) the .{0,40}made/.test(r)) {
+        return true;
+      }
+      if (interview.item && /what are we (putting|making)|putting a design on/.test(r)) return true;
+      return false;
+    }
+
+    function formContactSlots() {
+      const out = {};
+      const nameEl = document.getElementById("name");
+      const emailEl = document.getElementById("email");
+      const phoneEl = document.getElementById("phone");
+      if (nameEl && String(nameEl.value || "").trim()) out.name = String(nameEl.value).trim();
+      if (emailEl && String(emailEl.value || "").trim()) out.email = String(emailEl.value).trim();
+      if (phoneEl && String(phoneEl.value || "").trim()) out.phone = String(phoneEl.value).trim();
+      return out;
+    }
+
+    function stripBetsyDraft(text) {
+      let t = String(text || "");
+      t = t.replace(/---BETSY_DRAFT_START---[\s\S]*?---BETSY_DRAFT_END---/gi, "");
+      t = t.replace(/---BETSY_JSON_START---[\s\S]*?---BETSY_JSON_END---/gi, "");
+      t = t.replace(/\n\s*\{[\s\S]*\}\s*$/g, "");
+      return t.trim();
+    }
+
+    function mergeQuoteSlots(incoming) {
+      if (!incoming || typeof incoming !== "object") return;
+      Object.keys(incoming).forEach(function (k) {
+        const v = incoming[k];
+        if (v === null || v === undefined || v === "") return;
+        if (String(k).indexOf("_") === 0) return;
+        quoteSlots[k] = v;
+      });
+    }
+
+    async function askBetsy(text) {
+      // Production path = same as eval harness: POST classify with persisted slots.
+      // Portal betsy_slots owns next_slot / close. Page never picks the next question.
+      const contact = formContactSlots();
+      const slotsOut = Object.assign({}, quoteSlots, contact);
+      let apiSlots = {};
+      let apiFamily = "";
+      let apiLabel = "";
+      let reply = "";
+      let source = "";
+      let apiDone = false;
+      let nextSlot = null;
+
+      try {
+        const res = await fetch(betsyClassifyUrl() + "?t=" + Date.now() + "&v=" + BETSY_UI_VERSION, {
+          method: "POST",
+          headers: { "Content-Type": "application/json", Accept: "application/json" },
+          body: JSON.stringify({
+            message: text,
+            history: betsyHistory.slice(),
+            slots: slotsOut,
+          }),
+        });
+        if (!res.ok) throw new Error("Betsy API " + res.status);
+        const data = await res.json();
+        apiSlots = data.slots || {};
+        apiFamily = data.job_family || "";
+        apiLabel = data.label || "";
+        reply = stripBetsyDraft(data.reply || "");
+        source = data.source || "slots";
+        apiDone = !!data.done || !!data.draft_ready;
+        nextSlot = data.next_slot != null ? data.next_slot : apiSlots.next_slot;
+        mergeQuoteSlots(apiSlots);
+        if (apiFamily) quoteSlots.family = apiFamily;
+        if (apiFamily) quoteSlots.job_family = apiFamily;
+      } catch (e) {
+        console.error("Betsy API error", e);
+        reply =
+          "I can’t reach the quote helper right now. Try again in a moment, or use “Just have someone contact me.”";
+        source = "error";
+      }
+
+      if (!reply) {
+        reply = "Thanks — what would you like us to make or decorate?";
+        source = source || "fallback";
+      }
+
+      // Prefill form fields from persisted slots (never drive chat from page scripts)
+      try {
+        prefillFromSlots(quoteSlots);
+        autofillHiddenProcess();
+      } catch (e) {}
+
+      return {
+        family: quoteSlots.family || quoteSlots.job_family || apiFamily || "",
+        label: apiLabel || "",
+        confidence: "medium",
+        done: apiDone,
+        reply: reply,
+        source: source,
+        next_slot: nextSlot,
+        slots: Object.assign({}, quoteSlots, formContactSlots()),
+      };
+    }
+
+    function prefillFromSlots(slots) {
+      if (!slots || typeof slots !== "object") return;
+      // Map design_size onto logo_size fields when present
+      if (slots.design_size && !slots.logo_size) slots.logo_size = slots.design_size;
+      if (slots.design_size && !slots.patch_size) {
+        const ds = String(slots.design_size).toLowerCase();
+        if (ds.includes("2.5")) slots.patch_size = "2.5in";
+        else if (ds.includes("3")) slots.patch_size = "3in";
+        else if (ds.includes("2")) slots.patch_size = "2in";
+      }
+      const map = {
+        quantity: ["hat_qty", "mint_qty", "quantity"],
+        patch_size: ["hat_patch_size"],
+        hat_method: ["hat_method"],
+        surface: ["hat_surface"],
+        include_hat_blank: ["hat_include_blank"],
+        art_ready: ["hat_art_ready", "mint_art_ready"],
+        logo_size: ["mint_logo_size", "design_size"],
+        design_size: ["mint_logo_size", "design_size"],
+        timeline: ["hat_timeline", "mint_timeline", "timeline"],
+      };
+      Object.keys(map).forEach((key) => {
+        const val = slots[key];
+        if (val == null || String(val).trim() === "") return;
+        map[key].forEach((id) => {
+          const el = document.getElementById(id);
+          if (el) el.value = String(val);
+        });
+      });
+      // blank_source: chat uses customer|shop; mint select uses customer|studio
+      if (slots.blank_source) {
+        const mintBlank = document.getElementById("mint_blank");
+        if (mintBlank) {
+          const src = String(slots.blank_source).toLowerCase();
+          mintBlank.value = src === "shop" || src === "studio" ? "studio" : "customer";
+        }
+      }
+      // Process stays hidden — filled from Betsy, never a customer dropdown
+      autofillHiddenProcess();
+      // Stash machine suggestion for Portal (hidden field if present)
+      let machineEl = document.getElementById("suggested_machine");
+      if (!machineEl && form) {
+        machineEl = document.createElement("input");
+        machineEl.type = "hidden";
+        machineEl.id = "suggested_machine";
+        machineEl.name = "suggested_machine";
+        form.appendChild(machineEl);
+      }
+      if (machineEl && slots.suggested_machine) machineEl.value = String(slots.suggested_machine);
+      let materialEl = document.getElementById("material");
+      if (!materialEl && form) {
+        materialEl = document.createElement("input");
+        materialEl.type = "hidden";
+        materialEl.id = "material";
+        materialEl.name = "material";
+        form.appendChild(materialEl);
+      }
+      if (materialEl && slots.material) materialEl.value = String(slots.material);
+      let itemEl = document.getElementById("quote_item");
+      if (!itemEl && form) {
+        itemEl = document.createElement("input");
+        itemEl.type = "hidden";
+        itemEl.id = "quote_item";
+        itemEl.name = "item";
+        form.appendChild(itemEl);
+      }
+      if (itemEl && slots.item) itemEl.value = String(slots.item);
+    }
+
+    async function handleChatSend() {
+      const text = (quoteChatInput && quoteChatInput.value || "").trim();
+      if (!text) {
+        if (quoteChatInput) quoteChatInput.focus();
+        return;
+      }
+      appendChat("user", text);
+      if (quoteChatInput) quoteChatInput.value = "";
+      if (quoteChatSend) quoteChatSend.disabled = true;
+      if (quoteChatHint) quoteChatHint.textContent = BETSY_NAME + " is thinking…";
+      const result = await askBetsy(text);
+      // Keep history for multi-turn interview (after the request so message isn't duplicated)
+      betsyHistory.push({ role: "user", content: text });
+      if (result.reply) {
+        betsyHistory.push({ role: "assistant", content: result.reply });
+        betsyLastReply = result.reply;
+      }
+      if (betsyHistory.length > 16) betsyHistory = betsyHistory.slice(-16);
+
+      if (quoteChatSend) quoteChatSend.disabled = false;
+      appendChat("bot", result.reply);
+
+      // Family / prefill from classify slots (same path as eval)
+      if (result.family) applyJobFamily(result.family);
+      if (result.slots) {
+        mergeQuoteSlots(result.slots);
+        prefillFromSlots(quoteSlots);
+        autofillHiddenProcess();
+      }
+
+      // Enable Continue once we have a family or a close
+      if (quoteNext) quoteNext.disabled = !(result.family || result.done);
+
+      const contactOnly =
+        result.family === "contact_only" ||
+        !!(result.slots && (result.slots.fulfillment === "contact_only" || result.slots.contact_request));
+      if (quoteChatHint) {
+        if (contactOnly && result.done) {
+          quoteChatHint.textContent =
+            "We’ll have the shop contact you. Continue when you’re ready to finish.";
+        } else if (result.done && result.family) {
+          quoteChatHint.textContent =
+            "Quote details captured — Continue to review / finish.";
+        } else {
+          quoteChatHint.textContent =
+            "Keep chatting with " + BETSY_NAME + ", or Continue when you’re ready. (" + BETSY_UI_VERSION + ")";
+        }
+      }
+    }
+
+    if (quoteChatSend) quoteChatSend.addEventListener("click", handleChatSend);
+    if (quoteChatInput) {
+      quoteChatInput.addEventListener("keydown", (e) => {
+        if (e.key === "Enter" && !e.shiftKey) {
+          e.preventDefault();
+          handleChatSend();
+        }
+      });
+    }
+
+    function goQuoteNext() {
+      if (!validateQuoteStep(quoteStep)) return;
+      if (quoteStep < quoteStepCount) {
+        showQuoteStep(quoteStep + 1);
+        return;
+      }
+      if (typeof form.requestSubmit === "function") form.requestSubmit(quoteSubmit);
+      else quoteSubmit.click();
+    }
+
+    if (quoteNext) {
+      quoteNext.addEventListener("click", goQuoteNext);
+    }
+    if (quoteBack) {
+      quoteBack.addEventListener("click", () => {
+        if (quoteStep > 1) showQuoteStep(quoteStep - 1);
+      });
+    }
+    showQuoteStep(1);
+
+    function buildJobDetails() {
+      const family = (jobFamily && jobFamily.value) || "";
+      const details = { job_family: family };
+      if (family === "hat_patch") {
+        details.hat_method = (document.getElementById("hat_method") || {}).value || "";
+        details.surface = (document.getElementById("hat_surface") || {}).value || "";
+        details.quantity = (document.getElementById("hat_qty") || {}).value || "";
+        details.patch_size = (document.getElementById("hat_patch_size") || {}).value || "";
+        details.include_hat_blank = (document.getElementById("hat_include_blank") || {}).value || "";
+        details.art_ready = (document.getElementById("hat_art_ready") || {}).value || "";
+        details.timeline = (document.getElementById("hat_timeline") || {}).value || "";
+      } else if (family === "mint_tin") {
+        details.quantity = (document.getElementById("mint_qty") || {}).value || "";
+        details.blank_source = (document.getElementById("mint_blank") || {}).value || "";
+        details.art_ready = (document.getElementById("mint_art_ready") || {}).value || "";
+        details.logo_size = (document.getElementById("mint_logo_size") || {}).value || "";
+        details.timeline = (document.getElementById("mint_timeline") || {}).value || "";
+      } else {
+        details.service = (document.getElementById("service") || {}).value || "";
+        details.quantity = (document.getElementById("quantity") || {}).value || "";
+        details.design_size = (document.getElementById("design_size") || {}).value || "";
+        details.logo_size = details.design_size;
+        details.timeline = (document.getElementById("timeline") || {}).value || "";
+      }
+      return details;
+    }
+
+    function jobFamilyLabel(family) {
+      const map = {
+        hat_patch: "Hat with a patch",
+        mint_tin: "Mint tin / hard goods UV",
+        hard_goods_uv: "Color print on hard goods",
+        engrave: "Laser / UV engraving",
+        signage_laser: "Signage / engraving",
+        other: "Other / not sure yet",
+      };
+      return map[family] || family || "Website quote";
+    }
+
     form.addEventListener("submit", async (e) => {
       e.preventDefault();
+
+      // Enter on step 1–3 must advance the wizard, not finish the quote
+      if (typeof quoteStep === "number" && quoteStep < quoteStepCount) {
+        goQuoteNext();
+        return;
+      }
 
       if (phoneInput) {
         const formatted = formatUsPhone(phoneInput.value);
@@ -1120,11 +2532,13 @@
         const maxBytes = 4 * 1024 * 1024;
         const allowed = /\.(pdf|png|jpe?g|webp|gif)$/i;
         if (!allowed.test(file.name || "")) {
+          formNote.hidden = false;
           formNote.textContent = "Artwork must be PDF, JPG, PNG, WEBP, or GIF.";
           formNote.style.color = "#b42318";
           return;
         }
         if (file.size > maxBytes) {
+          formNote.hidden = false;
           formNote.textContent = "Artwork file must be 4 MB or smaller.";
           formNote.style.color = "#b42318";
           return;
@@ -1133,7 +2547,12 @@
 
       quoteSubmit.disabled = true;
       quoteSubmit.textContent = "Sending…";
-      formNote.textContent = "Sending your inquiry…";
+      if (quoteNext) {
+        quoteNext.disabled = true;
+        quoteNext.textContent = "Sending…";
+      }
+      formNote.hidden = false;
+      formNote.textContent = "Working…";
       formNote.style.color = "";
       if (artworkStatus) {
         artworkStatus.hidden = true;
@@ -1150,9 +2569,16 @@
           formData.set("service", "Not specified");
         }
 
+        const isLocalPreview =
+          /^(127\.0\.0\.1|localhost)$/i.test(window.location.hostname) ||
+          window.location.port === "8791";
+        const PORTAL_INTAKE = "http://127.0.0.1:8746/api/quote-leads/intake";
+
         let attachment = null;
-        if (file) {
+        // Artwork upload only works on the deployed Vercel site — skip on local preview
+        if (file && !isLocalPreview) {
           quoteSubmit.textContent = "Scanning file…";
+          formNote.hidden = false;
           formNote.textContent = "Scanning artwork for security…";
           if (artworkStatus) {
             artworkStatus.hidden = false;
@@ -1182,44 +2608,132 @@
             artworkStatus.textContent =
               "File scanned clean and attached: " + (attachment.filename || file.name);
           }
-          quoteSubmit.textContent = "Sending…";
-          formNote.textContent = "Sending your inquiry…";
+        } else if (file && isLocalPreview && artworkStatus) {
+          artworkStatus.hidden = false;
+          artworkStatus.textContent =
+            "Local preview: artwork file noted (" +
+            (file.name || "file") +
+            ") — upload runs after deploy.";
         }
 
+        quoteSubmit.textContent = "Working…";
+        if (quoteNext) quoteNext.textContent = "Working…";
+        formNote.hidden = false;
+        formNote.textContent = "Saving your request…";
+        formNote.style.color = "";
+
+        const jobDetails = buildJobDetails();
+        const family = jobDetails.job_family || "";
         const extras = [];
-        const qty = String(formData.get("quantity") || "").trim();
-        const timeline = String(formData.get("timeline") || "").trim();
-        if (qty) extras.push("Quantity: " + qty);
-        if (timeline) extras.push("Timeline: " + timeline);
+        extras.push("Project: " + jobFamilyLabel(family));
+        if (family === "hat_patch") {
+          if (jobDetails.hat_method) extras.push("Patch method: " + jobDetails.hat_method);
+          if (jobDetails.surface) extras.push("Surface: " + jobDetails.surface);
+          if (jobDetails.quantity) extras.push("Quantity: " + jobDetails.quantity);
+          if (jobDetails.patch_size) extras.push("Patch size: " + jobDetails.patch_size);
+          if (jobDetails.include_hat_blank) extras.push("Hat blank: " + jobDetails.include_hat_blank);
+          if (jobDetails.art_ready) extras.push("Artwork: " + jobDetails.art_ready);
+          if (jobDetails.timeline) extras.push("Timeline: " + jobDetails.timeline);
+        } else if (family === "mint_tin" || family === "hard_goods_uv") {
+          if (jobDetails.quantity) extras.push("Quantity: " + jobDetails.quantity);
+          if (jobDetails.blank_source) extras.push("Blanks: " + jobDetails.blank_source);
+          if (jobDetails.art_ready) extras.push("Artwork: " + jobDetails.art_ready);
+          if (jobDetails.logo_size) extras.push("Logo size: " + jobDetails.logo_size);
+          if (jobDetails.timeline) extras.push("Timeline: " + jobDetails.timeline);
+        } else {
+          const qty = String(jobDetails.quantity || formData.get("quantity") || "").trim();
+          const designSize = String(
+            jobDetails.design_size || jobDetails.logo_size || formData.get("design_size") || ""
+          ).trim();
+          const timeline = String(jobDetails.timeline || formData.get("timeline") || "").trim();
+          const service = String(jobDetails.service || formData.get("service") || "").trim();
+          if (service) extras.push("Process: " + service);
+          if (qty) extras.push("Quantity: " + qty);
+          if (designSize) extras.push("Design size: " + designSize);
+          if (timeline) extras.push("Timeline: " + timeline);
+        }
         let message = String(formData.get("message") || "").trim();
         if (extras.length) {
           message = extras.join("\n") + (message ? "\n\n" + message : "");
         }
+        if (!message) message = extras.join("\n") || "Website quote request";
+
+        const serviceForLead =
+          family === "hat_patch"
+            ? "Hat with a patch"
+            : family === "mint_tin" || family === "hard_goods_uv"
+              ? "Hard goods UV"
+              : family === "engrave"
+                ? "Engraving"
+                : String(jobDetails.service || formData.get("service") || jobFamilyLabel(family) || "").trim();
 
         const leadPayload = {
           name: String(formData.get("name") || "").trim(),
           email: String(formData.get("email") || "").trim(),
           phone: String(formData.get("phone") || "").trim(),
-          service: String(formData.get("service") || "").trim(),
+          company: String(formData.get("company") || "").trim(),
+          service: serviceForLead,
+          job_family: family,
+          job_details: jobDetails,
+          quantity: String(jobDetails.quantity || "").trim(),
+          timeline: String(jobDetails.timeline || formData.get("timeline") || "").trim(),
           message: message,
           page: window.location.href,
+          suggested_machine: String((document.getElementById("suggested_machine") || {}).value || ""),
+          material: String((document.getElementById("material") || {}).value || ""),
+          item: String((document.getElementById("quote_item") || {}).value || ""),
           _honey: String(formData.get("_honey") || ""),
           attachment: attachment,
         };
 
         let leadOk = false;
+        let intakeInfo = null;
+
+        // Local preview → Portal intake (creates BB # + Work Files). Deployed site → Vercel API.
+        const intakeUrl = isLocalPreview ? PORTAL_INTAKE : "/api/quote-request";
         try {
-          const leadRes = await fetch("/api/quote-request", {
+          const leadRes = await fetch(intakeUrl, {
             method: "POST",
             headers: { "Content-Type": "application/json", Accept: "application/json" },
             body: JSON.stringify(leadPayload),
           });
-          if (leadRes.ok) leadOk = true;
-          else console.warn("Workflow lead store failed", leadRes.status, await leadRes.text());
+          if (leadRes.ok) {
+            leadOk = true;
+            try {
+              intakeInfo = await leadRes.json();
+            } catch (_) {
+              intakeInfo = null;
+            }
+          } else {
+            console.warn("Lead intake failed", leadRes.status, await leadRes.text());
+          }
         } catch (leadErr) {
-          console.warn("Workflow lead store error", leadErr);
+          console.warn("Lead intake error", leadErr);
         }
 
+        if (isLocalPreview) {
+          if (!leadOk) {
+            throw new Error(
+              "Could not reach Portal at http://127.0.0.1:8746 — start Portal Beta, then try Finish again."
+            );
+          }
+          showFormSuccess();
+          if (intakeInfo && (intakeInfo.bb_number || intakeInfo.work_folder_path)) {
+            const note = document.querySelector("#formSuccess p");
+            if (note) {
+              note.textContent =
+                "Saved to Portal" +
+                (intakeInfo.bb_number ? " as " + intakeInfo.bb_number : "") +
+                (intakeInfo.work_folder_path
+                  ? ". Work Files folder created."
+                  : ".") +
+                " Check Quotes in Portal.";
+            }
+          }
+          return;
+        }
+
+        // Production path: also notify via FormSubmit when online
         if (attachment && attachment.filename) {
           formData.set(
             "artwork_note",
@@ -1231,24 +2745,24 @@
           );
         }
 
-        const res = await fetch("https://formsubmit.co/ajax/" + QUOTE_EMAIL, {
-          method: "POST",
-          body: formData,
-          headers: { Accept: "application/json" },
-        });
-
-        let payload = null;
+        let isSuccess = leadOk;
         try {
-          payload = await res.json();
+          const res = await fetch("https://formsubmit.co/ajax/" + QUOTE_EMAIL, {
+            method: "POST",
+            body: formData,
+            headers: { Accept: "application/json" },
+          });
+          let payload = null;
+          try {
+            payload = await res.json();
+          } catch (_) {
+            payload = null;
+          }
+          const successFlag = payload && payload.success;
+          if (res.ok && successFlag !== false && successFlag !== "false") isSuccess = true;
         } catch (_) {
-          payload = null;
+          /* FormSubmit optional if lead already saved */
         }
-
-        const successFlag = payload && payload.success;
-        const isSuccess =
-          res.ok &&
-          successFlag !== false &&
-          successFlag !== "false";
 
         if (file && !leadOk) {
           throw new Error(
@@ -1256,23 +2770,20 @@
           );
         }
         if (!isSuccess && !leadOk) {
-          const errMessage = (payload && (payload.message || payload.error)) || ("Send failed (" + res.status + ")");
-          throw new Error(errMessage);
+          throw new Error("Send failed. Please try again.");
         }
 
         showFormSuccess();
       } catch (err) {
         console.warn("Quote submit failed", err);
+        formNote.hidden = false;
         formNote.textContent = (err && err.message) || "Send failed. Please try again.";
         formNote.style.color = "#b42318";
         quoteSubmit.disabled = false;
-        quoteSubmit.textContent = "Send inquiry";
-        if (!file) {
-          try {
-            HTMLFormElement.prototype.submit.call(form);
-          } catch (_) {
-            /* ignore */
-          }
+        quoteSubmit.textContent = "Finish";
+        if (quoteNext) {
+          quoteNext.disabled = false;
+          quoteNext.textContent = "Finish";
         }
       }
     });
