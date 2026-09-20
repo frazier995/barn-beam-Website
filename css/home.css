@@ -1282,3 +1282,18 @@ ol {
   height: fit-content;
   margin: 0;
 }
+.quote-chat-actions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.65rem;
+  margin-top: 0.65rem;
+}
+.quote-chat-actions .btn:disabled {
+  opacity: 0.55;
+  cursor: not-allowed;
+}
+.quote-chat-actions .form-file-hint {
+  margin: 0;
+  flex: 1 1 12rem;
+}

@@ -858,6 +858,12 @@
                   <textarea id="quoteChatInput" rows="2" placeholder="e.g. UV printing on mint tins, or hat patches printed and pressed…"></textarea>
                   <button type="button" class="btn btn-primary" id="quoteChatSend">Send</button>
                 </div>
+                <div class="quote-chat-actions" id="quoteChatActions" hidden>
+                  <button type="button" class="btn btn-secondary" id="quoteSaveTranscript" disabled>
+                    Save transcript for Grok
+                  </button>
+                  <span class="form-file-hint" id="quoteTranscriptStatus" aria-live="polite"></span>
+                </div>
                 <p class="form-file-hint" id="quoteChatHint">Describe the job in your own words — we’ll figure out the type and move to the right questions.</p>
               </div>
             </div>
@@ -1486,6 +1492,8 @@
       betsyHistory = [];
       betsyLastReply = "";
       quoteSlots = {};
+      quoteChatDone = false;
+      setTranscriptButton(false, "");
       quoteChatLog.innerHTML = "";
       const hello =
         "Hi — I’m Betsy. Tell me what you’d like made or decorated, and I’ll get the details for a quote.";
@@ -1500,15 +1508,35 @@
     }
 
     const BETSY_NAME = "Betsy";
-    const BETSY_UI_VERSION = "slots-api-1";
+    const BETSY_UI_VERSION = "slots-api-2";
     // Same classify path as run_betsy_eval.py (Portal slot merger)
     function betsyClassifyUrl() {
       return "http://127.0.0.1:8746/api/quote-chat/classify";
+    }
+    function betsyTranscriptUrl() {
+      return "http://127.0.0.1:8746/api/quote-chat/transcript";
     }
     // Conversation + persisted slots (app/API owns next question — never raw model order)
     let betsyHistory = [];
     let betsyLastReply = "";
     let quoteSlots = {}; // persisted across turns; merged from classify every reply
+    let quoteChatDone = false;
+    const quoteChatActions = document.getElementById("quoteChatActions");
+    const quoteSaveTranscript = document.getElementById("quoteSaveTranscript");
+    const quoteTranscriptStatus = document.getElementById("quoteTranscriptStatus");
+
+    function setTranscriptButton(enabled, statusText) {
+      if (quoteChatActions) quoteChatActions.hidden = !enabled;
+      if (quoteSaveTranscript) {
+        quoteSaveTranscript.disabled = !enabled;
+        quoteSaveTranscript.textContent = enabled
+          ? "Save transcript for Grok"
+          : "Save transcript for Grok";
+      }
+      if (quoteTranscriptStatus && statusText != null) {
+        quoteTranscriptStatus.textContent = statusText;
+      }
+    }
 
 
     const ITEM_PATTERNS = [
@@ -2412,6 +2440,11 @@
       // Enable Continue once we have a family or a close
       if (quoteNext) quoteNext.disabled = !(result.family || result.done);
 
+      quoteChatDone = !!result.done;
+      if (quoteChatDone) {
+        setTranscriptButton(true, "Chat finished — save a copy for cloud Grok when ready.");
+      }
+
       const contactOnly =
         result.family === "contact_only" ||
         !!(result.slots && (result.slots.fulfillment === "contact_only" || result.slots.contact_request));
@@ -2421,12 +2454,53 @@
             "We’ll have the shop contact you. Continue when you’re ready to finish.";
         } else if (result.done && result.family) {
           quoteChatHint.textContent =
-            "Quote details captured — Continue to review / finish.";
+            "Quote details captured — Continue to review / finish, or save transcript for Grok.";
         } else {
           quoteChatHint.textContent =
             "Keep chatting with " + BETSY_NAME + ", or Continue when you’re ready. (" + BETSY_UI_VERSION + ")";
         }
       }
+    }
+
+    async function saveTranscriptForGrok() {
+      if (!quoteSaveTranscript) return;
+      quoteSaveTranscript.disabled = true;
+      if (quoteTranscriptStatus) quoteTranscriptStatus.textContent = "Saving & pushing…";
+      try {
+        const res = await fetch(betsyTranscriptUrl() + "?t=" + Date.now(), {
+          method: "POST",
+          headers: { "Content-Type": "application/json", Accept: "application/json" },
+          body: JSON.stringify({
+            history: betsyHistory.slice(),
+            slots: Object.assign({}, quoteSlots),
+            family: quoteSlots.family || quoteSlots.job_family || "",
+            done: quoteChatDone,
+            push: true,
+            slug: quoteSlots.object_name || quoteSlots.item || quoteSlots.family || "chat",
+          }),
+        });
+        const data = await res.json().catch(function () {
+          return {};
+        });
+        if (!res.ok || !data.ok) {
+          throw new Error((data && data.git_error) || "Transcript save failed");
+        }
+        const msg = data.pushed
+          ? "Pushed — tell cloud Grok: " + (data.tell_cloud_grok || data.rel)
+          : "Saved " + (data.rel || "") + (data.git_error ? " (push issue: " + data.git_error + ")" : "");
+        if (quoteTranscriptStatus) quoteTranscriptStatus.textContent = msg;
+        quoteSaveTranscript.disabled = false;
+      } catch (e) {
+        console.error(e);
+        if (quoteTranscriptStatus) {
+          quoteTranscriptStatus.textContent =
+            "Couldn’t save/push. Is Portal up on :8746? " + (e && e.message ? e.message : "");
+        }
+        quoteSaveTranscript.disabled = false;
+      }
+    }
+    if (quoteSaveTranscript) {
+      quoteSaveTranscript.addEventListener("click", saveTranscriptForGrok);
     }
 
     if (quoteChatSend) quoteChatSend.addEventListener("click", handleChatSend);
