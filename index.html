@@ -1496,7 +1496,7 @@
       setTranscriptButton(false, "");
       quoteChatLog.innerHTML = "";
       const hello =
-        "Hi — I’m Betsy. Tell me what you’d like made or decorated, and I’ll get the details for a quote.";
+        "Hi — I’m Betsy with Barn & Beam. Tell me what you want made and I’ll get the details for a quote.";
       appendChat("bot", hello);
       betsyHistory.push({ role: "assistant", content: hello });
       betsyLastReply = hello;
@@ -2730,6 +2730,33 @@
         if (extras.length) {
           message = extras.join("\n") + (message ? "\n\n" + message : "");
         }
+        // Include Betsy slots + transcript so the shop lead has first-contact context
+        try {
+          if (quoteSlots && Object.keys(quoteSlots).length) {
+            const slotLines = Object.keys(quoteSlots)
+              .filter(function (k) {
+                return quoteSlots[k] !== null && quoteSlots[k] !== "" && k.indexOf("_") !== 0;
+              })
+              .map(function (k) {
+                return k + ": " + quoteSlots[k];
+              });
+            if (slotLines.length) {
+              message += (message ? "\n\n" : "") + "Betsy slots:\n" + slotLines.join("\n");
+            }
+          }
+          if (betsyHistory && betsyHistory.length) {
+            const lines = betsyHistory
+              .filter(function (t) {
+                return t && t.content;
+              })
+              .map(function (t) {
+                return (t.role === "user" ? "USER" : "BETSY") + ": " + String(t.content).trim();
+              });
+            if (lines.length) {
+              message += (message ? "\n\n" : "") + "Betsy transcript:\n" + lines.join("\n");
+            }
+          }
+        } catch (e) {}
         if (!message) message = extras.join("\n") || "Website quote request";
 
         const serviceForLead =
