@@ -333,7 +333,7 @@
     ]
   }
   </script>
-  <link rel="stylesheet" href="css/home.css?v=3" />
+  <link rel="stylesheet" href="css/home.css?v=4" />
 </head>
 
 <body>
@@ -951,17 +951,6 @@
       </div>
       <div class="footer-bottom">
         <p>&copy; <span id="year"></span> Barn &amp; Beam Creations. Custom laser engraving &amp; UV printing.</p>
-        <div class="socials" aria-label="Social media">
-          <a href="https://www.facebook.com/" target="_blank" rel="noopener noreferrer" aria-label="Facebook" title="Facebook">
-            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M14 9h3V6h-3c-1.7 0-3 1.3-3 3v2H9v3h2v7h3v-7h2.5l.5-3H14V9z"/></svg>
-          </a>
-          <a href="https://www.instagram.com/" target="_blank" rel="noopener noreferrer" aria-label="Instagram" title="Instagram">
-            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 7a5 5 0 100 10 5 5 0 000-10zm0 8.2A3.2 3.2 0 1112 8.8a3.2 3.2 0 010 6.4z"/><circle cx="17.5" cy="6.5" r="1.2"/><path d="M16.5 3h-9A4.5 4.5 0 003 7.5v9A4.5 4.5 0 007.5 21h9a4.5 4.5 0 004.5-4.5v-9A4.5 4.5 0 0016.5 3zm2.5 13.5a2.5 2.5 0 01-2.5 2.5h-9a2.5 2.5 0 01-2.5-2.5v-9A2.5 2.5 0 017.5 5h9a2.5 2.5 0 012.5 2.5v9z"/></svg>
-          </a>
-          <a href="https://www.tiktok.com/" target="_blank" rel="noopener noreferrer" aria-label="TikTok" title="TikTok">
-            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M19.59 6.69a4.83 4.83 0 01-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 01-5.2 1.74 2.89 2.89 0 012.31-4.5c.28 0 .54.04.79.1v3.52a.9.9 0 00-.79-.04 1.37 1.37 0 00-.9 1.3 1.38 1.38 0 002.68.44V6.77a8.15 8.15 0 004.88 1.62V5.04a4.85 4.85 0 01-1.55-.35z"/></svg>
-          </a>
-        </div>
       </div>
     </div>
   </footer>
@@ -1152,6 +1141,7 @@
         }
 
         let attachment = null;
+        let artworkSkipped = "";
         if (file) {
           quoteSubmit.textContent = "Scanning file…";
           formNote.textContent = "Scanning artwork for security…";
@@ -1176,12 +1166,20 @@
             const msg =
               (upJson && upJson.error) ||
               "Artwork could not be uploaded securely. Try a different PDF or image under 4 MB.";
-            throw new Error(msg);
-          }
-          attachment = upJson.attachment;
-          if (artworkStatus) {
-            artworkStatus.textContent =
-              "File scanned clean and attached: " + (attachment.filename || file.name);
+            const scanUnavailable = upRes.status === 503 || /not configured/i.test(msg);
+            if (!scanUnavailable) throw new Error(msg);
+            artworkSkipped =
+              "Artwork was not attached. Please email the file to " + QUOTE_EMAIL + ".";
+            if (artworkStatus) {
+              artworkStatus.hidden = false;
+              artworkStatus.textContent = artworkSkipped;
+            }
+          } else {
+            attachment = upJson.attachment;
+            if (artworkStatus) {
+              artworkStatus.textContent =
+                "File scanned clean and attached: " + (attachment.filename || file.name);
+            }
           }
           quoteSubmit.textContent = "Sending…";
           formNote.textContent = "Sending your inquiry…";
@@ -1192,6 +1190,7 @@
         const timeline = String(formData.get("timeline") || "").trim();
         if (qty) extras.push("Quantity: " + qty);
         if (timeline) extras.push("Timeline: " + timeline);
+        if (artworkSkipped) extras.push(artworkSkipped);
         let message = String(formData.get("message") || "").trim();
         if (extras.length) {
           message = extras.join("\n") + (message ? "\n\n" + message : "");
@@ -1251,9 +1250,9 @@
           successFlag !== false &&
           successFlag !== "false";
 
-        if (file && !leadOk) {
+        if (attachment && !leadOk) {
           throw new Error(
-            "Your message was prepared, but the secure artwork upload did not finish. Please try again."
+            "Your message was prepared, but saving the inquiry did not finish. Please try again."
           );
         }
         if (!isSuccess && !leadOk) {
@@ -1262,6 +1261,10 @@
         }
 
         showFormSuccess();
+        if (artworkSkipped) {
+          const sentNote = formSuccess.querySelector("p:last-of-type");
+          if (sentNote) sentNote.textContent = "We’ll be in touch soon. " + artworkSkipped;
+        }
       } catch (err) {
         console.warn("Quote submit failed", err);
         formNote.textContent = (err && err.message) || "Send failed. Please try again.";
