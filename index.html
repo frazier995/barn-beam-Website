@@ -1305,6 +1305,41 @@
   </script>
 
   <script>
+    (function () {
+      function kindFrom(href) {
+        if (!href) return "";
+        if (href.indexOf("tel:") === 0) return "phone";
+        if (href.indexOf("mailto:") === 0) return "email";
+        if (href.indexOf("google.com/maps") !== -1 || href.indexOf("maps.google.") !== -1) return "directions";
+        return "";
+      }
+      document.addEventListener("click", function (event) {
+        var node = event.target;
+        while (node && node.tagName !== "A") node = node.parentNode;
+        if (!node) return;
+        var kind = kindFrom(node.getAttribute("href") || "");
+        if (!kind) return;
+        var page = (location.pathname || "/").split("?")[0].split("#")[0];
+        if (!page || page.charAt(0) !== "/") page = "/";
+        var payload = JSON.stringify({ kind: kind, page: page });
+        try {
+          if (navigator.sendBeacon) {
+            navigator.sendBeacon("/api/site-tap", new Blob([payload], { type: "application/json" }));
+            return;
+          }
+        } catch (err) {}
+        try {
+          fetch("/api/site-tap", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: payload,
+            keepalive: true,
+          });
+        } catch (err2) {}
+      }, true);
+    })();
+  </script>
+  <script>
     window.va = window.va || function () { (window.vaq = window.vaq || []).push(arguments); };
   </script>
   <script defer src="/_vercel/insights/script.js"></script>
